@@ -28,6 +28,7 @@ class DisambiguatorPrefixRule15a implements DisambiguatorInterface
         if ($contains === 1) {
             return 'n' . $matches[1] . $matches[2];
         }
+
         return null;
     }
 }

@@ -32,6 +32,7 @@ class DisambiguatorPrefixRule8 implements DisambiguatorInterface
 
             return $matches[1] . $matches[2];
         }
+
         return null;
     }
 }

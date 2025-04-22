@@ -25,6 +25,7 @@ class DisambiguatorPrefixRule25 implements DisambiguatorInterface
         if (preg_match('/^pem([bfv])(.*)$/', (string) $word, $matches) === 1) {
             return $matches[1] . $matches[2];
         }
+
         return null;
     }
 }

@@ -25,7 +25,8 @@ namespace SastrawiTest\Morphology\Disambiguator;
 final class DisambiguatorPrefixRule14Test extends \PHPUnit\Framework\TestCase
 {
     public $subject;
-    public function setUp(): void
+
+    protected function setUp(): void
     {
         $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule14();
     }

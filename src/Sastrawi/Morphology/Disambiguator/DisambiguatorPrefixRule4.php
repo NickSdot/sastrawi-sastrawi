@@ -25,6 +25,7 @@ class DisambiguatorPrefixRule4 implements DisambiguatorInterface
         if ($word == 'belajar') {
             return 'ajar';
         }
+
         return null;
     }
 }

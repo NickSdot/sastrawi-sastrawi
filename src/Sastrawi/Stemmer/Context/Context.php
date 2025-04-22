@@ -171,6 +171,7 @@ class Context implements ContextInterface, VisitableInterface
             if ($this->dictionary->contains($this->getCurrentWord())) {
                 return;
             }
+
             // if the trial is failed, restore the original word
             // and continue to normal rule precedence (suffix first, prefix afterwards)
             $this->setCurrentWord($this->originalWord);
@@ -226,6 +227,7 @@ class Context implements ContextInterface, VisitableInterface
                 return $this->getCurrentWord();
             }
         }
+
         return null;
     }
 
@@ -247,6 +249,7 @@ class Context implements ContextInterface, VisitableInterface
                 return null;
             }
         }
+
         return null;
     }
 
@@ -300,9 +303,11 @@ class Context implements ContextInterface, VisitableInterface
         if ($removal->getAffixType() == 'DS') {
             return true;
         }
+
         if ($removal->getAffixType() == 'PP') {
             return true;
         }
+
         return $removal->getAffixType() == 'P';
     }
 

@@ -25,6 +25,7 @@ class DisambiguatorPrefixRule28b implements DisambiguatorInterface
         if (preg_match('/^pen([aiueo])(.*)$/', (string) $word, $matches)) {
             return 't' . $matches[1] . $matches[2];
         }
+
         return null;
     }
 }

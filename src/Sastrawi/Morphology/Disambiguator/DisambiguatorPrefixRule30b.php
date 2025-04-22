@@ -25,6 +25,7 @@ class DisambiguatorPrefixRule30b implements DisambiguatorInterface
         if (preg_match('/^peng([aiueo])(.*)$/', (string) $word, $matches)) {
             return 'k' . $matches[1] . $matches[2];
         }
+
         return null;
     }
 }

@@ -32,6 +32,7 @@ class DisambiguatorPrefixRule9 implements DisambiguatorInterface
 
             return $matches[1] . 'er' . $matches[2] . $matches[3];
         }
+
         return null;
     }
 }

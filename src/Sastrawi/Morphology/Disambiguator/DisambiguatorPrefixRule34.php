@@ -29,6 +29,7 @@ class DisambiguatorPrefixRule34 implements DisambiguatorInterface
 
             return $matches[1] . $matches[2];
         }
+
         return null;
     }
 }

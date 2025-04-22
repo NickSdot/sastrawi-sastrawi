@@ -25,6 +25,7 @@ class DisambiguatorPrefixRule26a implements DisambiguatorInterface
         if (preg_match('/^pem([aiueo])(.*)$/', (string) $word, $matches)) {
             return 'm' . $matches[1] . $matches[2];
         }
+
         return null;
     }
 }

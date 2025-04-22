@@ -34,6 +34,7 @@ class DisambiguatorPrefixRule3 implements DisambiguatorInterface
 
             return $matches[1] . $matches[2] . 'er' . $matches[3] . $matches[4];
         }
+
         return null;
     }
 }

@@ -25,6 +25,7 @@ class DisambiguatorPrefixRule42 implements DisambiguatorInterface
         if (preg_match('/^kau(.*)$/', (string) $word, $matches)) {
             return $matches[1];
         }
+
         return null;
     }
 }

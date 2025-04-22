@@ -25,6 +25,7 @@ class DisambiguatorPrefixRule21a implements DisambiguatorInterface
         if (preg_match('/^per([aiueo])(.*)$/', (string) $word, $matches)) {
             return $matches[1] . $matches[2];
         }
+
         return null;
     }
 }

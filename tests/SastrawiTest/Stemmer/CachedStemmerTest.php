@@ -12,9 +12,10 @@ use Sastrawi\Dictionary\ArrayDictionary;
 final class CachedStemmerTest extends \PHPUnit\Framework\TestCase
 {
     public $arrayCache;
+
     private \Sastrawi\Stemmer\CachedStemmer $cachedStemmer;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $arrayDictionary = new ArrayDictionary(['makan']);
         $delegatedStemmer = new Stemmer($arrayDictionary);
@@ -34,14 +35,14 @@ final class CachedStemmerTest extends \PHPUnit\Framework\TestCase
 
     public function testStemLookupTheCache(): void
     {
-        $this->assertEquals('makan makan', $this->cachedStemmer->stem('memakan makanan'));
+        $this->assertSame('makan makan', $this->cachedStemmer->stem('memakan makanan'));
         $this->cachedStemmer->getCache()->set('memakan', 'minum');
-        $this->assertEquals('minum makan', $this->cachedStemmer->stem('memakan makanan'));
+        $this->assertSame('minum makan', $this->cachedStemmer->stem('memakan makanan'));
     }
 
     public function testStemStoreResultToCache(): void
     {
-        $this->assertEquals('makan makan', $this->cachedStemmer->stem('memakan makanan'));
+        $this->assertSame('makan makan', $this->cachedStemmer->stem('memakan makanan'));
         $this->assertEquals('makan', $this->cachedStemmer->getCache()->get('memakan'));
         $this->assertEquals('makan', $this->cachedStemmer->getCache()->get('makanan'));
     }

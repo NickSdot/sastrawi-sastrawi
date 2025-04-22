@@ -28,6 +28,7 @@ class DisambiguatorPrefixRule2 implements DisambiguatorInterface
 
             return $matches[1] . $matches[2] . $matches[3];
         }
+
         return null;
     }
 }

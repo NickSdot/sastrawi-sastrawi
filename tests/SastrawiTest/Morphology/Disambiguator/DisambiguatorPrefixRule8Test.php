@@ -17,7 +17,8 @@ namespace SastrawiTest\Morphology\Disambiguator;
 final class DisambiguatorPrefixRule8Test extends \PHPUnit\Framework\TestCase
 {
     public $subject;
-    public function setUp(): void
+
+    protected function setUp(): void
     {
         $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule8();
     }

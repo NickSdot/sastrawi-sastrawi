@@ -27,6 +27,7 @@ class DisambiguatorPrefixRule19 implements DisambiguatorInterface
         if (preg_match('/^memp([abcdfghijklmopqrstuvwxyz])(.*)$/', (string) $word, $matches)) {
             return 'p' . $matches[1] . $matches[2];
         }
+
         return null;
     }
 }

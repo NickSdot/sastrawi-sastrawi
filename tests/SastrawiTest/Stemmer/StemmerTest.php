@@ -11,7 +11,7 @@ final class StemmerTest extends \PHPUnit\Framework\TestCase
 {
     private \Sastrawi\Stemmer\Stemmer $stemmer;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $dictionary = new ArrayDictionary(['beri']);
         $this->stemmer = new Stemmer($dictionary);
@@ -27,8 +27,8 @@ final class StemmerTest extends \PHPUnit\Framework\TestCase
      */
     public function testStemReturnImmediatelyOnShortWord(): void
     {
-        $this->assertEquals('mei', $this->stemmer->stem('mei'));
-        $this->assertEquals('bui', $this->stemmer->stem('bui'));
+        $this->assertSame('mei', $this->stemmer->stem('mei'));
+        $this->assertSame('bui', $this->stemmer->stem('bui'));
     }
 
     /**
@@ -38,8 +38,8 @@ final class StemmerTest extends \PHPUnit\Framework\TestCase
     public function testStemReturnImmediatelyIfFoundOnDictionary(): void
     {
         $this->stemmer->getDictionary()->add('nila');
-        $this->assertEquals('nila', $this->stemmer->stem('nilai'));
+        $this->assertSame('nila', $this->stemmer->stem('nilai'));
         $this->stemmer->getDictionary()->add('nilai');
-        $this->assertEquals('nilai', $this->stemmer->stem('nilai'));
+        $this->assertSame('nilai', $this->stemmer->stem('nilai'));
     }
 }

@@ -33,6 +33,7 @@ class DisambiguatorPrefixRule27 implements DisambiguatorInterface
         if (preg_match('/^pen([cdjstz])(.*)$/', (string) $word, $matches)) {
             return $matches[1] . $matches[2];
         }
+
         return null;
     }
 }

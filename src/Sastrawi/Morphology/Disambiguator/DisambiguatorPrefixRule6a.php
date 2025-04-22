@@ -30,6 +30,7 @@ class DisambiguatorPrefixRule6a implements DisambiguatorInterface
         if ($contains === 1) {
             return $matches[1];
         }
+
         return null;
     }
 }

@@ -27,6 +27,7 @@ class DisambiguatorPrefixRule37a implements DisambiguatorInterface
         if ($contains === 1) {
             return $matches[1] . $matches[2] . $matches[3];
         }
+
         return null;
     }
 }

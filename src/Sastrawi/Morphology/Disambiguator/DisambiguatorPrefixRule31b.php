@@ -27,6 +27,7 @@ class DisambiguatorPrefixRule31b implements DisambiguatorInterface
         if (preg_match('/^peny([aiueo])(.*)$/', (string) $word, $matches)) {
             return 's' . $matches[1] . $matches[2];
         }
+
         return null;
     }
 }

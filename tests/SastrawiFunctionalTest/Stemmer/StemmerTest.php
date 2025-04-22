@@ -11,7 +11,7 @@ final class StemmerTest extends \PHPUnit\Framework\TestCase
 {
     private \Sastrawi\Stemmer\Stemmer $stemmer;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $dictionary = new ArrayDictionary(
             [

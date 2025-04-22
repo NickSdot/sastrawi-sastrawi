@@ -10,7 +10,7 @@ final class StemmerFactoryTest extends \PHPUnit\Framework\TestCase
 {
     private \Sastrawi\Stemmer\StemmerFactory $factory;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->factory = new StemmerFactory();
     }

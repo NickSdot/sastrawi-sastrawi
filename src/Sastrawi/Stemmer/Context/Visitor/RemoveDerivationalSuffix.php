@@ -26,7 +26,7 @@ class RemoveDerivationalSuffix implements VisitorInterface
         $result = $this->removeSuffix($context->getCurrentWord());
 
         if ($result != $context->getCurrentWord()) {
-            $removedPart = preg_replace("/$result/", '', $context->getCurrentWord(), 1);
+            $removedPart = preg_replace(sprintf('/%s/', $result), '', $context->getCurrentWord(), 1);
 
             $removal = new Removal(
                 $this,

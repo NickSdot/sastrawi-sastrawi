@@ -28,6 +28,7 @@ class DisambiguatorPrefixRule6b implements DisambiguatorInterface
         if ($contains === 1) {
             return 'r' . $matches[1];
         }
+
         return null;
     }
 }

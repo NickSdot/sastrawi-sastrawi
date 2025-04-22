@@ -10,7 +10,7 @@ final class StopWordRemoverFactoryTest extends \PHPUnit\Framework\TestCase
 {
     private \Sastrawi\StopWordRemover\StopWordRemoverFactory $factory;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->factory = new StopWordRemoverFactory();
     }

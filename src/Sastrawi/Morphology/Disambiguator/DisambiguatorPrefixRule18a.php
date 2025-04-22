@@ -25,6 +25,7 @@ class DisambiguatorPrefixRule18a implements DisambiguatorInterface
         if (preg_match('/^meny([aiueo])(.*)$/', (string) $word, $matches)) {
             return 'ny' . $matches[1] . $matches[2];
         }
+
         return null;
     }
 }

@@ -10,7 +10,7 @@ final class ArrayDictionaryTest extends \PHPUnit\Framework\TestCase
 {
     private ArrayDictionary $dictionary;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->dictionary = new ArrayDictionary();
     }

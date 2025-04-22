@@ -25,6 +25,7 @@ class DisambiguatorPrefixRule41 implements DisambiguatorInterface
         if (preg_match('/^ku(.*)$/', (string) $word, $matches)) {
             return $matches[1];
         }
+
         return null;
     }
 }

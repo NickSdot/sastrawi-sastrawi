@@ -29,6 +29,7 @@ class DisambiguatorPrefixRule32 implements DisambiguatorInterface
         if (preg_match('/^pe(l[aiueo])(.*)$/', (string) $word, $matches)) {
             return $matches[1] . $matches[2];
         }
+
         return null;
     }
 }

@@ -71,6 +71,7 @@ class Stemmer implements StemmerInterface
         if ($this->isPlural($word)) {
             return $this->stemPluralWord($word);
         }
+
         return $this->stemSingularWord($word);
     }
 
@@ -123,6 +124,7 @@ class Stemmer implements StemmerInterface
         if ($rootWord1 == $rootWord2) {
             return $rootWord1;
         }
+
         return $plural;
     }
 

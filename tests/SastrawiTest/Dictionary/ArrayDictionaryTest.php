@@ -27,9 +27,9 @@ class ArrayDictionaryTest extends \PHPUnit\Framework\TestCase
 
     public function testAddCountWord(): void
     {
-        $this->assertEquals(0, $this->dictionary->count());
+        $this->assertCount(0, $this->dictionary);
         $this->dictionary->add('word');
-        $this->assertEquals(1, $this->dictionary->count());
+        $this->assertCount(1, $this->dictionary);
     }
 
     /**
@@ -38,9 +38,9 @@ class ArrayDictionaryTest extends \PHPUnit\Framework\TestCase
      */
     public function testAddWordIgnoreEmptyString(): void
     {
-        $this->assertEquals(0, $this->dictionary->count());
+        $this->assertCount(0, $this->dictionary);
         $this->dictionary->add('');
-        $this->assertEquals(0, $this->dictionary->count());
+        $this->assertCount(0, $this->dictionary);
     }
 
     public function testAddWords(): void
@@ -51,7 +51,7 @@ class ArrayDictionaryTest extends \PHPUnit\Framework\TestCase
         );
 
         $this->dictionary->addWords($words);
-        $this->assertEquals(2, $this->dictionary->count());
+        $this->assertCount(2, $this->dictionary);
         $this->assertTrue($this->dictionary->contains('word1'));
         $this->assertTrue($this->dictionary->contains('word2'));
     }
@@ -64,7 +64,7 @@ class ArrayDictionaryTest extends \PHPUnit\Framework\TestCase
         );
 
         $dictionary = new ArrayDictionary($words);
-        $this->assertEquals(2, $dictionary->count());
+        $this->assertCount(2, $dictionary);
         $this->assertTrue($dictionary->contains('word1'));
         $this->assertTrue($dictionary->contains('word2'));
     }

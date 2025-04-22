@@ -19,7 +19,7 @@ class DisambiguatorPrefixRule24Test extends \PHPUnit\Framework\TestCase
         $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule24();
     }
 
-    public function testDisambiguate()
+    public function testDisambiguate(): void
     {
         $this->assertEquals('daerah', $this->subject->disambiguate('perdaerah'));
     }

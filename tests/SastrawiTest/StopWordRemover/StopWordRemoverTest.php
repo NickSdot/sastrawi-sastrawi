@@ -13,12 +13,12 @@ class StopWordRemoverTest extends \PHPUnit\Framework\TestCase
         $this->stopWordRemover = new StopWordRemover($this->dictionary);
     }
 
-    public function testGetDictionaryPreserveInstance()
+    public function testGetDictionaryPreserveInstance(): void
     {
         $this->assertSame($this->dictionary, $this->stopWordRemover->getDictionary());
     }
 
-    public function testRemoveStopWord()
+    public function testRemoveStopWord(): void
     {
         $this->assertEquals('pergi sekolah', $this->stopWordRemover->remove('pergi ke sekolah'));
         $this->assertEquals('makan rumah', $this->stopWordRemover->remove('makan di rumah'));

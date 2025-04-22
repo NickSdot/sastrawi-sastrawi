@@ -20,7 +20,7 @@ class DisambiguatorPrefixRule40bTest extends \PHPUnit\Framework\TestCase
         $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule40b();
     }
 
-    public function testDisambiguate()
+    public function testDisambiguate(): void
     {
         $this->assertEquals('kerja', $this->subject->disambiguate('kinerja'));
         $this->assertEquals('sambung', $this->subject->disambiguate('sinambung'));

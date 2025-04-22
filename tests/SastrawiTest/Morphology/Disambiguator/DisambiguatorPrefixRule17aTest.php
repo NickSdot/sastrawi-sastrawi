@@ -19,7 +19,7 @@ class DisambiguatorPrefixRule17aTest extends \PHPUnit\Framework\TestCase
         $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule17a();
     }
 
-    public function testDisambiguate()
+    public function testDisambiguate(): void
     {
         $this->assertEquals('erat', $this->subject->disambiguate('mengerat'));
     }

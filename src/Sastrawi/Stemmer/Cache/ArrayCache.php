@@ -12,7 +12,7 @@ class ArrayCache implements CacheInterface
 {
     protected $data = array();
 
-    public function set($key, $value)
+    public function set($key, $value): void
     {
         $this->data[$key] = $value;
     }

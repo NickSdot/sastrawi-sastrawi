@@ -20,7 +20,7 @@ class DisambiguatorPrefixRule34Test extends \PHPUnit\Framework\TestCase
         $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule34();
     }
 
-    public function testDisambiguate()
+    public function testDisambiguate(): void
     {
         $this->assertEquals('tarung', $this->subject->disambiguate('petarung'));
     }

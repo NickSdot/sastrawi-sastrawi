@@ -19,7 +19,7 @@ class DisambiguatorPrefixRule20Test extends \PHPUnit\Framework\TestCase
         $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule20();
     }
 
-    public function testDisambiguate()
+    public function testDisambiguate(): void
     {
         $this->assertEquals('warna', $this->subject->disambiguate('pewarna'));
         $this->assertEquals('yoga', $this->subject->disambiguate('peyoga'));

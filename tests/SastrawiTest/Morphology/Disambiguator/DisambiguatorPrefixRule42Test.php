@@ -20,7 +20,7 @@ class DisambiguatorPrefixRule42Test extends \PHPUnit\Framework\TestCase
         $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule42();
     }
 
-    public function testDisambiguate()
+    public function testDisambiguate(): void
     {
         $this->assertEquals('miliki', $this->subject->disambiguate('kaumiliki'));
     }

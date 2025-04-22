@@ -17,7 +17,7 @@ class StemmerTest extends \PHPUnit\Framework\TestCase
         $this->stemmer = new Stemmer($this->dictionary);
     }
 
-    public function testStemmerImplementsStemmerInterface()
+    public function testStemmerImplementsStemmerInterface(): void
     {
         $this->assertInstanceOf('Sastrawi\Stemmer\StemmerInterface', $this->stemmer);
     }
@@ -25,7 +25,7 @@ class StemmerTest extends \PHPUnit\Framework\TestCase
     /**
      * Don't stem such a short word (three or fewer characters)
      */
-    public function testStemReturnImmediatelyOnShortWord()
+    public function testStemReturnImmediatelyOnShortWord(): void
     {
         $this->assertEquals('mei', $this->stemmer->stem('mei'));
         $this->assertEquals('bui', $this->stemmer->stem('bui'));
@@ -35,7 +35,7 @@ class StemmerTest extends \PHPUnit\Framework\TestCase
      * To prevent overstemming : nilai could have been overstemmed to nila
      * if we don't lookup against the dictionary
      */
-    public function testStemReturnImmediatelyIfFoundOnDictionary()
+    public function testStemReturnImmediatelyIfFoundOnDictionary(): void
     {
         $this->stemmer->getDictionary()->add('nila');
         $this->assertEquals('nila', $this->stemmer->stem('nilai'));

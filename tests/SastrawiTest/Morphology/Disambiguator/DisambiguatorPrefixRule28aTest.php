@@ -19,7 +19,7 @@ class DisambiguatorPrefixRule28aTest extends \PHPUnit\Framework\TestCase
         $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule28a();
     }
 
-    public function testDisambiguate()
+    public function testDisambiguate(): void
     {
         $this->assertEquals('nilai', $this->subject->disambiguate('penilai'));
     }

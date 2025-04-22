@@ -20,7 +20,7 @@ class DisambiguatorPrefixRule35Test extends \PHPUnit\Framework\TestCase
         $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule35();
     }
 
-    public function testDisambiguate()
+    public function testDisambiguate(): void
     {
         $this->assertEquals('percaya', $this->subject->disambiguate('terpercaya'));
     }

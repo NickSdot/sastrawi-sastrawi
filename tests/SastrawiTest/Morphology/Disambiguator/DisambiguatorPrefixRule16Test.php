@@ -20,7 +20,7 @@ class DisambiguatorPrefixRule16Test extends \PHPUnit\Framework\TestCase
         $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule16();
     }
 
-    public function testDisambiguate()
+    public function testDisambiguate(): void
     {
         $this->assertEquals('gunakan', $this->subject->disambiguate('menggunakan'));
         $this->assertEquals('hambat', $this->subject->disambiguate('menghambat'));

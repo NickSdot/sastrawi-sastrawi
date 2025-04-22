@@ -21,7 +21,7 @@ class DisambiguatorPrefixRule31bTest extends \PHPUnit\Framework\TestCase
         $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule31b();
     }
 
-    public function testDisambiguate()
+    public function testDisambiguate(): void
     {
         $this->assertEquals('salut', $this->subject->disambiguate('penyalut'));
         $this->assertEquals('sekat', $this->subject->disambiguate('penyekat'));

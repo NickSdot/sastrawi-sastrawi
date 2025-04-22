@@ -21,7 +21,7 @@ class DisambiguatorPrefixRule29Test extends \PHPUnit\Framework\TestCase
         $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule29();
     }
 
-    public function testDisambiguate()
+    public function testDisambiguate(): void
     {
         $this->assertEquals('ganti', $this->subject->disambiguate('pengganti'));
         $this->assertEquals('hajar', $this->subject->disambiguate('penghajar'));

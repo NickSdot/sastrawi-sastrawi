@@ -19,7 +19,7 @@ class DisambiguatorPrefixRule15bTest extends \PHPUnit\Framework\TestCase
         $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule15b();
     }
 
-    public function testDisambiguate()
+    public function testDisambiguate(): void
     {
         $this->assertEquals('tulis', $this->subject->disambiguate('menulis'));
         $this->assertEquals('tari', $this->subject->disambiguate('menari'));

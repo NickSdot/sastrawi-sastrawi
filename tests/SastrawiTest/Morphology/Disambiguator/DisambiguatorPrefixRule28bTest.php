@@ -19,7 +19,7 @@ class DisambiguatorPrefixRule28bTest extends \PHPUnit\Framework\TestCase
         $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule28b();
     }
 
-    public function testDisambiguate()
+    public function testDisambiguate(): void
     {
         $this->assertEquals('tari', $this->subject->disambiguate('penari'));
         $this->assertEquals('terap', $this->subject->disambiguate('penerap'));

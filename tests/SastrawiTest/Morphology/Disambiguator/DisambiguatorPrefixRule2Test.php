@@ -19,7 +19,7 @@ class DisambiguatorPrefixRule2Test extends \PHPUnit\Framework\TestCase
         $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule2();
     }
 
-    public function testDisambiguate()
+    public function testDisambiguate(): void
     {
         $this->assertEquals('tabur', $this->subject->disambiguate('bertabur'));
         $this->assertNull($this->subject->disambiguate('beria-ia'));

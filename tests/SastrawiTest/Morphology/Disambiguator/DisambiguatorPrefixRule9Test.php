@@ -19,7 +19,7 @@ class DisambiguatorPrefixRule9Test extends \PHPUnit\Framework\TestCase
         $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule9();
     }
 
-    public function testDisambiguate()
+    public function testDisambiguate(): void
     {
         //TODO - need a real world example
         $this->assertEquals('terbang', $this->subject->disambiguate('teterbang'));

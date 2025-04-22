@@ -19,7 +19,7 @@ use Sastrawi\Stemmer\Context\Removal;
  */
 class RemoveInflectionalPossessivePronoun implements VisitorInterface
 {
-    public function visit(ContextInterface $context)
+    public function visit(ContextInterface $context): void
     {
         $result = $this->remove($context->getCurrentWord());
 

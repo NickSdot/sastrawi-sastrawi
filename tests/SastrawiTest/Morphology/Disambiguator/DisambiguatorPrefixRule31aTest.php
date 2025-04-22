@@ -20,7 +20,7 @@ class DisambiguatorPrefixRule31aTest extends \PHPUnit\Framework\TestCase
         $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule31a();
     }
 
-    public function testDisambiguate()
+    public function testDisambiguate(): void
     {
         $this->assertEquals('nyanyi', $this->subject->disambiguate('penyanyi'));
     }

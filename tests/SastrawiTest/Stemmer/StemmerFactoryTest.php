@@ -13,7 +13,7 @@ class StemmerFactoryTest extends \PHPUnit\Framework\TestCase
         $this->factory = new StemmerFactory();
     }
 
-    public function testCreateStemmerReturnStemmer()
+    public function testCreateStemmerReturnStemmer(): void
     {
         $stemmer = $this->factory->createStemmer();
 

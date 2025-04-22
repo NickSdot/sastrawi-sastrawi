@@ -20,7 +20,7 @@ class DisambiguatorPrefixRule39bTest extends \PHPUnit\Framework\TestCase
         $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule39b();
     }
 
-    public function testDisambiguate()
+    public function testDisambiguate(): void
     {
         $this->assertEquals('tali', $this->subject->disambiguate('temali'));
         $this->assertEquals('getar', $this->subject->disambiguate('gemetar'));

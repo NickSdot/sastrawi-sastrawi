@@ -27,7 +27,7 @@ class DisambiguatorPrefixRule14Test extends \PHPUnit\Framework\TestCase
         $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule14();
     }
 
-    public function testDisambiguate()
+    public function testDisambiguate(): void
     {
         $this->assertEquals('cantum', $this->subject->disambiguate('mencantum'));
         $this->assertEquals('duduki', $this->subject->disambiguate('menduduki'));

@@ -12,7 +12,7 @@ class InvalidAffixPairSpecificationTest extends \PHPUnit\Framework\TestCase
     /**
      * Test contains invalid affix pair ber-i|di-an|ke-i|ke-kan|me-an|ter-an|per-an
      */
-    public function testContainsInvalidAffixPair()
+    public function testContainsInvalidAffixPair(): void
     {
         $this->assertFalse($this->specification->isSatisfiedBy('memberikan'));
         $this->assertFalse($this->specification->isSatisfiedBy('ketahui'));

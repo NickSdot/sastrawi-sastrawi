@@ -44,7 +44,7 @@ class StemmerTest extends \PHPUnit\Framework\TestCase
     /**
      * @dataProvider stemDataProvider
      */
-    public function testStem($word, $stem)
+    public function testStem($word, $stem): void
     {
         $this->assertEquals($stem, $this->stemmer->stem($word));
     }

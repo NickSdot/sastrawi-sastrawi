@@ -93,7 +93,7 @@ class Context implements ContextInterface, VisitableInterface
         $this->prefixVisitors = $this->visitorProvider->getPrefixVisitors();
     }
 
-    public function setDictionary(DictionaryInterface $dictionary)
+    public function setDictionary(DictionaryInterface $dictionary): void
     {
         $this->dictionary = $dictionary;
     }
@@ -108,7 +108,7 @@ class Context implements ContextInterface, VisitableInterface
         return $this->originalWord;
     }
 
-    public function setCurrentWord($word)
+    public function setCurrentWord($word): void
     {
         $this->currentWord = $word;
     }
@@ -118,7 +118,7 @@ class Context implements ContextInterface, VisitableInterface
         return $this->currentWord;
     }
 
-    public function stopProcess()
+    public function stopProcess(): void
     {
         $this->processIsStopped = true;
     }
@@ -128,7 +128,7 @@ class Context implements ContextInterface, VisitableInterface
         return $this->processIsStopped;
     }
 
-    public function addRemoval(RemovalInterface $removal)
+    public function addRemoval(RemovalInterface $removal): void
     {
         $this->removals[] = $removal;
     }
@@ -148,7 +148,7 @@ class Context implements ContextInterface, VisitableInterface
      *
      * @return void
      */
-    public function execute()
+    public function execute(): void
     {
         // step 1 - 5
         $this->startStemmingProcess();
@@ -233,7 +233,7 @@ class Context implements ContextInterface, VisitableInterface
         $this->acceptVisitors($this->suffixVisitors);
     }
 
-    public function accept(VisitorInterface $visitor)
+    public function accept(VisitorInterface $visitor): void
     {
         $visitor->visit($this);
     }
@@ -276,7 +276,7 @@ class Context implements ContextInterface, VisitableInterface
     /**
      * ECS Loop Pengembalian Akhiran
      */
-    public function loopPengembalianAkhiran()
+    public function loopPengembalianAkhiran(): void
     {
         // restore prefix to form [DP+[DP+[DP]]] + Root word
         $this->restorePrefix();
@@ -333,7 +333,7 @@ class Context implements ContextInterface, VisitableInterface
      *
      * @return void
      */
-    public function restorePrefix()
+    public function restorePrefix(): void
     {
         foreach ($this->removals as $i => $removal) {
             if ($removal->getAffixType() == 'DP') {

@@ -19,7 +19,7 @@ class DisambiguatorPrefixRule23Test extends \PHPUnit\Framework\TestCase
         $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule23();
     }
 
-    public function testDisambiguate()
+    public function testDisambiguate(): void
     {
         $this->assertEquals('tahan', $this->subject->disambiguate('pertahan'));
     }

@@ -19,7 +19,7 @@ class DisambiguatorPrefixRule8Test extends \PHPUnit\Framework\TestCase
         $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule8();
     }
 
-    public function testDisambiguate()
+    public function testDisambiguate(): void
     {
         $this->assertEquals('tangkap', $this->subject->disambiguate('tertangkap'));
         $this->assertNull($this->subject->disambiguate('teracun'));

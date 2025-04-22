@@ -19,24 +19,24 @@ class CachedStemmerTest extends \PHPUnit\Framework\TestCase
         $this->cachedStemmer = new CachedStemmer($this->arrayCache, $this->delegatedStemmer);
     }
 
-    public function testInstanceOfStemmerInterface()
+    public function testInstanceOfStemmerInterface(): void
     {
         $this->assertInstanceOf('Sastrawi\Stemmer\StemmerInterface', $this->cachedStemmer);
     }
 
-    public function testGetCache()
+    public function testGetCache(): void
     {
         $this->assertSame($this->arrayCache, $this->cachedStemmer->getCache());
     }
 
-    public function testStemLookupTheCache()
+    public function testStemLookupTheCache(): void
     {
         $this->assertEquals('makan makan', $this->cachedStemmer->stem('memakan makanan'));
         $this->cachedStemmer->getCache()->set('memakan', 'minum');
         $this->assertEquals('minum makan', $this->cachedStemmer->stem('memakan makanan'));
     }
 
-    public function testStemStoreResultToCache()
+    public function testStemStoreResultToCache(): void
     {
         $this->assertEquals('makan makan', $this->cachedStemmer->stem('memakan makanan'));
         $this->assertEquals('makan', $this->cachedStemmer->getCache()->get('memakan'));

@@ -20,7 +20,7 @@ class DisambiguatorPrefixRule30cTest extends \PHPUnit\Framework\TestCase
         $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule30c();
     }
 
-    public function testDisambiguate()
+    public function testDisambiguate(): void
     {
         $this->assertEquals('tahuan', $this->subject->disambiguate('pengetahuan'));
         $this->assertEquals('blog', $this->subject->disambiguate('pengeblog'));

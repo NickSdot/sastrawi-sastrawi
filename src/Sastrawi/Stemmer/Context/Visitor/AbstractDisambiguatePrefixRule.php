@@ -16,7 +16,7 @@ abstract class AbstractDisambiguatePrefixRule implements VisitorInterface
 {
     protected $disambiguators = array();
 
-    public function visit(ContextInterface $context)
+    public function visit(ContextInterface $context): void
     {
         $result = null;
 
@@ -46,14 +46,14 @@ abstract class AbstractDisambiguatePrefixRule implements VisitorInterface
         $context->setCurrentWord($result);
     }
 
-    public function addDisambiguators(array $disambiguators)
+    public function addDisambiguators(array $disambiguators): void
     {
         foreach ($disambiguators as $disambiguator) {
             $this->addDisambiguator($disambiguator);
         }
     }
 
-    public function addDisambiguator(DisambiguatorInterface $disambiguator)
+    public function addDisambiguator(DisambiguatorInterface $disambiguator): void
     {
         $this->disambiguators[] = $disambiguator;
     }

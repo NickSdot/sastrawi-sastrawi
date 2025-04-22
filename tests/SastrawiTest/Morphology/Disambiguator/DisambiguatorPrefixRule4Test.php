@@ -19,7 +19,7 @@ class DisambiguatorPrefixRule4Test extends \PHPUnit\Framework\TestCase
         $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule4();
     }
 
-    public function testDisambiguate()
+    public function testDisambiguate(): void
     {
         $this->assertEquals('ajar', $this->subject->disambiguate('belajar'));
         $this->assertNull($this->subject->disambiguate('bekerja'));

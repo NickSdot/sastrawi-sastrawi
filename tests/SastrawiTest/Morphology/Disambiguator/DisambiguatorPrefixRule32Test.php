@@ -20,7 +20,7 @@ class DisambiguatorPrefixRule32Test extends \PHPUnit\Framework\TestCase
         $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule32();
     }
 
-    public function testDisambiguate()
+    public function testDisambiguate(): void
     {
         $this->assertEquals('ajar', $this->subject->disambiguate('pelajar'));
         $this->assertEquals('layan', $this->subject->disambiguate('pelayan'));

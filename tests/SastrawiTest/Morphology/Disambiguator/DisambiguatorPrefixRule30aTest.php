@@ -22,7 +22,7 @@ class DisambiguatorPrefixRule30aTest extends \PHPUnit\Framework\TestCase
         $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule30a();
     }
 
-    public function testDisambiguate()
+    public function testDisambiguate(): void
     {
         $this->assertEquals('alihan', $this->subject->disambiguate('pengalihan'));
         $this->assertEquals('eram', $this->subject->disambiguate('pengeram'));

@@ -19,7 +19,7 @@ class DisambiguatorPrefixRule21bTest extends \PHPUnit\Framework\TestCase
         $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule21b();
     }
 
-    public function testDisambiguate()
+    public function testDisambiguate(): void
     {
         $this->assertEquals('rusak', $this->subject->disambiguate('perusak'));
         $this->assertEquals('rancang', $this->subject->disambiguate('perancang'));

@@ -20,7 +20,7 @@ class DisambiguatorPrefixRule36Test extends \PHPUnit\Framework\TestCase
         $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule36();
     }
 
-    public function testDisambiguate()
+    public function testDisambiguate(): void
     {
         $this->assertEquals('kerja', $this->subject->disambiguate('pekerja'));
         $this->assertEquals('serta', $this->subject->disambiguate('peserta'));

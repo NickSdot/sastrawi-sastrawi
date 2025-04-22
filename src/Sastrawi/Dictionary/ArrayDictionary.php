@@ -45,7 +45,7 @@ class ArrayDictionary implements DictionaryInterface
      * @param  array $words
      * @return void
      */
-    public function addWords(array $words)
+    public function addWords(array $words): void
     {
         foreach ($words as $word) {
             $this->add($word);
@@ -58,7 +58,7 @@ class ArrayDictionary implements DictionaryInterface
      * @param  string $word
      * @return void
      */
-    public function add($word)
+    public function add($word): void
     {
         if ($word === '') {
             return;
@@ -73,7 +73,7 @@ class ArrayDictionary implements DictionaryInterface
      * @param  string $word
      * @return void
      */
-    public function remove($word)
+    public function remove($word): void
     {
         unset($this->words[$word]);
     }
@@ -84,7 +84,7 @@ class ArrayDictionary implements DictionaryInterface
      * @param  string $word
      * @return void
      */
-    public function addWordsFromTextFile($filePath, $delimiter = "\n")
+    public function addWordsFromTextFile($filePath, $delimiter = "\n"): void
     {
         $words = explode($delimiter, file_get_contents($filePath));
         $this->addWords($words);

@@ -11,12 +11,12 @@ class ArrayCacheTest extends \PHPUnit\Framework\TestCase
         $this->arrayCache = new \Sastrawi\Stemmer\Cache\ArrayCache();
     }
 
-    public function testInstanceOfCacheInterface()
+    public function testInstanceOfCacheInterface(): void
     {
         $this->assertInstanceOf('Sastrawi\Stemmer\Cache\CacheInterface', $this->arrayCache);
     }
 
-    public function testSetGetHas()
+    public function testSetGetHas(): void
     {
         $this->assertFalse($this->arrayCache->has('abc'));
         $this->assertNull($this->arrayCache->get('abc'));

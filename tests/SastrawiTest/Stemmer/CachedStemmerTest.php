@@ -7,7 +7,7 @@ use Sastrawi\Stemmer\Cache\ArrayCache;
 use Sastrawi\Stemmer\Stemmer;
 use Sastrawi\Dictionary\ArrayDictionary;
 
-class CachedStemmerTest extends \PHPUnit_Framework_TestCase
+class CachedStemmerTest extends \PHPUnit\Framework\TestCase
 {
     protected $cachedStemmer;
 

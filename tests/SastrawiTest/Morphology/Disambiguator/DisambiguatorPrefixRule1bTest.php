@@ -12,7 +12,7 @@ namespace SastrawiTest\Morphology\Disambiguator;
 * Disambiguate Prefix Rule 1a
 * Rule 1b : berV -> be-rV
 */
-class DisambiguatorPrefixRule1bTest extends \PHPUnit_Framework_TestCase
+class DisambiguatorPrefixRule1bTest extends \PHPUnit\Framework\TestCase
 {
     public function setUp()
     {

@@ -12,7 +12,7 @@ namespace SastrawiTest\Morphology\Disambiguator;
  * Disambiguate Prefix Rule 8
  * Rule 8 : terCP -> ter-CP where C != 'r' and P != 'er'
  */
-class DisambiguatorPrefixRule8Test extends \PHPUnit_Framework_TestCase
+class DisambiguatorPrefixRule8Test extends \PHPUnit\Framework\TestCase
 {
     public function setUp()
     {

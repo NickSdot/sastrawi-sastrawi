@@ -12,7 +12,7 @@ namespace SastrawiTest\Morphology\Disambiguator;
  * Disambiguate Prefix Rule 25
  * Rule 25 : pem{b|f|v} -> pem-{b|f|v}
  */
-class DisambiguatorPrefixRule25Test extends \PHPUnit_Framework_TestCase
+class DisambiguatorPrefixRule25Test extends \PHPUnit\Framework\TestCase
 {
     public function setUp()
     {

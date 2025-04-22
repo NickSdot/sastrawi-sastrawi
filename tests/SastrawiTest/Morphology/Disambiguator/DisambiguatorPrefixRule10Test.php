@@ -12,7 +12,7 @@ namespace SastrawiTest\Morphology\Disambiguator;
  * Disambiguate Prefix Rule 10
  * Rule 10 : me{l|r|w|y}V -> me-{l|r|w|y}V
  */
-class DisambiguatorPrefixRule10Test extends \PHPUnit_Framework_TestCase
+class DisambiguatorPrefixRule10Test extends \PHPUnit\Framework\TestCase
 {
     public function setUp()
     {

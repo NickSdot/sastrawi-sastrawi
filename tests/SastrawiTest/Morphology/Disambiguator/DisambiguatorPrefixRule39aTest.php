@@ -13,7 +13,7 @@ namespace SastrawiTest\Morphology\Disambiguator;
  * Rule 39a : CemV -> CemV
  */
 
-class DisambiguatorPrefixRule39aTest extends \PHPUnit_Framework_TestCase
+class DisambiguatorPrefixRule39aTest extends \PHPUnit\Framework\TestCase
 {
     public function setUp()
     {

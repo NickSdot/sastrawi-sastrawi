@@ -13,7 +13,7 @@ namespace SastrawiTest\Morphology\Disambiguator;
  * Rule 30b : pengV -> peng-kV
  */
 
-class DisambiguatorPrefixRule30bTest extends \PHPUnit_Framework_TestCase
+class DisambiguatorPrefixRule30bTest extends \PHPUnit\Framework\TestCase
 {
     public function setUp()
     {

@@ -12,7 +12,7 @@ namespace SastrawiTest\Morphology\Disambiguator;
  * Disambiguate Prefix Rule 21b
  * Rule 21a : perV -> pe-rV
  */
-class DisambiguatorPrefixRule21bTest extends \PHPUnit_Framework_TestCase
+class DisambiguatorPrefixRule21bTest extends \PHPUnit\Framework\TestCase
 {
     public function setUp()
     {

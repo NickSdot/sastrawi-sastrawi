@@ -4,7 +4,7 @@ namespace SastrawiTest\Stemmer;
 
 use Sastrawi\Stemmer\StemmerFactory;
 
-class StemmerFactoryTest extends \PHPUnit_Framework_TestCase
+class StemmerFactoryTest extends \PHPUnit\Framework\TestCase
 {
     protected $factory;
 

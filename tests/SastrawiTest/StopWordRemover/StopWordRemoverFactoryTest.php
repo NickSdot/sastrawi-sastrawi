@@ -4,7 +4,7 @@ namespace SastrawiTest\StopWordRemover;
 
 use Sastrawi\StopWordRemover\StopWordRemoverFactory;
 
-class StopWordRemoverFactoryTest extends \PHPUnit_Framework_TestCase
+class StopWordRemoverFactoryTest extends \PHPUnit\Framework\TestCase
 {
     protected $factory;
 

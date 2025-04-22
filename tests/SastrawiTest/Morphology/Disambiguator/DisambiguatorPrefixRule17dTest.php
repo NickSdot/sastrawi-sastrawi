@@ -12,7 +12,7 @@ namespace SastrawiTest\Morphology\Disambiguator;
  * Disambiguate Prefix Rule 17d
  * Rule 17d : mengV -> me-ngV
  */
-class DisambiguatorPrefixRule17dTest extends \PHPUnit_Framework_TestCase
+class DisambiguatorPrefixRule17dTest extends \PHPUnit\Framework\TestCase
 {
     public function setUp()
     {

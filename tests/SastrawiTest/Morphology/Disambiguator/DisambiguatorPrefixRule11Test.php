@@ -12,7 +12,7 @@ namespace SastrawiTest\Morphology\Disambiguator;
  * Disambiguate Prefix Rule 11
  * Rule 11 : mem{b|f|v} -> mem-{b|f|v}
  */
-class DisambiguatorPrefixRule11Test extends \PHPUnit_Framework_TestCase
+class DisambiguatorPrefixRule11Test extends \PHPUnit\Framework\TestCase
 {
     public function setUp()
     {

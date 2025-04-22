@@ -5,7 +5,7 @@ namespace SastrawiFunctionalTest\Stemmer;
 use Sastrawi\Dictionary\ArrayDictionary;
 use Sastrawi\Stemmer\Stemmer;
 
-class StemmerTest extends \PHPUnit_Framework_TestCase
+class StemmerTest extends \PHPUnit\Framework\TestCase
 {
     protected $dictionary;
 

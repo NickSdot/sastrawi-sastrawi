@@ -13,7 +13,7 @@ namespace SastrawiTest\Morphology\Disambiguator;
  * Rule 38b : CelV -> CV
  */
 
-class DisambiguatorPrefixRule38bTest extends \PHPUnit_Framework_TestCase
+class DisambiguatorPrefixRule38bTest extends \PHPUnit\Framework\TestCase
 {
     public function setUp()
     {

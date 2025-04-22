@@ -12,7 +12,7 @@ namespace SastrawiTest\Morphology\Disambiguator;
  * Disambiguate Prefix Rule 27
  * Rule 27 : pen{c|d|j|z} -> pen-{c|d|j|z}
  */
-class DisambiguatorPrefixRule27Test extends \PHPUnit_Framework_TestCase
+class DisambiguatorPrefixRule27Test extends \PHPUnit\Framework\TestCase
 {
     public function setUp()
     {

@@ -15,7 +15,7 @@ namespace SastrawiTest\Morphology\Disambiguator;
  */
 
 //TODO: Maybe this rule can be combined with rule 29?
-class DisambiguatorPrefixRule30aTest extends \PHPUnit_Framework_TestCase
+class DisambiguatorPrefixRule30aTest extends \PHPUnit\Framework\TestCase
 {
     public function setUp()
     {

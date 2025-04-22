@@ -12,7 +12,7 @@ namespace SastrawiTest\Morphology\Disambiguator;
  * Disambiguate Prefix Rule 15b
  * Rule 15 : men{V} -> me-t{V}
  */
-class DisambiguatorPrefixRule15bTest extends \PHPUnit_Framework_TestCase
+class DisambiguatorPrefixRule15bTest extends \PHPUnit\Framework\TestCase
 {
     public function setUp()
     {

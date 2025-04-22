@@ -6,7 +6,7 @@ use Sastrawi\Stemmer\StemmerFactory;
 
 class StemmerTest extends \PHPUnit\Framework\TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         $stemmerFactory = new StemmerFactory();
         $this->stemmer  = $stemmerFactory->createStemmer(false);

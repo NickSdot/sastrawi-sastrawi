@@ -11,7 +11,7 @@ class CachedStemmerTest extends \PHPUnit\Framework\TestCase
 {
     protected $cachedStemmer;
 
-    public function setUp()
+    public function setUp(): void
     {
         $arrayDictionary = new ArrayDictionary(['makan']);
         $this->delegatedStemmer = new Stemmer($arrayDictionary);

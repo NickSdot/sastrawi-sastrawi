@@ -6,7 +6,7 @@ class ArrayCacheTest extends \PHPUnit\Framework\TestCase
 {
     protected $arrayCache;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->arrayCache = new \Sastrawi\Stemmer\Cache\ArrayCache();
     }

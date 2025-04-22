@@ -20,7 +20,7 @@ class StemmerTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($stem, $this->stemmer->stem($word));
     }
 
-    public function stemDataProvider()
+    public static function stemDataProvider()
     {
         $data = array();
 

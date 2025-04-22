@@ -5,7 +5,7 @@ use Rector\PHPUnit\Set\PHPUnitSetList;
 
 return RectorConfig::configure()
     ->withSets([
-        PHPUnitSetList::PHPUNIT_60,
+        PHPUnitSetList::PHPUNIT_100,
     ])
     ->withPaths([
         __DIR__ . '/src',

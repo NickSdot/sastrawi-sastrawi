@@ -43,7 +43,7 @@ class RemoveInflectionalPossessivePronoun implements VisitorInterface
      * Remove inflectional possessive pronoun : ku|mu|nya|-ku|-mu|-nya
      * @param string $word
      */
-    public function remove($word)
+    public function remove($word): ?string
     {
         return preg_replace('/-*(ku|mu|nya)$/', '', $word, 1);
     }

@@ -45,7 +45,7 @@ class RemovePlainPrefix implements VisitorInterface
      * @param  string $word
      * @return string
      */
-    public function remove($word)
+    public function remove($word): ?string
     {
         return preg_replace('/^(di|ke|se)/', '', $word, 1);
     }

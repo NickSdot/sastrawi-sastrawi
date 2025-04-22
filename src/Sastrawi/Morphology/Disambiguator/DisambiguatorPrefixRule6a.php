@@ -20,7 +20,7 @@ class DisambiguatorPrefixRule6a implements DisambiguatorInterface
      * Rule 6a : terV -> ter-V
      * @return string
      */
-    public function disambiguate($word)
+    public function disambiguate($word): ?string
     {
         $matches  = null;
         $contains = preg_match('/^ter([aiueo].*)$/', (string) $word, $matches);
@@ -28,5 +28,6 @@ class DisambiguatorPrefixRule6a implements DisambiguatorInterface
         if ($contains === 1) {
             return $matches[1];
         }
+        return null;
     }
 }

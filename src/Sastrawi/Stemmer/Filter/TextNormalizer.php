@@ -19,7 +19,7 @@ class TextNormalizer
      * @param  string $text
      * @return string normalized text
      */
-    public static function normalizeText($text)
+    public static function normalizeText($text): string
     {
         $text = strtolower($text);
         $text = preg_replace('/[^a-z0-9 -]/im', ' ', $text);

@@ -18,7 +18,7 @@ class DisambiguatorPrefixRule32 implements DisambiguatorInterface
      * Disambiguate Prefix Rule 32
      * Rule 32 : pelV -> pe-lV except pelajar -> ajar
      */
-    public function disambiguate($word)
+    public function disambiguate($word): ?string
     {
         if ($word == 'pelajar') {
             return 'ajar';
@@ -27,5 +27,6 @@ class DisambiguatorPrefixRule32 implements DisambiguatorInterface
         if (preg_match('/^pe(l[aiueo])(.*)$/', (string) $word, $matches)) {
             return $matches[1] . $matches[2];
         }
+        return null;
     }
 }

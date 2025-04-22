@@ -19,12 +19,10 @@ class ArrayCache implements CacheInterface
 
     public function get($key)
     {
-        if (isset($this->data[$key])) {
-            return $this->data[$key];
-        }
+        return $this->data[$key] ?? null;
     }
 
-    public function has($key)
+    public function has($key): bool
     {
         return isset($this->data[$key]);
     }

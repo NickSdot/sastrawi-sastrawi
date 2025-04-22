@@ -18,10 +18,11 @@ class DisambiguatorPrefixRule4 implements DisambiguatorInterface
      * Disambiguate Prefix Rule 4
      * Rule 4 : belajar -> bel-ajar
      */
-    public function disambiguate($word)
+    public function disambiguate($word): ?string
     {
         if ($word == 'belajar') {
             return 'ajar';
         }
+        return null;
     }
 }

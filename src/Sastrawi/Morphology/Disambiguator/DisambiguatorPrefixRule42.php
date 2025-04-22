@@ -18,10 +18,11 @@ class DisambiguatorPrefixRule42 implements DisambiguatorInterface
      * Disambiguate Prefix Rule 42
      * Rule 42 : kauA -> kau-A
      */
-    public function disambiguate($word)
+    public function disambiguate($word): ?string
     {
         if (preg_match('/^kau(.*)$/', (string) $word, $matches)) {
             return $matches[1];
         }
+        return null;
     }
 }

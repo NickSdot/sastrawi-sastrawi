@@ -18,10 +18,11 @@ class DisambiguatorPrefixRule18a implements DisambiguatorInterface
      * Disambiguate Prefix Rule 18a
      * CC Rule 18a : menyV -> me-nyV to stem menyala -> nyala
      */
-    public function disambiguate($word)
+    public function disambiguate($word): ?string
     {
         if (preg_match('/^meny([aiueo])(.*)$/', (string) $word, $matches)) {
             return 'ny' . $matches[1] . $matches[2];
         }
+        return null;
     }
 }

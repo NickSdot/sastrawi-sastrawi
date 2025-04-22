@@ -6,20 +6,11 @@ use Sastrawi\Dictionary\DictionaryInterface;
 
 class StopWordRemover
 {
-    /**
-     * @var \Sastrawi\Dictionary\DictionaryInterface
-     */
-    protected $dictionary;
-
-    public function __construct(DictionaryInterface $dictionary)
+    public function __construct(protected \Sastrawi\Dictionary\DictionaryInterface $dictionary)
     {
-        $this->dictionary = $dictionary;
     }
 
-    /**
-     * @return \Sastrawi\Dictionary\DictionaryInterface
-     */
-    public function getDictionary()
+    public function getDictionary(): \Sastrawi\Dictionary\DictionaryInterface
     {
         return $this->dictionary;
     }
@@ -30,7 +21,7 @@ class StopWordRemover
      * @param  string $text The text which stop words to be removed
      * @return string The text after removal
      */
-    public function remove($text)
+    public function remove($text): string
     {
         $words = explode(' ', $text);
 

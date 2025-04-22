@@ -20,10 +20,11 @@ class DisambiguatorPrefixRule31b implements DisambiguatorInterface
      * Original Rule 31 : penyV -> peny-sV
      * Modified by CC, shifted to 31b
      */
-    public function disambiguate($word)
+    public function disambiguate($word): ?string
     {
         if (preg_match('/^peny([aiueo])(.*)$/', (string) $word, $matches)) {
             return 's' . $matches[1] . $matches[2];
         }
+        return null;
     }
 }

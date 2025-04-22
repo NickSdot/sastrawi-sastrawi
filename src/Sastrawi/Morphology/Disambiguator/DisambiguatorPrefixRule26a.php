@@ -18,10 +18,11 @@ class DisambiguatorPrefixRule26a implements DisambiguatorInterface
      * Disambiguate Prefix Rule 26a
      * Rule 26a : pem{rV|V} -> pe-m{rV|V}
      */
-    public function disambiguate($word)
+    public function disambiguate($word): ?string
     {
         if (preg_match('/^pem([aiueo])(.*)$/', (string) $word, $matches)) {
             return 'm' . $matches[1] . $matches[2];
         }
+        return null;
     }
 }

@@ -14,17 +14,18 @@ namespace Sastrawi\Morphology\Disambiguator;
 */
 class DisambiguatorPrefixRule2 implements DisambiguatorInterface
 {
-    public function disambiguate($word)
+    public function disambiguate($word): ?string
     {
         $matches  = null;
         $contains = preg_match('/^ber([bcdfghjklmnpqrstvwxyz])([a-z])(.*)$/', (string) $word, $matches);
 
         if ($contains === 1) {
             if (preg_match('/^er(.*)$/', $matches[3]) === 1) {
-                return;
+                return null;
             }
 
             return $matches[1] . $matches[2] . $matches[3];
         }
+        return null;
     }
 }

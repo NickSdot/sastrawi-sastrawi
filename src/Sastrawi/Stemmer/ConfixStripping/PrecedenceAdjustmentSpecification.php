@@ -20,9 +20,8 @@ class PrecedenceAdjustmentSpecification implements SpecificationInterface
 {
     /**
      * @param  string  $value
-     * @return boolean
      */
-    public function isSatisfiedBy($value)
+    public function isSatisfiedBy($value): bool
     {
         $regexRules = [
             '/^be(.*)lah$/',

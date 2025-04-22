@@ -6,17 +6,16 @@ use Sastrawi\Dictionary\ArrayDictionary;
 
 class StopWordRemoverFactory
 {
-    public function createStopWordRemover()
+    public function createStopWordRemover(): \Sastrawi\StopWordRemover\StopWordRemover
     {
         $stopWords = $this->getStopWords();
 
         $dictionary = new ArrayDictionary($stopWords);
-        $stopWordRemover = new StopWordRemover($dictionary);
 
-        return $stopWordRemover;
+        return new StopWordRemover($dictionary);
     }
 
-    public function getStopWords()
+    public function getStopWords(): array
     {
         return [
             'yang', 'untuk', 'pada', 'ke', 'para', 'namun', 'menurut', 'antara', 'dia', 'dua',

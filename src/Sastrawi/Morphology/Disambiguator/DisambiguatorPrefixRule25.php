@@ -18,10 +18,11 @@ class DisambiguatorPrefixRule25 implements DisambiguatorInterface
      * Disambiguate Prefix Rule 25
      * Rule 25 : pem{b|f|v} -> pem-{b|f|v}
      */
-    public function disambiguate($word)
+    public function disambiguate($word): ?string
     {
         if (preg_match('/^pem([bfv])(.*)$/', (string) $word, $matches) === 1) {
             return $matches[1] . $matches[2];
         }
+        return null;
     }
 }

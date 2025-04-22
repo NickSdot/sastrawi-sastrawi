@@ -10,17 +10,11 @@ namespace Sastrawi\Stemmer;
 
 class CachedStemmer implements StemmerInterface
 {
-    protected $cache;
-
-    protected $delegatedStemmer;
-
-    public function __construct(Cache\CacheInterface $cache, StemmerInterface $delegatedStemmer)
+    public function __construct(protected \Sastrawi\Stemmer\Cache\CacheInterface $cache, protected \Sastrawi\Stemmer\StemmerInterface $delegatedStemmer)
     {
-        $this->cache = $cache;
-        $this->delegatedStemmer = $delegatedStemmer;
     }
 
-    public function stem($text)
+    public function stem($text): string
     {
         $normalizedText = Filter\TextNormalizer::normalizeText($text);
 
@@ -40,12 +34,12 @@ class CachedStemmer implements StemmerInterface
         return implode(' ', $stems);
     }
 
-    public function getCache()
+    public function getCache(): \Sastrawi\Stemmer\Cache\CacheInterface
     {
         return $this->cache;
     }
 
-    public function getDelegatedStemmer()
+    public function getDelegatedStemmer(): \Sastrawi\Stemmer\StemmerInterface
     {
         return $this->delegatedStemmer;
     }

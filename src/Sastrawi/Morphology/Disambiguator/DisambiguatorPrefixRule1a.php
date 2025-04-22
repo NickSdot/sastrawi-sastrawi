@@ -19,7 +19,7 @@ class DisambiguatorPrefixRule1a implements DisambiguatorInterface
      * Rule 1a : berV -> ber-V
      * @return string
      */
-    public function disambiguate($word)
+    public function disambiguate($word): ?string
     {
         $matches  = null;
         $contains = preg_match('/^ber([aiueo].*)$/', (string) $word, $matches);
@@ -27,5 +27,6 @@ class DisambiguatorPrefixRule1a implements DisambiguatorInterface
         if ($contains === 1) {
             return $matches[1];
         }
+        return null;
     }
 }

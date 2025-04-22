@@ -18,10 +18,11 @@ class DisambiguatorPrefixRule17c implements DisambiguatorInterface
      * Disambiguate Prefix Rule 17c
      * Rule 17c : mengV -> mengV- where V = 'e'
      */
-    public function disambiguate($word)
+    public function disambiguate($word): ?string
     {
         if (preg_match('/^menge(.*)$/', (string) $word, $matches)) {
             return $matches[1];
         }
+        return null;
     }
 }

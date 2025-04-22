@@ -18,12 +18,13 @@ class DisambiguatorPrefixRule38b implements DisambiguatorInterface
      * Disambiguate Prefix Rule 38b (CC infix rules)
      * Rule 38b : CelV -> CV
      */
-    public function disambiguate($word)
+    public function disambiguate($word): ?string
     {
         $contains = preg_match('/^([bcdfghjklmnpqrstvwxyz])el([aiueo])(.*)$/', (string) $word, $matches);
 
         if ($contains === 1) {
             return $matches[1] . $matches[2] . $matches[3];
         }
+        return null;
     }
 }

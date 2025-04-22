@@ -18,10 +18,11 @@ class DisambiguatorPrefixRule31a implements DisambiguatorInterface
      * Disambiguate Prefix Rule 31a
      * CC Rule 31a : penyV -> pe-nyV
      */
-    public function disambiguate($word)
+    public function disambiguate($word): ?string
     {
         if (preg_match('/^peny([aiueo])(.*)$/', (string) $word, $matches)) {
             return 'ny' . $matches[1] . $matches[2];
         }
+        return null;
     }
 }

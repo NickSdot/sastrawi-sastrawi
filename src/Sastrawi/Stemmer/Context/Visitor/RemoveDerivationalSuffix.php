@@ -47,7 +47,7 @@ class RemoveDerivationalSuffix implements VisitorInterface
      * @param  string $word
      * @return string word after its derivational suffix removed
      */
-    public function removeSuffix($word)
+    public function removeSuffix($word): ?string
     {
         return preg_replace('/(is|isme|isasi|i|kan|an)$/', '', $word, 1);
     }

@@ -15,6 +15,7 @@ namespace SastrawiTest\Morphology\Disambiguator;
 
 class DisambiguatorPrefixRule40bTest extends \PHPUnit\Framework\TestCase
 {
+    public $subject;
     public function setUp(): void
     {
         $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule40b();

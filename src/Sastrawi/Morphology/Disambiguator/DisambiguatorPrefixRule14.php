@@ -32,7 +32,7 @@ class DisambiguatorPrefixRule14 implements DisambiguatorInterface
      *
      * Original CS Rule no 14 was : men{c|d|j|z} -> men-{c|d|j|z}
      */
-    public function disambiguate($word)
+    public function disambiguate($word): ?string
     {
         $matches  = null;
         $contains = preg_match('/^men([cdjstz])(.*)$/', (string) $word, $matches);
@@ -40,5 +40,6 @@ class DisambiguatorPrefixRule14 implements DisambiguatorInterface
         if ($contains === 1) {
             return $matches[1] . $matches[2];
         }
+        return null;
     }
 }

@@ -18,12 +18,13 @@ class DisambiguatorPrefixRule37a implements DisambiguatorInterface
      * Disambiguate Prefix Rule 37a (CC infix rules)
      * Rule 37a : CerV -> CerV
      */
-    public function disambiguate($word)
+    public function disambiguate($word): ?string
     {
         $contains = preg_match('/^([bcdfghjklmnpqrstvwxyz])(er[aiueo])(.*)$/', (string) $word, $matches);
 
         if ($contains === 1) {
             return $matches[1] . $matches[2] . $matches[3];
         }
+        return null;
     }
 }

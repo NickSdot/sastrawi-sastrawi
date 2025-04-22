@@ -20,25 +20,20 @@ class StemmerFactory
     /**
      * @return \Sastrawi\Stemmer\Stemmer
      */
-    public function createStemmer($isDev = false)
+    public function createStemmer($isDev = false): \Sastrawi\Stemmer\CachedStemmer
     {
         $stemmer    = new Stemmer($this->createDefaultDictionary($isDev));
 
         $resultCache   = new Cache\ArrayCache();
-        $cachedStemmer = new CachedStemmer($resultCache, $stemmer);
 
-        return $cachedStemmer;
+        return new CachedStemmer($resultCache, $stemmer);
     }
 
-    /**
-     * @return \Sastrawi\Dictionary\ArrayDictionary
-     */
-    public function createDefaultDictionary($isDev = false)
+    public function createDefaultDictionary($isDev = false): \Sastrawi\Dictionary\ArrayDictionary
     {
         $words      = $this->getWords($isDev);
-        $dictionary = new ArrayDictionary($words);
 
-        return $dictionary;
+        return new ArrayDictionary($words);
     }
 
     protected function getWords($isDev = false)

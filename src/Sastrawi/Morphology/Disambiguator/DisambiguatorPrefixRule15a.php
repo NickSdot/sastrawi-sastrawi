@@ -18,7 +18,7 @@ class DisambiguatorPrefixRule15a implements DisambiguatorInterface
      * Disambiguate Prefix Rule 15a
      * Rule 15a : men{V} -> me-n{V}
      */
-    public function disambiguate($word)
+    public function disambiguate($word): ?string
     {
         $matches  = null;
         $contains = preg_match('/^men([aiueo])(.*)$/', (string) $word, $matches);
@@ -26,5 +26,6 @@ class DisambiguatorPrefixRule15a implements DisambiguatorInterface
         if ($contains === 1) {
             return 'n' . $matches[1] . $matches[2];
         }
+        return null;
     }
 }

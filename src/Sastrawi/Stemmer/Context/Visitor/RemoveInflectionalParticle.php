@@ -43,7 +43,7 @@ class RemoveInflectionalParticle implements VisitorInterface
      * Remove inflectional particle : lah|kah|tah|pun
      * @param string $word
      */
-    public function remove($word)
+    public function remove($word): ?string
     {
         return preg_replace('/-*(lah|kah|tah|pun)$/', '', $word, 1);
     }

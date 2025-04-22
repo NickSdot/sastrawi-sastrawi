@@ -9,6 +9,11 @@ use Sastrawi\Dictionary\ArrayDictionary;
 
 class CachedStemmerTest extends \PHPUnit\Framework\TestCase
 {
+    /**
+     * @var \Sastrawi\Stemmer\Stemmer
+     */
+    public $delegatedStemmer;
+    public $arrayCache;
     protected $cachedStemmer;
 
     public function setUp(): void

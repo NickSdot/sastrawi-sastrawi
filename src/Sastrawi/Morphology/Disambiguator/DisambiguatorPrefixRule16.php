@@ -20,7 +20,7 @@ class DisambiguatorPrefixRule16 implements DisambiguatorInterface
      * Original Nazief and Adriani's Rule 16 : meng{g|h|q} -> meng-{g|h|q}
      * Modified Jelita Asian's CS Rule 16 : meng{g|h|q|k} -> meng-{g|h|q|k} to stem mengkritik
      */
-    public function disambiguate($word)
+    public function disambiguate($word): ?string
     {
         $matches  = null;
         $contains = preg_match('/^meng([g|h|q|k])(.*)$/', (string) $word, $matches);
@@ -28,5 +28,6 @@ class DisambiguatorPrefixRule16 implements DisambiguatorInterface
         if ($contains === 1) {
             return $matches[1] . $matches[2];
         }
+        return null;
     }
 }

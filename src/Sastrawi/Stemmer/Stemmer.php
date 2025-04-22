@@ -21,29 +21,19 @@ use Sastrawi\Stemmer\Context\Visitor\VisitorProvider;
 class Stemmer implements StemmerInterface
 {
     /**
-     * The dictionary containing root words
-     *
-     * @var \Sastrawi\Dictionary\DictionaryInterface
-     */
-    protected $dictionary;
-
-    /**
      * Visitor provider
-     *
-     * @var \Sastrawi\Stemmer\Context\Visitor\VisitorProvider
      */
-    protected $visitorProvider;
+    protected \Sastrawi\Stemmer\Context\Visitor\VisitorProvider $visitorProvider;
 
-    public function __construct(DictionaryInterface $dictionary)
+    public function __construct(/**
+     * The dictionary containing root words
+     */
+    protected \Sastrawi\Dictionary\DictionaryInterface $dictionary)
     {
-        $this->dictionary      = $dictionary;
         $this->visitorProvider = new VisitorProvider();
     }
 
-    /**
-     * @return \Sastrawi\Dictionary\DictionaryInterface
-     */
-    public function getDictionary()
+    public function getDictionary(): \Sastrawi\Dictionary\DictionaryInterface
     {
         return $this->dictionary;
     }
@@ -54,7 +44,7 @@ class Stemmer implements StemmerInterface
      * @param  string $text the text string to stem, e.g : memberdayakan pembangunan
      * @return string common stem form, e.g : daya bangun
      */
-    public function stem($text)
+    public function stem($text): string
     {
         $normalizedText = Filter\TextNormalizer::normalizeText($text);
 
@@ -78,16 +68,14 @@ class Stemmer implements StemmerInterface
     {
         if ($this->isPlural($word)) {
             return $this->stemPluralWord($word);
-        } else {
-            return $this->stemSingularWord($word);
         }
+        return $this->stemSingularWord($word);
     }
 
     /**
      * @param  string  $word
-     * @return boolean
      */
-    protected function isPlural($word)
+    protected function isPlural($word): bool
     {
         // -ku|-mu|-nya
         // nikmat-Ku, etc
@@ -132,9 +120,8 @@ class Stemmer implements StemmerInterface
 
         if ($rootWord1 == $rootWord2) {
             return $rootWord1;
-        } else {
-            return $plural;
         }
+        return $plural;
     }
 
     /**

@@ -18,7 +18,7 @@ class DisambiguatorPrefixRule11 implements DisambiguatorInterface
      * Disambiguate Prefix Rule 11
      * Rule 11 : mem{b|f|v} -> mem-{b|f|v}
      */
-    public function disambiguate($word)
+    public function disambiguate($word): ?string
     {
         $matches  = null;
         $contains = preg_match('/^mem([bfv])(.*)$/', (string) $word, $matches);
@@ -26,5 +26,6 @@ class DisambiguatorPrefixRule11 implements DisambiguatorInterface
         if ($contains === 1) {
             return $matches[1] . $matches[2];
         }
+        return null;
     }
 }

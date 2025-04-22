@@ -20,10 +20,11 @@ class DisambiguatorPrefixRule29 implements DisambiguatorInterface
      * Original Rule 29 : peng{g|h|q} -> peng-{g|h|q}
      * Modified Rule 29 by ECS : pengC -> peng-C
      */
-    public function disambiguate($word)
+    public function disambiguate($word): ?string
     {
         if (preg_match('/^peng([bcdfghjklmnpqrstvwxyz])(.*)$/', (string) $word, $matches)) {
             return $matches[1] . $matches[2];
         }
+        return null;
     }
 }

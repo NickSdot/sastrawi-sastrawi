@@ -34,16 +34,6 @@ class Context implements ContextInterface, VisitableInterface
     protected $removals = [];
 
     /**
-     * @var \Sastrawi\Dictionary\DictionaryInterface
-     */
-    protected $dictionary;
-
-    /**
-     * @var \Sastrawi\Stemmer\Context\Visitor\VisitorProvider
-     */
-    protected $visitorProvider;
-
-    /**
      * @var \Sastrawi\Stemmer\Context\Visitor\VisitorInterface[]
      */
     protected $visitors = [];
@@ -65,17 +55,13 @@ class Context implements ContextInterface, VisitableInterface
 
     /**
      * @param string                                            $originalWord
-     * @param \Sastrawi\Dictionary\DictionaryInterface          $dictionary
-     * @param \Sastrawi\Stemmer\Context\Visitor\VisitorProvider $visitorProvider
      */
     public function __construct(
         protected $originalWord,
-        DictionaryInterface $dictionary,
-        Visitor\VisitorProvider $visitorProvider
+        protected \Sastrawi\Dictionary\DictionaryInterface $dictionary,
+        protected \Sastrawi\Stemmer\Context\Visitor\VisitorProvider $visitorProvider
     ) {
         $this->currentWord  = $this->originalWord;
-        $this->dictionary   = $dictionary;
-        $this->visitorProvider = $visitorProvider;
 
         $this->initVisitors();
     }
@@ -92,7 +78,7 @@ class Context implements ContextInterface, VisitableInterface
         $this->dictionary = $dictionary;
     }
 
-    public function getDictionary()
+    public function getDictionary(): \Sastrawi\Dictionary\DictionaryInterface
     {
         return $this->dictionary;
     }
@@ -139,8 +125,6 @@ class Context implements ContextInterface, VisitableInterface
 
     /**
      * Execute stemming process; the result can be retrieved with getResult()
-     *
-     * @return void
      */
     public function execute(): void
     {
@@ -148,11 +132,7 @@ class Context implements ContextInterface, VisitableInterface
         $this->startStemmingProcess();
 
         // step 6
-        if ($this->dictionary->contains($this->getCurrentWord())) {
-            $this->result = $this->getCurrentWord();
-        } else {
-            $this->result = $this->originalWord;
-        }
+        $this->result = $this->dictionary->contains($this->getCurrentWord()) ? $this->getCurrentWord() : $this->originalWord;
     }
 
     /**
@@ -188,12 +168,11 @@ class Context implements ContextInterface, VisitableInterface
             $this->removeSuffixes();
             if ($this->dictionary->contains($this->getCurrentWord())) {
                 return;
-            } else {
-                // if the trial is failed, restore the original word
-                // and continue to normal rule precedence (suffix first, prefix afterwards)
-                $this->setCurrentWord($this->originalWord);
-                $this->removals = [];
             }
+            // if the trial is failed, restore the original word
+            // and continue to normal rule precedence (suffix first, prefix afterwards)
+            $this->setCurrentWord($this->originalWord);
+            $this->removals = [];
         }
 
         // step 2, 3
@@ -245,6 +224,7 @@ class Context implements ContextInterface, VisitableInterface
                 return $this->getCurrentWord();
             }
         }
+        return null;
     }
 
     protected function acceptPrefixVisitors(array $visitors)
@@ -262,9 +242,10 @@ class Context implements ContextInterface, VisitableInterface
             }
 
             if (count($this->removals) > $removalCount) {
-                return;
+                return null;
             }
         }
+        return null;
     }
 
     /**
@@ -311,21 +292,20 @@ class Context implements ContextInterface, VisitableInterface
 
     /**
      * Check wether the removed part is a suffix
-     *
-     * @param  \Sastrawi\Stemmer\Context\RemovalInterface $removal
-     * @return boolean
      */
-    protected function isSuffixRemoval(RemovalInterface $removal)
+    protected function isSuffixRemoval(RemovalInterface $removal): bool
     {
-        return $removal->getAffixType() == 'DS'
-            || $removal->getAffixType() == 'PP'
-            || $removal->getAffixType() == 'P';
+        if ($removal->getAffixType() == 'DS') {
+            return true;
+        }
+        if ($removal->getAffixType() == 'PP') {
+            return true;
+        }
+        return $removal->getAffixType() == 'P';
     }
 
     /**
      * Restore prefix to proceed with ECS loop pengembalian akhiran
-     *
-     * @return void
      */
     public function restorePrefix(): void
     {

@@ -18,7 +18,7 @@ class DisambiguatorPrefixRule10 implements DisambiguatorInterface
      * Disambiguate Prefix Rule 10
      * Rule 10 : me{l|r|w|y}V -> me-{l|r|w|y}V
      */
-    public function disambiguate($word)
+    public function disambiguate($word): ?string
     {
         $matches  = null;
         $contains = preg_match('/^me([lrwy])([aiueo])(.*)$/', (string) $word, $matches);
@@ -26,5 +26,6 @@ class DisambiguatorPrefixRule10 implements DisambiguatorInterface
         if ($contains === 1) {
             return $matches[1] . $matches[2] . $matches[3];
         }
+        return null;
     }
 }

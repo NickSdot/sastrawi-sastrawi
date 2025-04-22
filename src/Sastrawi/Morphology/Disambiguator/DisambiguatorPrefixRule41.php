@@ -18,10 +18,11 @@ class DisambiguatorPrefixRule41 implements DisambiguatorInterface
      * Disambiguate Prefix Rule 41
      * Rule 41 : kuA -> ku-A
      */
-    public function disambiguate($word)
+    public function disambiguate($word): ?string
     {
         if (preg_match('/^ku(.*)$/', (string) $word, $matches)) {
             return $matches[1];
         }
+        return null;
     }
 }

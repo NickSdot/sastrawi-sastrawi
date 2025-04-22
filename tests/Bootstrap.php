@@ -16,7 +16,7 @@
 * and is licensed under the MIT license.
 */
 
-ini_set('error_reporting', E_ALL | E_STRICT);
+ini_set('error_reporting', E_ALL);
 
 $files = [__DIR__ . '/../vendor/autoload.php'];
 

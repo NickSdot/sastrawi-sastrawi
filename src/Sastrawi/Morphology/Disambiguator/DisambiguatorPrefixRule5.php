@@ -18,7 +18,7 @@ class DisambiguatorPrefixRule5 implements DisambiguatorInterface
      * Disambiguate Prefix Rule 5
      * Rule 5 : beC1erC2 -> be-C1erC2 where C1 != 'r'
      */
-    public function disambiguate($word)
+    public function disambiguate($word): ?string
     {
         $matches  = null;
         $contains = preg_match('/^be([bcdfghjklmnpqstvwxyz])(er[bcdfghjklmnpqrstvwxyz])(.*)$/', (string) $word, $matches);
@@ -26,5 +26,6 @@ class DisambiguatorPrefixRule5 implements DisambiguatorInterface
         if ($contains === 1) {
             return $matches[1] . $matches[2] . $matches[3];
         }
+        return null;
     }
 }

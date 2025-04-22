@@ -26,7 +26,7 @@ class ArrayDictionary implements DictionaryInterface
     /**
      * {@inheritdoc}
      */
-    public function contains($word)
+    public function contains($word): bool
     {
         return isset($this->words[$word]);
     }
@@ -34,16 +34,13 @@ class ArrayDictionary implements DictionaryInterface
     /**
      * {@inheritdoc}
      */
-    public function count()
+    public function count(): int
     {
         return count($this->words);
     }
 
     /**
      * Add multiple words to the dictionary
-     *
-     * @param  array $words
-     * @return void
      */
     public function addWords(array $words): void
     {
@@ -56,7 +53,6 @@ class ArrayDictionary implements DictionaryInterface
      * Add a word to the dictionary
      *
      * @param  string $word
-     * @return void
      */
     public function add($word): void
     {
@@ -71,7 +67,6 @@ class ArrayDictionary implements DictionaryInterface
      * Remove a word from the dictionary
      *
      * @param  string $word
-     * @return void
      */
     public function remove($word): void
     {
@@ -82,7 +77,6 @@ class ArrayDictionary implements DictionaryInterface
      * Add words from a text file to the dictionary
      *
      * @param  string $word
-     * @return void
      */
     public function addWordsFromTextFile($filePath, $delimiter = "\n"): void
     {

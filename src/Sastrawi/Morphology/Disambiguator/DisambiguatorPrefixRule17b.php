@@ -18,7 +18,7 @@ class DisambiguatorPrefixRule17b implements DisambiguatorInterface
      * Disambiguate Prefix Rule 17b
      * Rule 17b : mengV -> meng-kV
      */
-    public function disambiguate($word)
+    public function disambiguate($word): ?string
     {
         $matches  = null;
         $contains = preg_match('/^meng([aiueo])(.*)$/', (string) $word, $matches);
@@ -26,5 +26,6 @@ class DisambiguatorPrefixRule17b implements DisambiguatorInterface
         if ($contains === 1) {
             return 'k'. $matches[1] . $matches[2];
         }
+        return null;
     }
 }

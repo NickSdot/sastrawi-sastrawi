@@ -18,10 +18,11 @@ class DisambiguatorPrefixRule30c implements DisambiguatorInterface
      * Disambiguate Prefix Rule 30c
      * Rule 30a : peng-V -> pengV- where V = 'e'
      */
-    public function disambiguate($word)
+    public function disambiguate($word): ?string
     {
         if (preg_match('/^penge(.*)$/', (string) $word, $matches)) {
             return $matches[1];
         }
+        return null;
     }
 }

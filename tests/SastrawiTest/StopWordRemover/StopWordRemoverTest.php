@@ -7,6 +7,8 @@ use Sastrawi\Dictionary\ArrayDictionary;
 
 class StopWordRemoverTest extends \PHPUnit\Framework\TestCase
 {
+    public $dictionary;
+    public $stopWordRemover;
     public function setUp(): void
     {
         $this->dictionary = new ArrayDictionary(['di', 'ke']);

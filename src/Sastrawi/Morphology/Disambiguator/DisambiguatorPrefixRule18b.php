@@ -22,7 +22,7 @@ class DisambiguatorPrefixRule18b implements DisambiguatorInterface
      */
     public function disambiguate($word)
     {
-        if (preg_match('/^meny([aiueo])(.*)$/', $word, $matches)) {
+        if (preg_match('/^meny([aiueo])(.*)$/', (string) $word, $matches)) {
             return 's' . $matches[1] . $matches[2];
         }
     }

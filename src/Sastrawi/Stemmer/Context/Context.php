@@ -21,11 +21,6 @@ class Context implements ContextInterface, VisitableInterface
     /**
      * @var string
      */
-    protected $originalWord;
-
-    /**
-     * @var string
-     */
     protected $currentWord;
 
     /**
@@ -36,7 +31,7 @@ class Context implements ContextInterface, VisitableInterface
     /**
      * @var \Sastrawi\Stemmer\Context\RemovalInterface[]
      */
-    protected $removals = array();
+    protected $removals = [];
 
     /**
      * @var \Sastrawi\Dictionary\DictionaryInterface
@@ -51,17 +46,17 @@ class Context implements ContextInterface, VisitableInterface
     /**
      * @var \Sastrawi\Stemmer\Context\Visitor\VisitorInterface[]
      */
-    protected $visitors = array();
+    protected $visitors = [];
 
     /**
      * @var \Sastrawi\Stemmer\Context\Visitor\VisitorInterface[]
      */
-    protected $suffixVisitors = array();
+    protected $suffixVisitors = [];
 
     /**
      * @var \Sastrawi\Stemmer\Context\Visitor\VisitorInterface[]
      */
-    protected $prefixVisitors = array();
+    protected $prefixVisitors = [];
 
     /**
      * @var string
@@ -74,11 +69,10 @@ class Context implements ContextInterface, VisitableInterface
      * @param \Sastrawi\Stemmer\Context\Visitor\VisitorProvider $visitorProvider
      */
     public function __construct(
-        $originalWord,
+        protected $originalWord,
         DictionaryInterface $dictionary,
         Visitor\VisitorProvider $visitorProvider
     ) {
-        $this->originalWord = $originalWord;
         $this->currentWord  = $this->originalWord;
         $this->dictionary   = $dictionary;
         $this->visitorProvider = $visitorProvider;
@@ -198,7 +192,7 @@ class Context implements ContextInterface, VisitableInterface
                 // if the trial is failed, restore the original word
                 // and continue to normal rule precedence (suffix first, prefix afterwards)
                 $this->setCurrentWord($this->originalWord);
-                $this->removals = array();
+                $this->removals = [];
             }
         }
 

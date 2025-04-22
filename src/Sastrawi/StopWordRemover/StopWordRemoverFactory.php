@@ -18,7 +18,7 @@ class StopWordRemoverFactory
 
     public function getStopWords()
     {
-        return array(
+        return [
             'yang', 'untuk', 'pada', 'ke', 'para', 'namun', 'menurut', 'antara', 'dia', 'dua',
             'ia', 'seperti', 'jika', 'jika', 'sehingga', 'kembali', 'dan', 'tidak', 'ini', 'karena',
             'kepada', 'oleh', 'saat', 'harus', 'sementara', 'setelah', 'belum', 'kami', 'sekitar',
@@ -33,6 +33,6 @@ class StopWordRemoverFactory
             'juga', 'nggak', 'mari', 'nanti', 'melainkan', 'oh', 'ok', 'seharusnya', 'sebetulnya',
             'setiap', 'setidaknya', 'sesuatu', 'pasti', 'saja', 'toh', 'ya', 'walau', 'tolong',
             'tentu', 'amat', 'apalagi', 'bagaimanapun',
-        );
+        ];
     }
 }

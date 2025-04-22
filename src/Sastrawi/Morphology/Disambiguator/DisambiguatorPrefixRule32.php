@@ -24,7 +24,7 @@ class DisambiguatorPrefixRule32 implements DisambiguatorInterface
             return 'ajar';
         }
 
-        if (preg_match('/^pe(l[aiueo])(.*)$/', $word, $matches)) {
+        if (preg_match('/^pe(l[aiueo])(.*)$/', (string) $word, $matches)) {
             return $matches[1] . $matches[2];
         }
     }

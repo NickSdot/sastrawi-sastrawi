@@ -23,7 +23,7 @@ class DisambiguatorPrefixRule12 implements DisambiguatorInterface
     public function disambiguate($word)
     {
         $matches  = null;
-        $contains = preg_match('/^mempe(.*)$/', $word, $matches);
+        $contains = preg_match('/^mempe(.*)$/', (string) $word, $matches);
 
         if ($contains === 1) {
             return 'pe' . $matches[1];

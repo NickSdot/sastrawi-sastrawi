@@ -25,7 +25,7 @@ class CachedStemmer implements StemmerInterface
         $normalizedText = Filter\TextNormalizer::normalizeText($text);
 
         $words = explode(' ', $normalizedText);
-        $stems = array();
+        $stems = [];
 
         foreach ($words as $word) {
             if ($this->cache->has($word)) {

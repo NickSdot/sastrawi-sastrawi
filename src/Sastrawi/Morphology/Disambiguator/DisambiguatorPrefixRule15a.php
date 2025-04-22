@@ -21,7 +21,7 @@ class DisambiguatorPrefixRule15a implements DisambiguatorInterface
     public function disambiguate($word)
     {
         $matches  = null;
-        $contains = preg_match('/^men([aiueo])(.*)$/', $word, $matches);
+        $contains = preg_match('/^men([aiueo])(.*)$/', (string) $word, $matches);
 
         if ($contains === 1) {
             return 'n' . $matches[1] . $matches[2];

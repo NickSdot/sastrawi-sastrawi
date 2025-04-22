@@ -45,10 +45,10 @@ class ArrayDictionaryTest extends \PHPUnit\Framework\TestCase
 
     public function testAddWords(): void
     {
-        $words = array(
+        $words = [
             'word1',
             'word2',
-        );
+        ];
 
         $this->dictionary->addWords($words);
         $this->assertCount(2, $this->dictionary);
@@ -58,10 +58,10 @@ class ArrayDictionaryTest extends \PHPUnit\Framework\TestCase
 
     public function testConstructorPreserveWords(): void
     {
-        $words = array(
+        $words = [
             'word1',
             'word2',
-        );
+        ];
 
         $dictionary = new ArrayDictionary($words);
         $this->assertCount(2, $dictionary);

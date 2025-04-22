@@ -21,7 +21,7 @@ class DisambiguatorPrefixRule36 implements DisambiguatorInterface
     public function disambiguate($word)
     {
         $matches  = null;
-        $contains = preg_match('/^pe([bcdfghjkpqstvxz])(er[bcdfghjklmnpqrstvwxyz])(.*)$/', $word, $matches);
+        $contains = preg_match('/^pe([bcdfghjkpqstvxz])(er[bcdfghjklmnpqrstvwxyz])(.*)$/', (string) $word, $matches);
 
         if ($contains === 1) {
             return $matches[1] . $matches[2] . $matches[3];

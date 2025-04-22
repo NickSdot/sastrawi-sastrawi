@@ -9,7 +9,7 @@ class StopWordRemoverTest extends \PHPUnit\Framework\TestCase
 {
     public function setUp()
     {
-        $this->dictionary = new ArrayDictionary(array('di', 'ke'));
+        $this->dictionary = new ArrayDictionary(['di', 'ke']);
         $this->stopWordRemover = new StopWordRemover($this->dictionary);
     }
 

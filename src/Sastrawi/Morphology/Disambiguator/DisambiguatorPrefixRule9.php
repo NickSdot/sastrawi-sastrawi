@@ -21,7 +21,7 @@ class DisambiguatorPrefixRule9 implements DisambiguatorInterface
     public function disambiguate($word)
     {
         $matches  = null;
-        $contains = preg_match('/^te([bcdfghjklmnpqrstvwxyz])er([bcdfghjklmnpqrstvwxyz])(.*)$/', $word, $matches);
+        $contains = preg_match('/^te([bcdfghjklmnpqrstvwxyz])er([bcdfghjklmnpqrstvwxyz])(.*)$/', (string) $word, $matches);
 
         if ($contains === 1) {
             if ($matches[1] === 'r') {

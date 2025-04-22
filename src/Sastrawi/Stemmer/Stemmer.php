@@ -59,7 +59,7 @@ class Stemmer implements StemmerInterface
         $normalizedText = Filter\TextNormalizer::normalizeText($text);
 
         $words = explode(' ', $normalizedText);
-        $stems = array();
+        $stems = [];
 
         foreach ($words as $word) {
             $stems[] = $this->stemWord($word);
@@ -92,10 +92,10 @@ class Stemmer implements StemmerInterface
         // -ku|-mu|-nya
         // nikmat-Ku, etc
         if (preg_match('/^(.*)-(ku|mu|nya|lah|kah|tah|pun)$/', $word, $words)) {
-            return strpos($words[1], '-') !== false;
+            return str_contains($words[1], '-');
         }
 
-        return strpos($word, '-') !== false;
+        return str_contains($word, '-');
     }
 
     /**
@@ -116,7 +116,7 @@ class Stemmer implements StemmerInterface
 
         // malaikat-malaikat-nya -> malaikat malaikat-nya
         $suffix = $words[2];
-        if (in_array($suffix, array('ku', 'mu', 'nya', 'lah', 'kah', 'tah', 'pun')) &&
+        if (in_array($suffix, ['ku', 'mu', 'nya', 'lah', 'kah', 'tah', 'pun']) &&
             preg_match('/^(.*)-(.*)$/', $words[1], $words)) {
             $words[2] .= '-' . $suffix;
         }

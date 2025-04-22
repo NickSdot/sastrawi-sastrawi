@@ -10,7 +10,7 @@ namespace Sastrawi\Stemmer\Cache;
 
 class ArrayCache implements CacheInterface
 {
-    protected $data = array();
+    protected $data = [];
 
     public function set($key, $value): void
     {

@@ -20,7 +20,7 @@ class DisambiguatorPrefixRule25 implements DisambiguatorInterface
      */
     public function disambiguate($word)
     {
-        if (preg_match('/^pem([bfv])(.*)$/', $word, $matches) === 1) {
+        if (preg_match('/^pem([bfv])(.*)$/', (string) $word, $matches) === 1) {
             return $matches[1] . $matches[2];
         }
     }

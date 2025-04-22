@@ -20,7 +20,7 @@ class DisambiguatorPrefixRule34 implements DisambiguatorInterface
      */
     public function disambiguate($word)
     {
-        if (preg_match('/^pe([bcdfghjklmnpqrstvwxyz])(.*)$/', $word, $matches)) {
+        if (preg_match('/^pe([bcdfghjklmnpqrstvwxyz])(.*)$/', (string) $word, $matches)) {
             if (preg_match('/^er(.*)$/', $matches[2]) === 1) {
                 return;
             }

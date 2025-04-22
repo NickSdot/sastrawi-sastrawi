@@ -13,7 +13,7 @@ class CachedStemmerTest extends \PHPUnit\Framework\TestCase
 
     public function setUp()
     {
-        $arrayDictionary = new ArrayDictionary(array('makan'));
+        $arrayDictionary = new ArrayDictionary(['makan']);
         $this->delegatedStemmer = new Stemmer($arrayDictionary);
         $this->arrayCache    = new ArrayCache();
         $this->cachedStemmer = new CachedStemmer($this->arrayCache, $this->delegatedStemmer);
@@ -21,7 +21,7 @@ class CachedStemmerTest extends \PHPUnit\Framework\TestCase
 
     public function testInstanceOfStemmerInterface(): void
     {
-        $this->assertInstanceOf('Sastrawi\Stemmer\StemmerInterface', $this->cachedStemmer);
+        $this->assertInstanceOf(\Sastrawi\Stemmer\StemmerInterface::class, $this->cachedStemmer);
     }
 
     public function testGetCache(): void

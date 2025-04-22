@@ -16,9 +16,9 @@ class ArrayDictionary implements DictionaryInterface
     /**
      * @var string[]
      */
-    protected $words = array();
+    protected $words = [];
 
-    public function __construct(array $words = array())
+    public function __construct(array $words = [])
     {
         $this->addWords($words);
     }

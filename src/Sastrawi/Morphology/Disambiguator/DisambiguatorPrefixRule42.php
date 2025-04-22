@@ -20,7 +20,7 @@ class DisambiguatorPrefixRule42 implements DisambiguatorInterface
      */
     public function disambiguate($word)
     {
-        if (preg_match('/^kau(.*)$/', $word, $matches)) {
+        if (preg_match('/^kau(.*)$/', (string) $word, $matches)) {
             return $matches[1];
         }
     }

@@ -23,8 +23,8 @@ class TextNormalizer
     {
         $text = strtolower($text);
         $text = preg_replace('/[^a-z0-9 -]/im', ' ', $text);
-        $text = preg_replace('/( +)/im', ' ', $text);
+        $text = preg_replace('/( +)/im', ' ', (string) $text);
 
-        return trim($text);
+        return trim((string) $text);
     }
 }

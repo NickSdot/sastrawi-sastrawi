@@ -18,6 +18,6 @@ class StemmerFactoryTest extends \PHPUnit\Framework\TestCase
         $stemmer = $this->factory->createStemmer();
 
         $this->assertNotNull($stemmer);
-        $this->assertInstanceOf('Sastrawi\Stemmer\StemmerInterface', $stemmer);
+        $this->assertInstanceOf(\Sastrawi\Stemmer\StemmerInterface::class, $stemmer);
     }
 }

@@ -20,7 +20,7 @@ class DisambiguatorPrefixRule20 implements DisambiguatorInterface
      */
     public function disambiguate($word)
     {
-        $contains = preg_match('/^pe([wy])([aiueo])(.*)$/', $word, $matches);
+        $contains = preg_match('/^pe([wy])([aiueo])(.*)$/', (string) $word, $matches);
 
         if ($contains === 1) {
             return $matches[1] . $matches[2] . $matches[3];

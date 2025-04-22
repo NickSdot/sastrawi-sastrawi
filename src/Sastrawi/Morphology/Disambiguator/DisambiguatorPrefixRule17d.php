@@ -20,7 +20,7 @@ class DisambiguatorPrefixRule17d implements DisambiguatorInterface
      */
     public function disambiguate($word)
     {
-        if (preg_match('/^meng([aiueo])(.*)$/', $word, $matches)) {
+        if (preg_match('/^meng([aiueo])(.*)$/', (string) $word, $matches)) {
             return 'ng'.$matches[1].$matches[2];
         }
     }

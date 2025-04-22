@@ -17,7 +17,7 @@ class DisambiguatorPrefixRule2 implements DisambiguatorInterface
     public function disambiguate($word)
     {
         $matches  = null;
-        $contains = preg_match('/^ber([bcdfghjklmnpqrstvwxyz])([a-z])(.*)$/', $word, $matches);
+        $contains = preg_match('/^ber([bcdfghjklmnpqrstvwxyz])([a-z])(.*)$/', (string) $word, $matches);
 
         if ($contains === 1) {
             if (preg_match('/^er(.*)$/', $matches[3]) === 1) {

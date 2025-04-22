@@ -22,7 +22,7 @@ class DisambiguatorPrefixRule1a implements DisambiguatorInterface
     public function disambiguate($word)
     {
         $matches  = null;
-        $contains = preg_match('/^ber([aiueo].*)$/', $word, $matches);
+        $contains = preg_match('/^ber([aiueo].*)$/', (string) $word, $matches);
 
         if ($contains === 1) {
             return $matches[1];

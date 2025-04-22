@@ -13,13 +13,13 @@ class StemmerTest extends \PHPUnit\Framework\TestCase
 
     public function setUp()
     {
-        $this->dictionary = new ArrayDictionary(array('beri'));
+        $this->dictionary = new ArrayDictionary(['beri']);
         $this->stemmer = new Stemmer($this->dictionary);
     }
 
     public function testStemmerImplementsStemmerInterface(): void
     {
-        $this->assertInstanceOf('Sastrawi\Stemmer\StemmerInterface', $this->stemmer);
+        $this->assertInstanceOf(\Sastrawi\Stemmer\StemmerInterface::class, $this->stemmer);
     }
 
     /**

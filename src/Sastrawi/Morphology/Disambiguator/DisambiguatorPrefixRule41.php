@@ -20,7 +20,7 @@ class DisambiguatorPrefixRule41 implements DisambiguatorInterface
      */
     public function disambiguate($word)
     {
-        if (preg_match('/^ku(.*)$/', $word, $matches)) {
+        if (preg_match('/^ku(.*)$/', (string) $word, $matches)) {
             return $matches[1];
         }
     }

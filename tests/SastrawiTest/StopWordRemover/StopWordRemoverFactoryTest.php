@@ -16,7 +16,7 @@ class StopWordRemoverFactoryTest extends \PHPUnit\Framework\TestCase
     public function testCreateStopWordRemover(): void
     {
         $this->assertInstanceOf(
-            'Sastrawi\StopWordRemover\StopWordRemover',
+            \Sastrawi\StopWordRemover\StopWordRemover::class,
             $this->factory->createStopWordRemover()
         );
     }

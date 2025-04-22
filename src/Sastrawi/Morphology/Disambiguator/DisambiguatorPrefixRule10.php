@@ -21,7 +21,7 @@ class DisambiguatorPrefixRule10 implements DisambiguatorInterface
     public function disambiguate($word)
     {
         $matches  = null;
-        $contains = preg_match('/^me([lrwy])([aiueo])(.*)$/', $word, $matches);
+        $contains = preg_match('/^me([lrwy])([aiueo])(.*)$/', (string) $word, $matches);
 
         if ($contains === 1) {
             return $matches[1] . $matches[2] . $matches[3];

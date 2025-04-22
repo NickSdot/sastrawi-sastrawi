@@ -14,7 +14,7 @@ use Sastrawi\Morphology\Disambiguator\DisambiguatorInterface;
 
 abstract class AbstractDisambiguatePrefixRule implements VisitorInterface
 {
-    protected $disambiguators = array();
+    protected $disambiguators = [];
 
     public function visit(ContextInterface $context): void
     {

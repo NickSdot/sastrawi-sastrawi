@@ -19,26 +19,6 @@ class Removal implements RemovalInterface
     protected $visitor;
 
     /**
-     * @var string
-     */
-    protected $subject;
-
-    /**
-     * @var string
-     */
-    protected $result;
-
-    /**
-     * @var string
-     */
-    protected $removedPart;
-
-    /**
-     * @var string
-     */
-    protected $affixType;
-
-    /**
      * @param \Sastrawi\Stemmer\Context\Visitor\VisitorInterface $visitor
      * @param string                                             $subject
      * @param string                                             $result
@@ -47,16 +27,12 @@ class Removal implements RemovalInterface
      */
     public function __construct(
         Visitor\VisitorInterface $visitor,
-        $subject,
-        $result,
-        $removedPart,
-        $affixType
+        protected $subject,
+        protected $result,
+        protected $removedPart,
+        protected $affixType
     ) {
         $this->visitor = $visitor;
-        $this->subject = $subject;
-        $this->result  = $result;
-        $this->removedPart = $removedPart;
-        $this->affixType = $affixType;
     }
 
     public function getVisitor()

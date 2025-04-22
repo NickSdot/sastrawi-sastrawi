@@ -21,7 +21,7 @@ class DisambiguatorPrefixRule7 implements DisambiguatorInterface
     public function disambiguate($word)
     {
         $matches  = null;
-        $contains = preg_match('/^ter([bcdfghjklmnpqrstvwxyz])er([aiueo].*)$/', $word, $matches);
+        $contains = preg_match('/^ter([bcdfghjklmnpqrstvwxyz])er([aiueo].*)$/', (string) $word, $matches);
 
         if ($contains === 1) {
             if ($matches[1] === 'r') {

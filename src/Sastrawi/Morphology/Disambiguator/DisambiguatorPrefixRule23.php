@@ -20,7 +20,7 @@ class DisambiguatorPrefixRule23 implements DisambiguatorInterface
      */
     public function disambiguate($word)
     {
-        $contains = preg_match('/^per([bcdfghjklmnpqrstvwxyz])([a-z])(.*)$/', $word, $matches);
+        $contains = preg_match('/^per([bcdfghjklmnpqrstvwxyz])([a-z])(.*)$/', (string) $word, $matches);
 
         if ($contains === 1) {
             if (preg_match('/^er(.*)$/', $matches[3]) === 1) {

@@ -20,7 +20,7 @@ class DisambiguatorPrefixRule26b implements DisambiguatorInterface
      */
     public function disambiguate($word)
     {
-        if (preg_match('/^pem([aiueo])(.*)$/', $word, $matches)) {
+        if (preg_match('/^pem([aiueo])(.*)$/', (string) $word, $matches)) {
             return 'p' . $matches[1] . $matches[2];
         }
     }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace SastrawiTest\Stemmer;
 
 use Sastrawi\Stemmer\CachedStemmer;
@@ -7,21 +9,17 @@ use Sastrawi\Stemmer\Cache\ArrayCache;
 use Sastrawi\Stemmer\Stemmer;
 use Sastrawi\Dictionary\ArrayDictionary;
 
-class CachedStemmerTest extends \PHPUnit\Framework\TestCase
+final class CachedStemmerTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @var \Sastrawi\Stemmer\Stemmer
-     */
-    public $delegatedStemmer;
     public $arrayCache;
-    protected $cachedStemmer;
+    private \Sastrawi\Stemmer\CachedStemmer $cachedStemmer;
 
     public function setUp(): void
     {
         $arrayDictionary = new ArrayDictionary(['makan']);
-        $this->delegatedStemmer = new Stemmer($arrayDictionary);
+        $delegatedStemmer = new Stemmer($arrayDictionary);
         $this->arrayCache    = new ArrayCache();
-        $this->cachedStemmer = new CachedStemmer($this->arrayCache, $this->delegatedStemmer);
+        $this->cachedStemmer = new CachedStemmer($this->arrayCache, $delegatedStemmer);
     }
 
     public function testInstanceOfStemmerInterface(): void

@@ -1,19 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
 namespace SastrawiFunctionalTest\Stemmer;
 
 use Sastrawi\Dictionary\ArrayDictionary;
 use Sastrawi\Stemmer\Stemmer;
 
-class StemmerTest extends \PHPUnit\Framework\TestCase
+final class StemmerTest extends \PHPUnit\Framework\TestCase
 {
-    protected $dictionary;
-
-    protected $stemmer;
+    private \Sastrawi\Stemmer\Stemmer $stemmer;
 
     public function setUp(): void
     {
-        $this->dictionary = new ArrayDictionary(
+        $dictionary = new ArrayDictionary(
             [
                 'hancur', 'benar', 'apa', 'siapa', 'jubah', 'baju', 'beli',
                 'celana', 'hantu', 'jual', 'buku', 'milik', 'kulit', 'sakit', 'kasih', 'buang', 'suap',
@@ -38,7 +38,7 @@ class StemmerTest extends \PHPUnit\Framework\TestCase
                 'lewat', 'nganga', 'allah',
             ]
         );
-        $this->stemmer = new Stemmer($this->dictionary);
+        $this->stemmer = new Stemmer($dictionary);
     }
 
     #[\PHPUnit\Framework\Attributes\DataProvider('stemDataProvider')]

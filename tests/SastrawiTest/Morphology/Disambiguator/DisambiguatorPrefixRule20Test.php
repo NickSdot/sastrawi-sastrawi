@@ -1,18 +1,20 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Sastrawi (https://github.com/sastrawi/sastrawi)
  *
  * @link      http://github.com/sastrawi/sastrawi for the canonical source repository
  * @license   https://github.com/sastrawi/sastrawi/blob/master/LICENSE The MIT License (MIT)
  */
-
 namespace SastrawiTest\Morphology\Disambiguator;
 
 /**
  * Disambiguate Prefix Rule 20
  * Rule 20 : pe{w|y}V -> pe-{w|y}V
  */
-class DisambiguatorPrefixRule20Test extends \PHPUnit\Framework\TestCase
+final class DisambiguatorPrefixRule20Test extends \PHPUnit\Framework\TestCase
 {
     public $subject;
     public function setUp(): void

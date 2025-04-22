@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace SastrawiTest\Morphology;
 
-class InvalidAffixPairSpecificationTest extends \PHPUnit\Framework\TestCase
+final class InvalidAffixPairSpecificationTest extends \PHPUnit\Framework\TestCase
 {
     public $specification;
     public function setUp(): void

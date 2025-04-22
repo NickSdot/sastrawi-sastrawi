@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace SastrawiTest\StopWordRemover;
 
 use Sastrawi\StopWordRemover\StopWordRemover;
 use Sastrawi\Dictionary\ArrayDictionary;
 
-class StopWordRemoverTest extends \PHPUnit\Framework\TestCase
+final class StopWordRemoverTest extends \PHPUnit\Framework\TestCase
 {
     public $dictionary;
     public $stopWordRemover;

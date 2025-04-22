@@ -1,11 +1,13 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Sastrawi (https://github.com/sastrawi/sastrawi)
  *
  * @link      http://github.com/sastrawi/sastrawi for the canonical source repository
  * @license   https://github.com/sastrawi/sastrawi/blob/master/LICENSE The MIT License (MIT)
  */
-
 namespace SastrawiTest\Morphology\Disambiguator;
 
 /**
@@ -13,7 +15,7 @@ namespace SastrawiTest\Morphology\Disambiguator;
  * Original Rule 19 : mempV -> mem-pV where V != 'e'
  * Modified Rule 19 by ECS : mempA -> mem-pA where A != 'e' in order to stem memproteksi
  */
-class DisambiguatorPrefixRule19Test extends \PHPUnit\Framework\TestCase
+final class DisambiguatorPrefixRule19Test extends \PHPUnit\Framework\TestCase
 {
     public $subject;
     public function setUp(): void

@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace SastrawiTest\Stemmer\Cache;
 
-class ArrayCacheTest extends \PHPUnit\Framework\TestCase
+final class ArrayCacheTest extends \PHPUnit\Framework\TestCase
 {
-    protected $arrayCache;
+    private \Sastrawi\Stemmer\Cache\ArrayCache $arrayCache;
 
     public function setUp(): void
     {

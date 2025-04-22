@@ -1,18 +1,20 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Sastrawi (https://github.com/sastrawi/sastrawi)
  *
  * @link      http://github.com/sastrawi/sastrawi for the canonical source repository
  * @license   https://github.com/sastrawi/sastrawi/blob/master/LICENSE The MIT License (MIT)
  */
-
 namespace SastrawiTest\Morphology\Disambiguator;
 
 /**
 * Disambiguate Prefix Rule 2
 * Rule 2 : berCAP -> ber-CAP where C != 'r' AND P != 'er'
 */
-class DisambiguatorPrefixRule2Test extends \PHPUnit\Framework\TestCase
+final class DisambiguatorPrefixRule2Test extends \PHPUnit\Framework\TestCase
 {
     public $subject;
     public function setUp(): void

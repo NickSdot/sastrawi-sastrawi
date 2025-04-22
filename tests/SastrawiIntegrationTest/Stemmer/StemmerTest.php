@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace SastrawiIntegrationTest\Stemmer;
 
 use Sastrawi\Stemmer\StemmerFactory;
 
-class StemmerTest extends \PHPUnit\Framework\TestCase
+final class StemmerTest extends \PHPUnit\Framework\TestCase
 {
     public $stemmer;
     public function setUp(): void

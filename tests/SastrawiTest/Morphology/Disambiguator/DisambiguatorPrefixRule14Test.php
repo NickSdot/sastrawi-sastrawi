@@ -1,11 +1,13 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Sastrawi (https://github.com/sastrawi/sastrawi)
  *
  * @link      http://github.com/sastrawi/sastrawi for the canonical source repository
  * @license   https://github.com/sastrawi/sastrawi/blob/master/LICENSE The MIT License (MIT)
  */
-
 namespace SastrawiTest\Morphology\Disambiguator;
 
 /**
@@ -20,7 +22,7 @@ namespace SastrawiTest\Morphology\Disambiguator;
  * Original CS Rule no 14 was : men{c|d|j|z} -> men-{c|d|j|z}
  */
 
-class DisambiguatorPrefixRule14Test extends \PHPUnit\Framework\TestCase
+final class DisambiguatorPrefixRule14Test extends \PHPUnit\Framework\TestCase
 {
     public $subject;
     public function setUp(): void

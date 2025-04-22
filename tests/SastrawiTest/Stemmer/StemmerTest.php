@@ -1,20 +1,20 @@
 <?php
 
+declare(strict_types=1);
+
 namespace SastrawiTest\Stemmer;
 
 use Sastrawi\Stemmer\Stemmer;
 use Sastrawi\Dictionary\ArrayDictionary;
 
-class StemmerTest extends \PHPUnit\Framework\TestCase
+final class StemmerTest extends \PHPUnit\Framework\TestCase
 {
-    protected $dictionary;
-
-    protected $stemmer;
+    private \Sastrawi\Stemmer\Stemmer $stemmer;
 
     public function setUp(): void
     {
-        $this->dictionary = new ArrayDictionary(['beri']);
-        $this->stemmer = new Stemmer($this->dictionary);
+        $dictionary = new ArrayDictionary(['beri']);
+        $this->stemmer = new Stemmer($dictionary);
     }
 
     public function testStemmerImplementsStemmerInterface(): void

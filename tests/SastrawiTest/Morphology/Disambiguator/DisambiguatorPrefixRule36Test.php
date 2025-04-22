@@ -1,11 +1,13 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Sastrawi (https://github.com/sastrawi/sastrawi)
  *
  * @link      http://github.com/sastrawi/sastrawi for the canonical source repository
  * @license   https://github.com/sastrawi/sastrawi/blob/master/LICENSE The MIT License (MIT)
  */
-
 namespace SastrawiTest\Morphology\Disambiguator;
 
 /**
@@ -13,7 +15,7 @@ namespace SastrawiTest\Morphology\Disambiguator;
  * Rule 36 : peC1erC2 -> pe-C1erC2 where C1 != {r|w|y|l|m|n}
  */
 
-class DisambiguatorPrefixRule36Test extends \PHPUnit\Framework\TestCase
+final class DisambiguatorPrefixRule36Test extends \PHPUnit\Framework\TestCase
 {
     public $subject;
     public function setUp(): void

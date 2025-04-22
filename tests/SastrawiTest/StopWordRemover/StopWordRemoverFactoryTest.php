@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace SastrawiTest\StopWordRemover;
 
 use Sastrawi\StopWordRemover\StopWordRemoverFactory;
 
-class StopWordRemoverFactoryTest extends \PHPUnit\Framework\TestCase
+final class StopWordRemoverFactoryTest extends \PHPUnit\Framework\TestCase
 {
-    protected $factory;
+    private \Sastrawi\StopWordRemover\StopWordRemoverFactory $factory;
 
     public function setUp(): void
     {

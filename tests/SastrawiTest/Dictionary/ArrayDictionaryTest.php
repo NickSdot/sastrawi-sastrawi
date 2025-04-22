@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace SastrawiTest\Dictionary;
 
 use Sastrawi\Dictionary\ArrayDictionary;
 
-class ArrayDictionaryTest extends \PHPUnit\Framework\TestCase
+final class ArrayDictionaryTest extends \PHPUnit\Framework\TestCase
 {
-    protected ArrayDictionary $dictionary;
+    private ArrayDictionary $dictionary;
 
     public function setUp(): void
     {

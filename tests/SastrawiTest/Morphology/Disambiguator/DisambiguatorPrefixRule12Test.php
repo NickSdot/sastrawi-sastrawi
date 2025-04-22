@@ -1,11 +1,13 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Sastrawi (https://github.com/sastrawi/sastrawi)
  *
  * @link      http://github.com/sastrawi/sastrawi for the canonical source repository
  * @license   https://github.com/sastrawi/sastrawi/blob/master/LICENSE The MIT License (MIT)
  */
-
 namespace SastrawiTest\Morphology\Disambiguator;
 
 /**
@@ -13,7 +15,7 @@ namespace SastrawiTest\Morphology\Disambiguator;
  * Nazief and Adriani Rule 12 : mempe{r|l} -> mem-pe{r|l}
  * Modified by Jelita Asian's CS Rule 12 : mempe -> mem-pe to stem mempengaruhi
  */
-class DisambiguatorPrefixRule12Test extends \PHPUnit\Framework\TestCase
+final class DisambiguatorPrefixRule12Test extends \PHPUnit\Framework\TestCase
 {
     public $subject;
     public function setUp(): void

@@ -1,11 +1,13 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Sastrawi (https://github.com/sastrawi/sastrawi)
  *
  * @link      http://github.com/sastrawi/sastrawi for the canonical source repository
  * @license   https://github.com/sastrawi/sastrawi/blob/master/LICENSE The MIT License (MIT)
  */
-
 namespace Sastrawi\Stemmer\Context;
 
 use Sastrawi\Dictionary\DictionaryInterface;
@@ -193,7 +195,7 @@ class Context implements ContextInterface, VisitableInterface
 
     protected function removePrefixes()
     {
-        for ($i = 0; $i < 3; $i++) {
+        for ($i = 0; $i < 3; ++$i) {
             $this->acceptPrefixVisitors($this->prefixVisitors);
             if ($this->dictionary->contains($this->getCurrentWord())) {
                 return;

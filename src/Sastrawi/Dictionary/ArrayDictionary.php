@@ -78,10 +78,10 @@ class ArrayDictionary implements DictionaryInterface
     /**
      * Add words from a text file to the dictionary
      *
-     * @param $filePath
+     * @param string $filePath
      * @param string $delimiter
      */
-    public function addWordsFromTextFile($filePath, string $delimiter = "\n"): void
+    public function addWordsFromTextFile(string $filePath, string $delimiter = "\n"): void
     {
         $this->addWords(
             explode($delimiter, file_get_contents($filePath))

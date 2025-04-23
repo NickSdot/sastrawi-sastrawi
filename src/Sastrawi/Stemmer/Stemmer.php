@@ -29,9 +29,7 @@ class Stemmer implements StemmerInterface
     protected VisitorProvider $visitorProvider;
 
     public function __construct(
-        /**
-         * The dictionary containing root words
-         */
+        /** The dictionary containing root words */
         protected DictionaryInterface $dictionary
     ) {
         $this->visitorProvider = new VisitorProvider();
@@ -109,7 +107,8 @@ class Stemmer implements StemmerInterface
 
         // malaikat-malaikat-nya -> malaikat malaikat-nya
         $suffix = $words[2];
-        if (in_array($suffix, [ 'ku', 'mu', 'nya', 'lah', 'kah', 'tah', 'pun' ]) &&
+
+        if (in_array($suffix, [ 'ku', 'mu', 'nya', 'lah', 'kah', 'tah', 'pun' ], true) &&
             preg_match('/^(.*)-(.*)$/', $words[1], $words)) {
             $words[2] .= '-' . $suffix;
         }

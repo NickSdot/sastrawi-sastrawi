@@ -18,9 +18,9 @@ use Sastrawi\Specification\SpecificationInterface;
  */
 class InvalidAffixPairSpecification implements SpecificationInterface
 {
-    public function isSatisfiedBy($word)
+    public function isSatisfiedBy(string $word): bool
     {
-        if (preg_match('/^me(.*)kan$/', (string) $word) === 1) {
+        if (preg_match('/^me(.*)kan$/', $word) === 1) {
             return false;
         }
 
@@ -42,7 +42,7 @@ class InvalidAffixPairSpecification implements SpecificationInterface
         $contains = false;
 
         foreach ($invalidAffixes as $invalidAffix) {
-            $contains = $contains || preg_match($invalidAffix, (string) $word) === 1;
+            $contains = $contains || preg_match($invalidAffix, $word) === 1;
         }
 
         return $contains;

@@ -17,12 +17,14 @@ use Sastrawi\Dictionary\ArrayDictionary;
  */
 class StemmerFactory
 {
-    const APC_KEY = 'sastrawi_cache_dictionary';
+    const string APC_KEY = 'sastrawi_cache_dictionary';
 
     /**
-     * @return \Sastrawi\Stemmer\Stemmer
+     * @param bool $isDev
+     *
+     * @return \Sastrawi\Stemmer\CachedStemmer
      */
-    public function createStemmer($isDev = false): \Sastrawi\Stemmer\CachedStemmer
+    public function createStemmer(bool $isDev = false): StemmerInterface
     {
         $stemmer    = new Stemmer($this->createDefaultDictionary($isDev));
 
@@ -31,14 +33,17 @@ class StemmerFactory
         return new CachedStemmer($resultCache, $stemmer);
     }
 
-    public function createDefaultDictionary($isDev = false): \Sastrawi\Dictionary\ArrayDictionary
+    public function createDefaultDictionary($isDev = false): ArrayDictionary
     {
         $words      = $this->getWords($isDev);
 
         return new ArrayDictionary($words);
     }
 
-    protected function getWords($isDev = false)
+    /**
+     * @throws \Exception
+     */
+    protected function getWords(bool $isDev = false)
     {
         if ($isDev || !function_exists('apc_fetch')) {
             $words = $this->getWordsFromFile();
@@ -54,7 +59,7 @@ class StemmerFactory
         return $words;
     }
 
-    protected function getWordsFromFile()
+    protected function getWordsFromFile(): array
     {
         $dictionaryFile = __DIR__ . '/../../../data/kata-dasar.txt';
         if (!is_readable($dictionaryFile)) {

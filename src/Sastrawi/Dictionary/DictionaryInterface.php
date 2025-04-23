@@ -29,5 +29,18 @@ interface DictionaryInterface extends Countable
      */
     public function contains(string|null $word): bool;
 
-    public function addWordsFromTextFile($filePath, string $delimiter = "\n"): void;
+    /**
+     * Add a word to the dictionary
+     *
+     * @param string $word
+     */
+    public function add(string $word): void;
+
+    /**
+     * Add words from a text file to the dictionary
+     *
+     * @param string $filePath
+     * @param string $delimiter
+     */
+    public function addWordsFromTextFile(string $filePath, string $delimiter = "\n"): void;
 }

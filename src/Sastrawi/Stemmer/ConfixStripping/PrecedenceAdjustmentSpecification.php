@@ -21,9 +21,11 @@ use Sastrawi\Specification\SpecificationInterface;
 class PrecedenceAdjustmentSpecification implements SpecificationInterface
 {
     /**
-     * @param  string  $value
+     * @param string $word
+     *
+     * @return bool
      */
-    public function isSatisfiedBy($value): bool
+    public function isSatisfiedBy(string $word): bool
     {
         $regexRules = [
             '/^be(.*)lah$/',
@@ -35,7 +37,7 @@ class PrecedenceAdjustmentSpecification implements SpecificationInterface
         ];
 
         foreach ($regexRules as $rule) {
-            if (preg_match($rule, $value)) {
+            if (preg_match($rule, $word)) {
                 return true;
             }
         }

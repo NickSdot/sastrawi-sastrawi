@@ -5,10 +5,11 @@ declare(strict_types=1);
 namespace SastrawiTest\Stemmer;
 
 use Sastrawi\Stemmer\StemmerFactory;
+use Sastrawi\Stemmer\StemmerInterface;
 
 final class StemmerFactoryTest extends \PHPUnit\Framework\TestCase
 {
-    private \Sastrawi\Stemmer\StemmerFactory $factory;
+    private StemmerFactory $factory;
 
     protected function setUp(): void
     {
@@ -19,7 +20,7 @@ final class StemmerFactoryTest extends \PHPUnit\Framework\TestCase
     {
         $stemmer = $this->factory->createStemmer();
 
-        self::assertNotNull($stemmer);
-        self::assertInstanceOf(\Sastrawi\Stemmer\StemmerInterface::class, $stemmer);
+        self::assertNotNull($stemmer); // todo: this is always true, why need it?
+        self::assertInstanceOf(StemmerInterface::class, $stemmer);
     }
 }

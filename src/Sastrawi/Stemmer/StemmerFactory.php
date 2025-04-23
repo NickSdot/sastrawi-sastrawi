@@ -56,7 +56,8 @@ class StemmerFactory
             apc_store(self::APC_KEY, $words = $this->getWordsFromFile());
         }
 
-        return $words;
+        /** @var list<string> */
+        return (array) $words;
     }
 
     /**

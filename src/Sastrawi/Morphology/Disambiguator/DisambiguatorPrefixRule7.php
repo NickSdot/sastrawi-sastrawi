@@ -12,13 +12,13 @@ namespace Sastrawi\Morphology\Disambiguator;
 
 /**
  * Disambiguate Prefix Rule 7
- * Rule 7 : terCerv -> ter-CerV where C  !==  'r'
+ * Rule 7 : terCerV -> ter-CerV where C  !==  'r'
  */
 class DisambiguatorPrefixRule7 implements DisambiguatorInterface
 {
     /**
      * Disambiguate Prefix Rule 7
-     * Rule 7 : terCerv -> ter-CerV where C  !==  'r'
+     * Rule 7 : terCerV -> ter-CerV where C  !==  'r'
      */
     public function disambiguate(string $word): ?string
     {

@@ -20,11 +20,6 @@ use Sastrawi\Specification\SpecificationInterface;
  */
 class PrecedenceAdjustmentSpecification implements SpecificationInterface
 {
-    /**
-     * @param string $word
-     *
-     * @return bool
-     */
     public function isSatisfiedBy(string $word): bool
     {
         $regexRules = [
@@ -36,12 +31,6 @@ class PrecedenceAdjustmentSpecification implements SpecificationInterface
             '/^ter(.*)i$/',
         ];
 
-        foreach ($regexRules as $rule) {
-            if (1 === preg_match($rule, $word)) {
-                return true;
-            }
-        }
-
-        return false;
+        return array_any($regexRules, fn($rule): bool => 1 === preg_match($rule, $word));
     }
 }

@@ -19,9 +19,6 @@ final class StopWordRemoverFactoryTest extends TestCase
 
     public function testCreateStopWordRemover(): void
     {
-        self::assertInstanceOf(
-            StopWordRemover::class,
-            $this->factory->createStopWordRemover()
-        );
+        self::assertInstanceOf(StopWordRemover::class, $this->factory->createStopWordRemover());
     }
 }

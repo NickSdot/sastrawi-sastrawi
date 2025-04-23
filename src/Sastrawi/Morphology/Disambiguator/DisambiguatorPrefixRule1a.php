@@ -19,7 +19,6 @@ class DisambiguatorPrefixRule1a implements DisambiguatorInterface
     /**
      * Disambiguate Prefix Rule 1a
      * Rule 1a : berV -> ber-V
-     * @return string
      */
     public function disambiguate(string $word): ?string
     {

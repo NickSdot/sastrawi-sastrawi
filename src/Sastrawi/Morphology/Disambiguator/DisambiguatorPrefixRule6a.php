@@ -20,7 +20,6 @@ class DisambiguatorPrefixRule6a implements DisambiguatorInterface
     /**
      * Disambiguate Prefix Rule 6a
      * Rule 6a : terV -> ter-V
-     * @return string
      */
     public function disambiguate(string $word): ?string
     {

@@ -15,7 +15,7 @@ use Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule7;
 
 /**
  * Disambiguate Prefix Rule 7
- * Rule 7 : terCerv -> ter-CerV where C  !==  'r'
+ * Rule 7 : terCerV -> ter-CerV where C  !==  'r'
  */
 final class DisambiguatorPrefixRule7Test extends TestCase
 {

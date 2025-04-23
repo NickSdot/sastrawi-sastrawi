@@ -16,10 +16,8 @@ namespace Sastrawi\Stemmer\Filter;
 class TextNormalizer
 {
     /**
-     * Removes symbols & characters other than alphabetics
-     *
-     * @param  string $text
-     * @return string normalized text
+     * Removes symbols & characters other than alphabetic,
+     * and returns the normalized text
      */
     public static function normalizeText(string $text): string
     {

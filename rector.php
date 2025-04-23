@@ -10,7 +10,6 @@ return RectorConfig::configure()
     ->withPhpSets(
         php84: true
     )
-    ->withPhpSets(php84: true)
     ->withPreparedSets(
         deadCode: true,
         codeQuality: true,
@@ -20,6 +19,5 @@ return RectorConfig::configure()
         instanceOf: true,
         earlyReturn: true,
         strictBooleans: true,
-        rectorPreset: true,
         phpunitCodeQuality: true,
     );

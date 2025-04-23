@@ -18,10 +18,5 @@ namespace Sastrawi\Specification;
  */
 interface SpecificationInterface
 {
-    /**
-     * @param string $word
-     *
-     * @return boolean
-     */
     public function isSatisfiedBy(string $word): bool;
 }

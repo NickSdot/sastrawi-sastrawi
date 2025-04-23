@@ -25,7 +25,7 @@ class DisambiguatorPrefixRule16 implements DisambiguatorInterface
     public function disambiguate(string $word): ?string
     {
         $matches  = null;
-        $contains = preg_match('/^meng([g|h|q|k])(.*)$/', $word, $matches);
+        $contains = preg_match('/^meng([ghqk])(.*)$/', $word, $matches);
 
         if ($contains === 1) {
             return $matches[1] . $matches[2];

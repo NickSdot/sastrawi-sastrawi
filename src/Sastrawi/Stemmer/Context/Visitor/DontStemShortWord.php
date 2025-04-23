@@ -21,10 +21,7 @@ class DontStemShortWord implements VisitorInterface
         }
     }
 
-    /**
-     * @param string $word
-     */
-    protected function isShortWord($word): bool
+    protected function isShortWord(string $word): bool
     {
         return (strlen($word) <= 3);
     }

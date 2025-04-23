@@ -10,6 +10,8 @@ declare(strict_types=1);
  */
 namespace Sastrawi\Dictionary;
 
+use Exception;
+
 /**
  * Implementation of the DictionaryInterface using Array
  */
@@ -59,8 +61,6 @@ class ArrayDictionary implements DictionaryInterface
 
     /**
      * Add a word to the dictionary
-     *
-     * @param string $word
      */
     public function add(string $word): void
     {
@@ -73,8 +73,6 @@ class ArrayDictionary implements DictionaryInterface
 
     /**
      * Remove a word from the dictionary
-     *
-     * @param string $word
      */
     public function remove(string $word): void
     {
@@ -84,8 +82,6 @@ class ArrayDictionary implements DictionaryInterface
     /**
      * Add words from a text file to the dictionary
      *
-     * @param string $filePath
-     * @param string $delimiter
      *
      * @throws \Exception
      */
@@ -94,7 +90,7 @@ class ArrayDictionary implements DictionaryInterface
         $words = file($filePath , FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
 
         if([] === $words || false === $words) {
-            throw new \Exception('Dictionary file could not be read.');
+            throw new Exception('Dictionary file could not be read.');
         }
 
         $this->addWords($words);

@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace Sastrawi\Stemmer\Context\Visitor;
 
+use RuntimeException;
 use Sastrawi\Stemmer\Context\ContextInterface;
 use Sastrawi\Stemmer\Context\Removal;
 
@@ -37,7 +38,7 @@ class RemovePlainPrefix implements VisitorInterface
         );
 
         if (null === $removedPart) {
-            throw new \RuntimeException('Could not get removed word part.');
+            throw new RuntimeException('Could not get removed word part.');
         }
 
         $removal = new Removal(
@@ -58,7 +59,7 @@ class RemovePlainPrefix implements VisitorInterface
     public function remove(string $word): string
     {
         if (null === $result = preg_replace('/^(di|ke|se)/', '', $word, 1)) {
-            throw new \RuntimeException("The word '{$word}' does not exist");
+            throw new RuntimeException(sprintf("The word '%s' does not exist", $word));
         }
 
         return $result;

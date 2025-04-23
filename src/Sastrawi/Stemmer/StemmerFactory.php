@@ -10,6 +10,7 @@ declare(strict_types=1);
  */
 namespace Sastrawi\Stemmer;
 
+use Exception;
 use Sastrawi\Dictionary\ArrayDictionary;
 
 /**
@@ -18,12 +19,11 @@ use Sastrawi\Dictionary\ArrayDictionary;
 class StemmerFactory
 {
     const string APC_KEY = 'sastrawi_cache_dictionary';
+
     const string KATA_DASAR_FILE_PATH = __DIR__ . '/../../../data/kata-dasar.txt';
 
     /**
-     * @param bool $isDev
-     *
-     * @return \Sastrawi\Stemmer\CachedStemmer
+     * @throws \Exception
      */
     public function createStemmer(bool $isDev = false): StemmerInterface
     {
@@ -34,6 +34,9 @@ class StemmerFactory
         return new CachedStemmer($resultCache, $stemmer);
     }
 
+    /**
+     * @throws \Exception
+     */
     public function createDefaultDictionary(bool $isDev = false): ArrayDictionary
     {
         $words      = $this->getWords($isDev);
@@ -52,12 +55,16 @@ class StemmerFactory
             return $this->getWordsFromFile();
         }
 
-        if (false === $words = apc_fetch(self::APC_KEY)) {
-            apc_store(self::APC_KEY, $words = $this->getWordsFromFile());
+        $words = (array) apc_fetch(self::APC_KEY);
+
+        if ([] === $words) {
+            $words = $this->getWordsFromFile();
+
+            apc_store(self::APC_KEY, $words);
         }
 
-        /** @var list<string> */
-        return (array) $words;
+        /** @var list<string> $words */
+        return $words;
     }
 
     /**
@@ -68,11 +75,11 @@ class StemmerFactory
     protected function getWordsFromFile(): array
     {
         if (false === is_readable($dictionaryFile = self::KATA_DASAR_FILE_PATH)) {
-            throw new \Exception('Dictionary file is missing. It seems that your installation is corrupted.');
+            throw new Exception('Dictionary file is missing. It seems that your installation is corrupted.');
         }
 
         if (false === $data = file($dictionaryFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES)) {
-            throw new \Exception('Dictionary file could not be read.');
+            throw new Exception('Dictionary file could not be read.');
         }
 
         return $data;

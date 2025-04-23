@@ -14,11 +14,12 @@ use Sastrawi\Stemmer\Cache\CacheInterface;
 
 class CachedStemmer implements StemmerInterface
 {
-    public function __construct(protected CacheInterface $cache, protected \Sastrawi\Stemmer\StemmerInterface $delegatedStemmer)
-    {
-    }
+    public function __construct(
+        protected CacheInterface $cache,
+        protected StemmerInterface $delegatedStemmer
+    ) {}
 
-    public function stem($text): string
+    public function stem(string $text): string
     {
         $normalizedText = Filter\TextNormalizer::normalizeText($text);
 
@@ -43,7 +44,7 @@ class CachedStemmer implements StemmerInterface
         return $this->cache;
     }
 
-    public function getDelegatedStemmer(): \Sastrawi\Stemmer\StemmerInterface
+    public function getDelegatedStemmer(): StemmerInterface
     {
         return $this->delegatedStemmer;
     }

@@ -45,7 +45,7 @@ final class CachedStemmerTest extends TestCase
     public function testStemStoreResultToCache(): void
     {
         self::assertSame('makan makan', $this->cachedStemmer->stem('memakan makanan'));
-        self::assertEquals('makan', $this->cachedStemmer->getCache()->get('memakan'));
-        self::assertEquals('makan', $this->cachedStemmer->getCache()->get('makanan'));
+        self::assertSame('makan', $this->cachedStemmer->getCache()->get('memakan'));
+        self::assertSame('makan', $this->cachedStemmer->getCache()->get('makanan'));
     }
 }

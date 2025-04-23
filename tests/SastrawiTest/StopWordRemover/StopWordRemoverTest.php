@@ -27,7 +27,7 @@ final class StopWordRemoverTest extends TestCase
 
     public function testRemoveStopWord(): void
     {
-        self::assertEquals('pergi sekolah', $this->stopWordRemover->remove('pergi ke sekolah'));
-        self::assertEquals('makan rumah', $this->stopWordRemover->remove('makan di rumah'));
+        self::assertSame('pergi sekolah', $this->stopWordRemover->remove('pergi ke sekolah'));
+        self::assertSame('makan rumah', $this->stopWordRemover->remove('makan di rumah'));
     }
 }

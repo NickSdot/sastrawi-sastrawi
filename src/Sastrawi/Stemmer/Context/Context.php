@@ -39,11 +39,6 @@ class Context implements ContextInterface, VisitableInterface
 
     protected string $result;
 
-    /**
-     * @param string $originalWord
-     * @param \Sastrawi\Dictionary\DictionaryInterface $dictionary
-     * @param \Sastrawi\Stemmer\Context\Visitor\VisitorProvider $visitorProvider
-     */
     public function __construct(
         protected string $originalWord,
         protected DictionaryInterface $dictionary,
@@ -62,9 +57,6 @@ class Context implements ContextInterface, VisitableInterface
     }
 
     /**
-     * @param \Sastrawi\Dictionary\DictionaryInterface $dictionary
-     *
-     * @return void
      * @api
      */
     public function setDictionary(DictionaryInterface $dictionary): void
@@ -129,9 +121,6 @@ class Context implements ContextInterface, VisitableInterface
         $this->result = $this->dictionary->contains($this->getCurrentWord()) ? $this->getCurrentWord() : $this->originalWord;
     }
 
-    /**
-     * @return void
-     */
     protected function startStemmingProcess(): void
     {
         // step 1
@@ -209,8 +198,6 @@ class Context implements ContextInterface, VisitableInterface
 
     /**
      * @param \Sastrawi\Stemmer\Context\Visitor\VisitorInterface[] $visitors
-     *
-     * @return string|null
      */
     protected function acceptVisitors(array $visitors): ?string
     {
@@ -231,8 +218,6 @@ class Context implements ContextInterface, VisitableInterface
 
     /**
      * @param \Sastrawi\Stemmer\Context\Visitor\VisitorInterface[] $visitors
-     *
-     * @return string|null
      */
     protected function acceptPrefixVisitors(array $visitors): ?string
     {

@@ -19,8 +19,5 @@ use Sastrawi\Stemmer\Context\ContextInterface;
  */
 interface VisitorInterface
 {
-    /**
-     * @return void
-     */
-    public function visit(ContextInterface $context);
+    public function visit(ContextInterface $context): void;
 }

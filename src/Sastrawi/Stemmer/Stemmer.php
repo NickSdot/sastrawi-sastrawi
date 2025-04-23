@@ -47,7 +47,7 @@ class Stemmer implements StemmerInterface
      *
      * @return string common stem form, e.g : daya bangun
      */
-    public function stem($text): string
+    public function stem(string $text): string
     {
         $normalizedText = Filter\TextNormalizer::normalizeText($text);
 

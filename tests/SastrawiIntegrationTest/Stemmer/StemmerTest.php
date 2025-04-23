@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace SastrawiIntegrationTest\Stemmer;
 
-use Iterator;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Sastrawi\Stemmer\StemmerFactory;
@@ -27,7 +26,7 @@ final class StemmerTest extends TestCase
 
 
     /** @return \Iterator<array{string, string}> */
-    public static function stemDataProvider(): Iterator
+    public static function stemDataProvider(): \Iterator
     {
         yield ['kebijakan', 'bijak'];
         //$data[] = ['karyawan', 'karya'];

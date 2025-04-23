@@ -8,13 +8,16 @@ declare(strict_types=1);
  * @link      http://github.com/sastrawi/sastrawi for the canonical source repository
  * @license   https://github.com/sastrawi/sastrawi/blob/master/LICENSE The MIT License (MIT)
  */
+
 namespace Sastrawi\Morphology\Disambiguator;
+
+use function preg_match;
 
 /**
  * Disambiguate Prefix Rule 42
  * Rule 42 : kauA -> kau-A
  */
-class DisambiguatorPrefixRule42 implements DisambiguatorInterface
+final class DisambiguatorPrefixRule42 implements DisambiguatorInterface
 {
     /**
      * Disambiguate Prefix Rule 42

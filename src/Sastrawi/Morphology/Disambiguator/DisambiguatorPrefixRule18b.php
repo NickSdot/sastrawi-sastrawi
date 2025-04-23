@@ -8,14 +8,17 @@ declare(strict_types=1);
  * @link      http://github.com/sastrawi/sastrawi for the canonical source repository
  * @license   https://github.com/sastrawi/sastrawi/blob/master/LICENSE The MIT License (MIT)
  */
+
 namespace Sastrawi\Morphology\Disambiguator;
+
+use function preg_match;
 
 /**
  * Disambiguate Prefix Rule 18b
  * Original Rule 18 : menyV -> meny-sV
  * Modified by CC (shifted into 18b, see also 18a)
  */
-class DisambiguatorPrefixRule18b implements DisambiguatorInterface
+final class DisambiguatorPrefixRule18b implements DisambiguatorInterface
 {
     /**
      * Disambiguate Prefix Rule 18b

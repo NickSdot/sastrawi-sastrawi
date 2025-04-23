@@ -8,12 +8,15 @@ declare(strict_types=1);
  * @link      http://github.com/sastrawi/sastrawi for the canonical source repository
  * @license   https://github.com/sastrawi/sastrawi/blob/master/LICENSE The MIT License (MIT)
  */
+
 namespace Sastrawi\Stemmer\Context\Visitor;
 
-use RuntimeException;
+use Sastrawi\Morphology\Disambiguator\DisambiguatorInterface;
 use Sastrawi\Stemmer\Context\ContextInterface;
 use Sastrawi\Stemmer\Context\Removal;
-use Sastrawi\Morphology\Disambiguator\DisambiguatorInterface;
+
+use function preg_replace;
+use function sprintf;
 
 abstract class AbstractDisambiguatePrefixRule implements VisitorInterface
 {
@@ -35,14 +38,14 @@ abstract class AbstractDisambiguatePrefixRule implements VisitorInterface
             }
         }
 
-        if ($result === null) {
+        if (null === $result) {
             return;
         }
 
         $removedPart = preg_replace(sprintf('/%s/', $result), '', $context->getCurrentWord(), 1);
 
         if (null === $removedPart) {
-            throw new RuntimeException('Could not get removed word part.');
+            throw new \RuntimeException('Could not get removed word part.');
         }
 
         $removal = new Removal(

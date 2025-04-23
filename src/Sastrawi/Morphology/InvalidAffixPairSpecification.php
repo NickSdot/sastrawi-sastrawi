@@ -8,15 +8,18 @@ declare(strict_types=1);
  * @link      http://github.com/sastrawi/sastrawi for the canonical source repository
  * @license   https://github.com/sastrawi/sastrawi/blob/master/LICENSE The MIT License (MIT)
  */
+
 namespace Sastrawi\Morphology;
 
 use Sastrawi\Specification\SpecificationInterface;
+
+use function preg_match;
 
 /**
  * Asian J. (2007) “Effective Techniques for Indonesian Text Retrieval”. page 26
  * @link http://researchbank.rmit.edu.au/eserv/rmit:6312/Asian.pdf
  */
-class InvalidAffixPairSpecification implements SpecificationInterface
+final class InvalidAffixPairSpecification implements SpecificationInterface
 {
     public function isSatisfiedBy(string $word): bool
     {
@@ -24,7 +27,7 @@ class InvalidAffixPairSpecification implements SpecificationInterface
             return false;
         }
 
-        if ($word === 'ketahui') {
+        if ('ketahui' === $word) {
             return false;
         }
 
@@ -42,7 +45,7 @@ class InvalidAffixPairSpecification implements SpecificationInterface
         $contains = false;
 
         foreach ($invalidAffixes as $invalidAffix) {
-            $contains = $contains || preg_match($invalidAffix, $word) === 1;
+            $contains = $contains || 1 === preg_match($invalidAffix, $word);
         }
 
         return $contains;

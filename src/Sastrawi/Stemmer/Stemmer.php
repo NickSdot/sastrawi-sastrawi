@@ -15,13 +15,19 @@ use Sastrawi\Dictionary\DictionaryInterface;
 use Sastrawi\Stemmer\Context\Context;
 use Sastrawi\Stemmer\Context\Visitor\VisitorProvider;
 
+use function explode;
+use function implode;
+use function in_array;
+use function preg_match;
+use function str_contains;
+
 /**
  * Indonesian Stemmer.
  * Nazief & Adriani, CS Stemmer, ECS Stemmer, Improved ECS.
  *
  * @link https://github.com/sastrawi/sastrawi/wiki/Resources
  */
-class Stemmer implements StemmerInterface
+final class Stemmer implements StemmerInterface
 {
     /**
      * Visitor provider

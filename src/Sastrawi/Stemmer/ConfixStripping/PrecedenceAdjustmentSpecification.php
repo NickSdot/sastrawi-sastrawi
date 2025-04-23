@@ -8,9 +8,13 @@ declare(strict_types=1);
  * @link      http://github.com/sastrawi/sastrawi for the canonical source repository
  * @license   https://github.com/sastrawi/sastrawi/blob/master/LICENSE The MIT License (MIT)
  */
+
 namespace Sastrawi\Stemmer\ConfixStripping;
 
 use Sastrawi\Specification\SpecificationInterface;
+
+use function array_any;
+use function preg_match;
 
 /**
  * Confix Stripping Rule Precedence Adjustment Specification.
@@ -18,7 +22,7 @@ use Sastrawi\Specification\SpecificationInterface;
  *
  * @link   http://researchbank.rmit.edu.au/eserv/rmit:6312/Asian.pdf
  */
-class PrecedenceAdjustmentSpecification implements SpecificationInterface
+final class PrecedenceAdjustmentSpecification implements SpecificationInterface
 {
     public function isSatisfiedBy(string $word): bool
     {

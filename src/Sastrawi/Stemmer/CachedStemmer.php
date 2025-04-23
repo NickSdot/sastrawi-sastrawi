@@ -8,11 +8,15 @@ declare(strict_types=1);
  * @link      http://github.com/sastrawi/sastrawi for the canonical source repository
  * @license   https://github.com/sastrawi/sastrawi/blob/master/LICENSE The MIT License (MIT)
  */
+
 namespace Sastrawi\Stemmer;
 
 use Sastrawi\Stemmer\Cache\CacheInterface;
 
-class CachedStemmer implements StemmerInterface
+use function explode;
+use function implode;
+
+final class CachedStemmer implements StemmerInterface
 {
     public function __construct(
         protected CacheInterface $cache,

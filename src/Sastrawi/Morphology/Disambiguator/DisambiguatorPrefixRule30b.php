@@ -8,13 +8,16 @@ declare(strict_types=1);
  * @link      http://github.com/sastrawi/sastrawi for the canonical source repository
  * @license   https://github.com/sastrawi/sastrawi/blob/master/LICENSE The MIT License (MIT)
  */
+
 namespace Sastrawi\Morphology\Disambiguator;
+
+use function preg_match;
 
 /**
  * Disambiguate Prefix Rule 30b
  * Rule 30b : pengV -> peng-kV
  */
-class DisambiguatorPrefixRule30b implements DisambiguatorInterface
+final class DisambiguatorPrefixRule30b implements DisambiguatorInterface
 {
     /**
      * Disambiguate Prefix Rule 30b

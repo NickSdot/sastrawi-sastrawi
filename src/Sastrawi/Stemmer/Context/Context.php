@@ -8,18 +8,22 @@ declare(strict_types=1);
  * @link      http://github.com/sastrawi/sastrawi for the canonical source repository
  * @license   https://github.com/sastrawi/sastrawi/blob/master/LICENSE The MIT License (MIT)
  */
+
 namespace Sastrawi\Stemmer\Context;
 
 use Sastrawi\Dictionary\DictionaryInterface;
-use Sastrawi\Stemmer\Context\Visitor\VisitorInterface;
-use Sastrawi\Stemmer\Context\Visitor\VisitableInterface;
 use Sastrawi\Stemmer\ConfixStripping;
+use Sastrawi\Stemmer\Context\Visitor\VisitableInterface;
+use Sastrawi\Stemmer\Context\Visitor\VisitorInterface;
 use Sastrawi\Stemmer\Context\Visitor\VisitorProvider;
+
+use function array_reverse;
+use function count;
 
 /**
  * Stemming Context using Nazief and Adriani, CS, ECS, Improved ECS
  */
-class Context implements ContextInterface, VisitableInterface
+final class Context implements ContextInterface, VisitableInterface
 {
     protected string $currentWord;
 
@@ -258,7 +262,7 @@ class Context implements ContextInterface, VisitableInterface
                 continue;
             }
 
-            if ($removal->getRemovedPart() === 'kan') {
+            if ('kan' === $removal->getRemovedPart()) {
                 $this->setCurrentWord($removal->getResult() . 'k');
 
                 // step 4, 5
@@ -288,15 +292,15 @@ class Context implements ContextInterface, VisitableInterface
      */
     protected function isSuffixRemoval(RemovalInterface $removal): bool
     {
-        if ($removal->getAffixType() === 'DS') {
+        if ('DS' === $removal->getAffixType()) {
             return true;
         }
 
-        if ($removal->getAffixType() === 'PP') {
+        if ('PP' === $removal->getAffixType()) {
             return true;
         }
 
-        return $removal->getAffixType() === 'P';
+        return 'P' === $removal->getAffixType();
     }
 
     /**
@@ -305,7 +309,7 @@ class Context implements ContextInterface, VisitableInterface
     public function restorePrefix(): void
     {
         foreach ($this->removals as $removal) {
-            if ($removal->getAffixType() === 'DP') {
+            if ('DP' === $removal->getAffixType()) {
                 // return the word before pre-coding (the subject of first prefix removal)
                 $this->setCurrentWord($removal->getSubject());
                 break;
@@ -313,7 +317,7 @@ class Context implements ContextInterface, VisitableInterface
         }
 
         foreach ($this->removals as $i => $removal) {
-            if ($removal->getAffixType() === 'DP') {
+            if ('DP' === $removal->getAffixType()) {
                 unset($this->removals[$i]);
             }
         }

@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace SastrawiTest\StopWordRemover;
 
 use PHPUnit\Framework\TestCase;
-use Sastrawi\StopWordRemover\StopWordRemover;
 use Sastrawi\Dictionary\ArrayDictionary;
+use Sastrawi\StopWordRemover\StopWordRemover;
 
 final class StopWordRemoverTest extends TestCase
 {

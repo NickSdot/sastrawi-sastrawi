@@ -8,13 +8,16 @@ declare(strict_types=1);
  * @link      http://github.com/sastrawi/sastrawi for the canonical source repository
  * @license   https://github.com/sastrawi/sastrawi/blob/master/LICENSE The MIT License (MIT)
  */
+
 namespace Sastrawi\Morphology\Disambiguator;
+
+use function preg_match;
 
 /**
  * Disambiguate Prefix Rule 23
  * Rule 23 : perCAP -> per-CAP where C  !==  'r' AND P  !==  'er'
  */
-class DisambiguatorPrefixRule23 implements DisambiguatorInterface
+final class DisambiguatorPrefixRule23 implements DisambiguatorInterface
 {
     /**
      * Disambiguate Prefix Rule 23
@@ -24,7 +27,7 @@ class DisambiguatorPrefixRule23 implements DisambiguatorInterface
     {
         $contains = preg_match('/^per([bcdfghjklmnpqrstvwxyz])([a-z])(.*)$/', $word, $matches);
 
-        if ($contains === 1) {
+        if (1 === $contains) {
             if (1 === preg_match('/^er(.*)$/', $matches[3])) {
                 return null;
             }

@@ -8,19 +8,23 @@ declare(strict_types=1);
  * @link      http://github.com/sastrawi/sastrawi for the canonical source repository
  * @license   https://github.com/sastrawi/sastrawi/blob/master/LICENSE The MIT License (MIT)
  */
+
 namespace Sastrawi\Stemmer;
 
-use Exception;
 use Sastrawi\Dictionary\ArrayDictionary;
+
+use function file;
+use function function_exists;
+use function is_readable;
 
 /**
  * Stemmer factory helps to create pre-configured stemmer
  */
-class StemmerFactory
+final class StemmerFactory
 {
-    const string APC_KEY = 'sastrawi_cache_dictionary';
+    public const string APC_KEY = 'sastrawi_cache_dictionary';
 
-    const string KATA_DASAR_FILE_PATH = __DIR__ . '/../../../data/kata-dasar.txt';
+    public const string KATA_DASAR_FILE_PATH = __DIR__ . '/../../../data/kata-dasar.txt';
 
     /**
      * @throws \Exception
@@ -75,11 +79,11 @@ class StemmerFactory
     protected function getWordsFromFile(): array
     {
         if (false === is_readable($dictionaryFile = self::KATA_DASAR_FILE_PATH)) {
-            throw new Exception('Dictionary file is missing. It seems that your installation is corrupted.');
+            throw new \Exception('Dictionary file is missing. It seems that your installation is corrupted.');
         }
 
         if (false === $data = file($dictionaryFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES)) {
-            throw new Exception('Dictionary file could not be read.');
+            throw new \Exception('Dictionary file could not be read.');
         }
 
         return $data;

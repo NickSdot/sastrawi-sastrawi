@@ -8,14 +8,16 @@ declare(strict_types=1);
  * @link      http://github.com/sastrawi/sastrawi for the canonical source repository
  * @license   https://github.com/sastrawi/sastrawi/blob/master/LICENSE The MIT License (MIT)
  */
+
 namespace Sastrawi\Dictionary;
 
-use Exception;
+use function count;
+use function file;
 
 /**
  * Implementation of the DictionaryInterface using Array
  */
-class ArrayDictionary implements DictionaryInterface
+final class ArrayDictionary implements DictionaryInterface
 {
     /**
      * @var string[]
@@ -63,7 +65,7 @@ class ArrayDictionary implements DictionaryInterface
      */
     public function add(string $word): void
     {
-        if ($word === '') {
+        if ('' === $word) {
             return;
         }
 
@@ -86,10 +88,10 @@ class ArrayDictionary implements DictionaryInterface
      */
     public function addWordsFromTextFile(string $filePath, string $delimiter = "\n"): void
     {
-        $words = file($filePath , FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+        $words = file($filePath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
 
-        if([] === $words || false === $words) {
-            throw new Exception('Dictionary file could not be read.');
+        if ([] === $words || false === $words) {
+            throw new \Exception('Dictionary file could not be read.');
         }
 
         $this->addWords($words);

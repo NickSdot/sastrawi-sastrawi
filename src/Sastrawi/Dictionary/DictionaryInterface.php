@@ -8,9 +8,8 @@ declare(strict_types=1);
  * @link      http://github.com/sastrawi/sastrawi for the canonical source repository
  * @license   https://github.com/sastrawi/sastrawi/blob/master/LICENSE The MIT License (MIT)
  */
-namespace Sastrawi\Dictionary;
 
-use Countable;
+namespace Sastrawi\Dictionary;
 
 /**
  * The Dictionary interface used by the stemmer.
@@ -18,7 +17,7 @@ use Countable;
  * @since  0.1.0
  * @author Andy Librian <andylibrian@gmail.com>
  */
-interface DictionaryInterface extends Countable
+interface DictionaryInterface extends \Countable
 {
     /**
      * Checks whether a word is contained in the dictionary.

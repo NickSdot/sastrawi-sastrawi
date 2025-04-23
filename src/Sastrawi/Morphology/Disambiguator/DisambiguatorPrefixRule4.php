@@ -8,13 +8,14 @@ declare(strict_types=1);
  * @link      http://github.com/sastrawi/sastrawi for the canonical source repository
  * @license   https://github.com/sastrawi/sastrawi/blob/master/LICENSE The MIT License (MIT)
  */
+
 namespace Sastrawi\Morphology\Disambiguator;
 
 /**
 * Disambiguate Prefix Rule 4
 * Rule 4 : belajar -> bel-ajar
 */
-class DisambiguatorPrefixRule4 implements DisambiguatorInterface
+final class DisambiguatorPrefixRule4 implements DisambiguatorInterface
 {
     /**
      * Disambiguate Prefix Rule 4
@@ -22,7 +23,7 @@ class DisambiguatorPrefixRule4 implements DisambiguatorInterface
      */
     public function disambiguate(string $word): ?string
     {
-        if ($word === 'belajar') {
+        if ('belajar' === $word) {
             return 'ajar';
         }
 

@@ -8,14 +8,17 @@ declare(strict_types=1);
  * @link      http://github.com/sastrawi/sastrawi for the canonical source repository
  * @license   https://github.com/sastrawi/sastrawi/blob/master/LICENSE The MIT License (MIT)
  */
+
 namespace Sastrawi\Morphology\Disambiguator;
+
+use function preg_match;
 
 /**
  * Disambiguate Prefix Rule 19
  * Original Rule 19 : mempV -> mem-pV where V  !==  'e'
  * Modified Rule 19 by ECS : mempA -> mem-pA where A  !==  'e' in order to stem memproteksi
  */
-class DisambiguatorPrefixRule19 implements DisambiguatorInterface
+final class DisambiguatorPrefixRule19 implements DisambiguatorInterface
 {
     /**
      * Disambiguate Prefix Rule 19

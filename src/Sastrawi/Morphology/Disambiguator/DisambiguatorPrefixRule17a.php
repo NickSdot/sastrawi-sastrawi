@@ -8,13 +8,16 @@ declare(strict_types=1);
  * @link      http://github.com/sastrawi/sastrawi for the canonical source repository
  * @license   https://github.com/sastrawi/sastrawi/blob/master/LICENSE The MIT License (MIT)
  */
+
 namespace Sastrawi\Morphology\Disambiguator;
+
+use function preg_match;
 
 /**
  * Disambiguate Prefix Rule 17a
  * Rule 17a : mengV -> meng-V
  */
-class DisambiguatorPrefixRule17a implements DisambiguatorInterface
+final class DisambiguatorPrefixRule17a implements DisambiguatorInterface
 {
     /**
      * Disambiguate Prefix Rule 17a
@@ -25,7 +28,7 @@ class DisambiguatorPrefixRule17a implements DisambiguatorInterface
         $matches  = null;
         $contains = preg_match('/^meng([aiueo])(.*)$/', $word, $matches);
 
-        if ($contains === 1) {
+        if (1 === $contains) {
             return $matches[1] . $matches[2];
         }
 

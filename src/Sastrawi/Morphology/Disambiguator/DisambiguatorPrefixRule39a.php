@@ -8,13 +8,16 @@ declare(strict_types=1);
  * @link      http://github.com/sastrawi/sastrawi for the canonical source repository
  * @license   https://github.com/sastrawi/sastrawi/blob/master/LICENSE The MIT License (MIT)
  */
+
 namespace Sastrawi\Morphology\Disambiguator;
+
+use function preg_match;
 
 /**
  * Disambiguate Prefix Rule 39a (CC infix rules)
  * Rule 39a : CemV -> CemV
  */
-class DisambiguatorPrefixRule39a implements DisambiguatorInterface
+final class DisambiguatorPrefixRule39a implements DisambiguatorInterface
 {
     /**
      * Disambiguate Prefix Rule 39a (CC infix rules)
@@ -24,7 +27,7 @@ class DisambiguatorPrefixRule39a implements DisambiguatorInterface
     {
         $contains = preg_match('/^([bcdfghjklmnpqrstvwxyz])(em[aiueo])(.*)$/', $word, $matches);
 
-        if ($contains === 1) {
+        if (1 === $contains) {
             return $matches[1] . $matches[2] . $matches[3];
         }
 

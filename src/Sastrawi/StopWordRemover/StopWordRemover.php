@@ -6,7 +6,10 @@ namespace Sastrawi\StopWordRemover;
 
 use Sastrawi\Dictionary\DictionaryInterface;
 
-class StopWordRemover
+use function explode;
+use function implode;
+
+final class StopWordRemover
 {
     public function __construct(
         protected DictionaryInterface $dictionary

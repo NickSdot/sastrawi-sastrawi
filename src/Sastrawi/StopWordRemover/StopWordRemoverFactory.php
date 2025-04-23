@@ -6,7 +6,7 @@ namespace Sastrawi\StopWordRemover;
 
 use Sastrawi\Dictionary\ArrayDictionary;
 
-class StopWordRemoverFactory
+final class StopWordRemoverFactory
 {
     public function createStopWordRemover(): StopWordRemover
     {

@@ -8,14 +8,17 @@ declare(strict_types=1);
  * @link      http://github.com/sastrawi/sastrawi for the canonical source repository
  * @license   https://github.com/sastrawi/sastrawi/blob/master/LICENSE The MIT License (MIT)
  */
+
 namespace Sastrawi\Morphology\Disambiguator;
+
+use function preg_match;
 
 /**
  * Disambiguate Prefix Rule 12
  * Nazief and Adriani Rule 12 : mempe{r|l} -> mem-pe{r|l}
  * Modified by Jelita Asian's CS Rule 12 : mempe -> mem-pe to stem mempengaruhi
  */
-class DisambiguatorPrefixRule12 implements DisambiguatorInterface
+final class DisambiguatorPrefixRule12 implements DisambiguatorInterface
 {
     /**
      * Disambiguate Prefix Rule 12
@@ -27,7 +30,7 @@ class DisambiguatorPrefixRule12 implements DisambiguatorInterface
         $matches  = null;
         $contains = preg_match('/^mempe(.*)$/', $word, $matches);
 
-        if ($contains === 1) {
+        if (1 === $contains) {
             return 'pe' . $matches[1];
         }
 

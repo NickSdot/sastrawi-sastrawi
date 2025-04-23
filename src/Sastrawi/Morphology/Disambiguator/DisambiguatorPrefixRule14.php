@@ -8,7 +8,10 @@ declare(strict_types=1);
  * @link      http://github.com/sastrawi/sastrawi for the canonical source repository
  * @license   https://github.com/sastrawi/sastrawi/blob/master/LICENSE The MIT License (MIT)
  */
+
 namespace Sastrawi\Morphology\Disambiguator;
+
+use function preg_match;
 
 /**
  * Disambiguate Prefix Rule no 14
@@ -21,7 +24,7 @@ namespace Sastrawi\Morphology\Disambiguator;
  *
  * Original CS Rule no 14 was : men{c|d|j|z} -> men-{c|d|j|z}
  */
-class DisambiguatorPrefixRule14 implements DisambiguatorInterface
+final class DisambiguatorPrefixRule14 implements DisambiguatorInterface
 {
     /**
      * Disambiguate Prefix Rule no 14
@@ -39,7 +42,7 @@ class DisambiguatorPrefixRule14 implements DisambiguatorInterface
         $matches  = null;
         $contains = preg_match('/^men([cdjstz])(.*)$/', $word, $matches);
 
-        if ($contains === 1) {
+        if (1 === $contains) {
             return $matches[1] . $matches[2];
         }
 

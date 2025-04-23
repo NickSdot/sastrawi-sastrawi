@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace SastrawiTest\Stemmer;
 
 use PHPUnit\Framework\TestCase;
-use Sastrawi\Stemmer\CachedStemmer;
-use Sastrawi\Stemmer\Cache\ArrayCache;
-use Sastrawi\Stemmer\Stemmer;
 use Sastrawi\Dictionary\ArrayDictionary;
+use Sastrawi\Stemmer\Cache\ArrayCache;
+use Sastrawi\Stemmer\CachedStemmer;
+use Sastrawi\Stemmer\Stemmer;
 use Sastrawi\Stemmer\StemmerInterface;
 
 final class CachedStemmerTest extends TestCase

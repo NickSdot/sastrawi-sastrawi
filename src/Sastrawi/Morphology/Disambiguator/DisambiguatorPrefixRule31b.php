@@ -8,14 +8,17 @@ declare(strict_types=1);
  * @link      http://github.com/sastrawi/sastrawi for the canonical source repository
  * @license   https://github.com/sastrawi/sastrawi/blob/master/LICENSE The MIT License (MIT)
  */
+
 namespace Sastrawi\Morphology\Disambiguator;
+
+use function preg_match;
 
 /**
  * Disambiguate Prefix Rule 31b
  * Original Rule 31 : penyV -> peny-sV
  * Modified by CC, shifted to 31b
  */
-class DisambiguatorPrefixRule31b implements DisambiguatorInterface
+final class DisambiguatorPrefixRule31b implements DisambiguatorInterface
 {
     /**
      * Disambiguate Prefix Rule 31b

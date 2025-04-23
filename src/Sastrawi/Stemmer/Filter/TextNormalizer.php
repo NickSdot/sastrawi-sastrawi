@@ -8,12 +8,17 @@ declare(strict_types=1);
  * @link      http://github.com/sastrawi/sastrawi for the canonical source repository
  * @license   https://github.com/sastrawi/sastrawi/blob/master/LICENSE The MIT License (MIT)
  */
+
 namespace Sastrawi\Stemmer\Filter;
+
+use function mb_strtolower;
+use function mb_trim;
+use function preg_replace;
 
 /**
  * Class for normalize text before the stemming process
  */
-class TextNormalizer
+final class TextNormalizer
 {
     /**
      * Removes symbols & characters other than alphabetic,
@@ -21,10 +26,10 @@ class TextNormalizer
      */
     public static function normalizeText(string $text): string
     {
-        $text = strtolower($text);
+        $text = mb_strtolower($text);
         $text = preg_replace('/[^a-z0-9 -]/im', ' ', $text);
         $text = preg_replace('/( +)/im', ' ', (string) $text);
 
-        return trim((string) $text);
+        return mb_trim((string) $text);
     }
 }

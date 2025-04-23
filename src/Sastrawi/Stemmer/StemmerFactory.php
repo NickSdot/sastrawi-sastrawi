@@ -13,11 +13,12 @@ namespace Sastrawi\Stemmer;
 use Sastrawi\Dictionary\ArrayDictionary;
 
 /**
- * Stemmer factory helps creating pre-configured stemmer
+ * Stemmer factory helps to create pre-configured stemmer
  */
 class StemmerFactory
 {
     const string APC_KEY = 'sastrawi_cache_dictionary';
+    const string KATA_DASAR_FILE_PATH = __DIR__ . '/../../../data/kata-dasar.txt';
 
     /**
      * @param bool $isDev
@@ -33,7 +34,7 @@ class StemmerFactory
         return new CachedStemmer($resultCache, $stemmer);
     }
 
-    public function createDefaultDictionary($isDev = false): ArrayDictionary
+    public function createDefaultDictionary(bool $isDev = false): ArrayDictionary
     {
         $words      = $this->getWords($isDev);
 
@@ -41,31 +42,34 @@ class StemmerFactory
     }
 
     /**
+     * @return list<string>
+     *
      * @throws \Exception
      */
-    protected function getWords(bool $isDev = false)
+    protected function getWords(bool $isDev = false): array
     {
         if ($isDev || !function_exists('apc_fetch')) {
-            $words = $this->getWordsFromFile();
-        } else {
-            $words = apc_fetch(self::APC_KEY);
+            return $this->getWordsFromFile();
+        }
 
-            if ($words === false) {
-                $words = $this->getWordsFromFile();
-                apc_store(self::APC_KEY, $words);
-            }
+        if (false === $words = apc_fetch(self::APC_KEY)) {
+            apc_store(self::APC_KEY, $words = $this->getWordsFromFile());
         }
 
         return $words;
     }
 
+    /**
+     * @return list<string>
+     *
+     * @throws \Exception
+     */
     protected function getWordsFromFile(): array
     {
-        $dictionaryFile = __DIR__ . '/../../../data/kata-dasar.txt';
-        if (!is_readable($dictionaryFile)) {
+        if (false === is_readable($dictionaryFile = self::KATA_DASAR_FILE_PATH)) {
             throw new \Exception('Dictionary file is missing. It seems that your installation is corrupted.');
         }
 
-        return explode("\n", file_get_contents($dictionaryFile));
+        return file($dictionaryFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
     }
 }

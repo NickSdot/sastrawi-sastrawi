@@ -10,18 +10,21 @@ declare(strict_types=1);
  */
 namespace SastrawiTest\Morphology\Disambiguator;
 
+use PHPUnit\Framework\TestCase;
+use Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule30c;
+
 /**
  * Disambiguate Prefix Rule 30c
  * Rule 30c : pengV -> pengV- where V = 'e'
  */
 
-final class DisambiguatorPrefixRule30cTest extends \PHPUnit\Framework\TestCase
+final class DisambiguatorPrefixRule30cTest extends TestCase
 {
-    public $subject;
+    public DisambiguatorPrefixRule30c $subject;
 
     protected function setUp(): void
     {
-        $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule30c();
+        $this->subject = new DisambiguatorPrefixRule30c();
     }
 
     public function testDisambiguate(): void

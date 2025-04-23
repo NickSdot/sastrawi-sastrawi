@@ -10,18 +10,21 @@ declare(strict_types=1);
  */
 namespace SastrawiTest\Morphology\Disambiguator;
 
+use PHPUnit\Framework\TestCase;
+use Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule3;
+
 /**
 * Disambiguate Prefix Rule 3
 * Rule 3 : berCAerV -> ber-CAerV where C  !==  'r'
 *
 */
-final class DisambiguatorPrefixRule3Test extends \PHPUnit\Framework\TestCase
+final class DisambiguatorPrefixRule3Test extends TestCase
 {
-    public $subject;
+    public DisambiguatorPrefixRule3 $subject;
 
     protected function setUp(): void
     {
-        $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule3();
+        $this->subject = new DisambiguatorPrefixRule3();
     }
 
     public function testDisambiguate(): void

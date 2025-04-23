@@ -10,17 +10,20 @@ declare(strict_types=1);
  */
 namespace SastrawiTest\Morphology\Disambiguator;
 
+use PHPUnit\Framework\TestCase;
+use Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule4;
+
 /**
 * Disambiguate Prefix Rule 4
 * Rule 4 : belajar -> bel-ajar
 */
-final class DisambiguatorPrefixRule4Test extends \PHPUnit\Framework\TestCase
+final class DisambiguatorPrefixRule4Test extends TestCase
 {
-    public $subject;
+    public DisambiguatorPrefixRule4 $subject;
 
     protected function setUp(): void
     {
-        $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule4();
+        $this->subject = new DisambiguatorPrefixRule4();
     }
 
     public function testDisambiguate(): void

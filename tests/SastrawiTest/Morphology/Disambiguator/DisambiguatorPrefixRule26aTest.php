@@ -10,17 +10,20 @@ declare(strict_types=1);
  */
 namespace SastrawiTest\Morphology\Disambiguator;
 
+use PHPUnit\Framework\TestCase;
+use Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule26a;
+
 /**
  * Disambiguate Prefix Rule 26a
  * Rule 26a : pem{rV|V} -> pe-m{rV|V}
  */
-final class DisambiguatorPrefixRule26aTest extends \PHPUnit\Framework\TestCase
+final class DisambiguatorPrefixRule26aTest extends TestCase
 {
-    public $subject;
+    public DisambiguatorPrefixRule26a $subject;
 
     protected function setUp(): void
     {
-        $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule26a();
+        $this->subject = new DisambiguatorPrefixRule26a();
     }
 
     public function testDisambiguate(): void

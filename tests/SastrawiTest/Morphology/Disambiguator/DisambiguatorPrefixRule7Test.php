@@ -10,17 +10,20 @@ declare(strict_types=1);
  */
 namespace SastrawiTest\Morphology\Disambiguator;
 
+use PHPUnit\Framework\TestCase;
+use Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule7;
+
 /**
  * Disambiguate Prefix Rule 7
  * Rule 7 : terCerv -> ter-CerV where C  !==  'r'
  */
-final class DisambiguatorPrefixRule7Test extends \PHPUnit\Framework\TestCase
+final class DisambiguatorPrefixRule7Test extends TestCase
 {
-    public $subject;
+    public DisambiguatorPrefixRule7 $subject;
 
     protected function setUp(): void
     {
-        $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule7();
+        $this->subject = new DisambiguatorPrefixRule7();
     }
 
     public function testDisambiguate(): void

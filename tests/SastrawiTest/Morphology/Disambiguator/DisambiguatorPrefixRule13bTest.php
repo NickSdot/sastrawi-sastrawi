@@ -10,18 +10,21 @@ declare(strict_types=1);
  */
 namespace SastrawiTest\Morphology\Disambiguator;
 
+use PHPUnit\Framework\TestCase;
+use Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule13b;
+
 /**
  * Disambiguate Prefix Rule 13b
  * Rule 13b : mem{rV|V} -> me-p{rV|V}
  */
 
-final class DisambiguatorPrefixRule13bTest extends \PHPUnit\Framework\TestCase
+final class DisambiguatorPrefixRule13bTest extends TestCase
 {
-    public $subject;
+    public DisambiguatorPrefixRule13b $subject;
 
     protected function setUp(): void
     {
-        $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule13b();
+        $this->subject = new DisambiguatorPrefixRule13b();
     }
 
     public function testDisambiguate(): void

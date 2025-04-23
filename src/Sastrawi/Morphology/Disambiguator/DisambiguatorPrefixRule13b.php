@@ -20,10 +20,10 @@ class DisambiguatorPrefixRule13b implements DisambiguatorInterface
      * Disambiguate Prefix Rule 13b
      * Rule 13b : mem{rV|V} -> me-p{rV|V}
      */
-    public function disambiguate($word): ?string
+    public function disambiguate(string $word): ?string
     {
         $matches  = null;
-        $contains = preg_match('/^mem([aiueo])(.*)$/', (string) $word, $matches);
+        $contains = preg_match('/^mem([aiueo])(.*)$/', $word, $matches);
 
         if ($contains === 1) {
             return 'p' . $matches[1] . $matches[2];

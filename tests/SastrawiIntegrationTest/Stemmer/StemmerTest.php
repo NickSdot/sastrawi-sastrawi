@@ -4,29 +4,34 @@ declare(strict_types=1);
 
 namespace SastrawiIntegrationTest\Stemmer;
 
+use Iterator;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\TestCase;
 use Sastrawi\Stemmer\StemmerFactory;
+use Sastrawi\Stemmer\StemmerInterface;
 
-final class StemmerTest extends \PHPUnit\Framework\TestCase
+final class StemmerTest extends TestCase
 {
-    public $stemmer;
+    public StemmerInterface $stemmer;
 
     protected function setUp(): void
     {
-        $stemmerFactory = new StemmerFactory();
-        $this->stemmer  = $stemmerFactory->createStemmer(false);
+        $this->stemmer  =  new StemmerFactory()->createStemmer();
     }
 
-    #[\PHPUnit\Framework\Attributes\DataProvider('stemDataProvider')]
+    #[DataProvider('stemDataProvider')]
     public function testStem(string $word, string $stem): void
     {
         self::assertEquals($stem, $this->stemmer->stem($word));
     }
 
-    public static function stemDataProvider(): \Iterator
+
+    /** @return \Iterator<array{string, string}> */
+    public static function stemDataProvider(): Iterator
     {
         yield ['kebijakan', 'bijak'];
-        //$data[] = array('karyawan', 'karya');
-        //$data[] = array('karyawati', 'karya');
+        //$data[] = ['karyawan', 'karya'];
+        //$data[] = ['karyawati', 'karya'];
         yield ['kinerja', 'kerja'];
         yield ['mengandung', 'kandung'];
         yield ['memakan', 'makan'];
@@ -44,8 +49,7 @@ final class StemmerTest extends \PHPUnit\Framework\TestCase
         yield ['mengikis', 'kikis'];
         yield ['kedudukan', 'duduk'];
         yield ['menekan', 'tekan'];
-        yield ['perusakan', 'rusa'];
-        // overstemming, it's better than perusa
+        yield ['perusakan', 'rusa']; // over-stemming, it's better than perusa (todo?)
         yield ['ditemui', 'temu'];
         yield ['di', 'di'];
         yield ['mengalahkan', 'kalah'];

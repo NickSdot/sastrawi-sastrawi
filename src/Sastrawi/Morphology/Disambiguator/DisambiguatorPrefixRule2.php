@@ -16,10 +16,10 @@ namespace Sastrawi\Morphology\Disambiguator;
 */
 class DisambiguatorPrefixRule2 implements DisambiguatorInterface
 {
-    public function disambiguate($word): ?string
+    public function disambiguate(string $word): ?string
     {
         $matches  = null;
-        $contains = preg_match('/^ber([bcdfghjklmnpqrstvwxyz])([a-z])(.*)$/', (string) $word, $matches);
+        $contains = preg_match('/^ber([bcdfghjklmnpqrstvwxyz])([a-z])(.*)$/', $word, $matches);
 
         if ($contains === 1) {
             if (preg_match('/^er(.*)$/', $matches[3]) === 1) {

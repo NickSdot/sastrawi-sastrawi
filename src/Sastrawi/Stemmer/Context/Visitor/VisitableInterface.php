@@ -20,5 +20,5 @@ interface VisitableInterface
     /**
      * @return void
      */
-    public function accept(VisitorInterface $visitor);
+    public function accept(VisitorInterface $visitor): void;
 }

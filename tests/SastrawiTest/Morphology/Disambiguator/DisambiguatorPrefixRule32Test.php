@@ -10,18 +10,21 @@ declare(strict_types=1);
  */
 namespace SastrawiTest\Morphology\Disambiguator;
 
+use PHPUnit\Framework\TestCase;
+use Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule32;
+
 /**
  * Disambiguate Prefix Rule 32
  * Rule 32 : pelV -> pe-lV except pelajar -> ajar
  */
 
-final class DisambiguatorPrefixRule32Test extends \PHPUnit\Framework\TestCase
+final class DisambiguatorPrefixRule32Test extends TestCase
 {
-    public $subject;
+    public DisambiguatorPrefixRule32 $subject;
 
     protected function setUp(): void
     {
-        $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule32();
+        $this->subject = new DisambiguatorPrefixRule32();
     }
 
     public function testDisambiguate(): void

@@ -22,9 +22,9 @@ class DisambiguatorPrefixRule19 implements DisambiguatorInterface
      * Original Rule 19 : mempV -> mem-pV where V  !==  'e'
      * Modified Rule 19 by ECS : mempA -> mem-pA where A  !==  'e' in order to stem memproteksi
      */
-    public function disambiguate($word): ?string
+    public function disambiguate(string $word): ?string
     {
-        if (preg_match('/^memp([abcdfghijklmopqrstuvwxyz])(.*)$/', (string) $word, $matches)) {
+        if (preg_match('/^memp([abcdfghijklmopqrstuvwxyz])(.*)$/', $word, $matches)) {
             return 'p' . $matches[1] . $matches[2];
         }
 

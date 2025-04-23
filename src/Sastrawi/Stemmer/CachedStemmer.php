@@ -10,9 +10,11 @@ declare(strict_types=1);
  */
 namespace Sastrawi\Stemmer;
 
+use Sastrawi\Stemmer\Cache\CacheInterface;
+
 class CachedStemmer implements StemmerInterface
 {
-    public function __construct(protected \Sastrawi\Stemmer\Cache\CacheInterface $cache, protected \Sastrawi\Stemmer\StemmerInterface $delegatedStemmer)
+    public function __construct(protected CacheInterface $cache, protected \Sastrawi\Stemmer\StemmerInterface $delegatedStemmer)
     {
     }
 
@@ -36,7 +38,7 @@ class CachedStemmer implements StemmerInterface
         return implode(' ', $stems);
     }
 
-    public function getCache(): \Sastrawi\Stemmer\Cache\CacheInterface
+    public function getCache(): CacheInterface
     {
         return $this->cache;
     }

@@ -22,10 +22,10 @@ class DisambiguatorPrefixRule6a implements DisambiguatorInterface
      * Rule 6a : terV -> ter-V
      * @return string
      */
-    public function disambiguate($word): ?string
+    public function disambiguate(string $word): ?string
     {
         $matches  = null;
-        $contains = preg_match('/^ter([aiueo].*)$/', (string) $word, $matches);
+        $contains = preg_match('/^ter([aiueo].*)$/', $word, $matches);
 
         if ($contains === 1) {
             return $matches[1];

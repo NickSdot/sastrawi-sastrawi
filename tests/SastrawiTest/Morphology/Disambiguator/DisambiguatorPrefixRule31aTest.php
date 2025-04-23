@@ -10,18 +10,21 @@ declare(strict_types=1);
  */
 namespace SastrawiTest\Morphology\Disambiguator;
 
+use PHPUnit\Framework\TestCase;
+use Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule31a;
+
 /**
  * Disambiguate Prefix Rule 31a
  * CC Rule 31a : penyV -> pe-nyV
  */
 
-final class DisambiguatorPrefixRule31aTest extends \PHPUnit\Framework\TestCase
+final class DisambiguatorPrefixRule31aTest extends TestCase
 {
-    public $subject;
+    public DisambiguatorPrefixRule31a $subject;
 
     protected function setUp(): void
     {
-        $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule31a();
+        $this->subject = new DisambiguatorPrefixRule31a();
     }
 
     public function testDisambiguate(): void

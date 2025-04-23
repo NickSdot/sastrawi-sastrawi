@@ -20,9 +20,9 @@ class DisambiguatorPrefixRule17d implements DisambiguatorInterface
      * Disambiguate Prefix Rule 17d
      * Rule 17d : mengV -> me-ngV
      */
-    public function disambiguate($word): ?string
+    public function disambiguate(string $word): ?string
     {
-        if (preg_match('/^meng([aiueo])(.*)$/', (string) $word, $matches)) {
+        if (preg_match('/^meng([aiueo])(.*)$/', $word, $matches)) {
             return 'ng'.$matches[1].$matches[2];
         }
 

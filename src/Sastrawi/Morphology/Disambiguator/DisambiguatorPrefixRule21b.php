@@ -20,9 +20,9 @@ class DisambiguatorPrefixRule21b implements DisambiguatorInterface
      * Disambiguate Prefix Rule 21b
      * Rule 21a : perV -> pe-rV
      */
-    public function disambiguate($word): ?string
+    public function disambiguate(string $word): ?string
     {
-        if (preg_match('/^pe(r[aiueo])(.*)$/', (string) $word, $matches)) {
+        if (preg_match('/^pe(r[aiueo])(.*)$/', $word, $matches)) {
             return $matches[1] . $matches[2];
         }
 

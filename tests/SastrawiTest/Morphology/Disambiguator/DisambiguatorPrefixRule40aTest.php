@@ -10,18 +10,21 @@ declare(strict_types=1);
  */
 namespace SastrawiTest\Morphology\Disambiguator;
 
+use PHPUnit\Framework\TestCase;
+use Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule40a;
+
 /**
  * Disambiguate Prefix Rule 40a (CC infix rules)
  * Rule 40a : CinV -> CinV
  */
 
-final class DisambiguatorPrefixRule40aTest extends \PHPUnit\Framework\TestCase
+final class DisambiguatorPrefixRule40aTest extends TestCase
 {
-    public $subject;
+    public DisambiguatorPrefixRule40a $subject;
 
     protected function setUp(): void
     {
-        $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule40a();
+        $this->subject = new DisambiguatorPrefixRule40a();
     }
 
     public function testDisambiguate(): void

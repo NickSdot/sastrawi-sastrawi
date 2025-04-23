@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace SastrawiTest\Dictionary;
 
+use PHPUnit\Framework\TestCase;
 use Sastrawi\Dictionary\ArrayDictionary;
+use Sastrawi\Dictionary\DictionaryInterface;
 
-final class ArrayDictionaryTest extends \PHPUnit\Framework\TestCase
+final class ArrayDictionaryTest extends TestCase
 {
     private ArrayDictionary $dictionary;
 
@@ -17,7 +19,7 @@ final class ArrayDictionaryTest extends \PHPUnit\Framework\TestCase
 
     public function testDictionaryImplementsDictionaryInterface(): void
     {
-        self::assertInstanceOf(\Sastrawi\Dictionary\DictionaryInterface::class, $this->dictionary);
+        self::assertInstanceOf(DictionaryInterface::class, $this->dictionary);
     }
 
     public function testAddAndContain(): void

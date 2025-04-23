@@ -10,17 +10,20 @@ declare(strict_types=1);
  */
 namespace SastrawiTest\Morphology\Disambiguator;
 
+use PHPUnit\Framework\TestCase;
+use Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule8;
+
 /**
  * Disambiguate Prefix Rule 8
  * Rule 8 : terCP -> ter-CP where C  !==  'r' and P  !==  'er'
  */
-final class DisambiguatorPrefixRule8Test extends \PHPUnit\Framework\TestCase
+final class DisambiguatorPrefixRule8Test extends TestCase
 {
-    public $subject;
+    public DisambiguatorPrefixRule8 $subject;
 
     protected function setUp(): void
     {
-        $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule8();
+        $this->subject = new DisambiguatorPrefixRule8();
     }
 
     public function testDisambiguate(): void

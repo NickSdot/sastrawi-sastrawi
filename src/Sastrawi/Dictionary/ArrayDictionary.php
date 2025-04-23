@@ -20,6 +20,9 @@ class ArrayDictionary implements DictionaryInterface
      */
     protected array $words = [];
 
+    /**
+     * @param list<string> $words
+     */
     public function __construct(array $words = [])
     {
         $this->addWords($words);
@@ -43,6 +46,8 @@ class ArrayDictionary implements DictionaryInterface
 
     /**
      * Add multiple words to the dictionary
+     *
+     * @param list<string> $words
      */
     public function addWords(array $words): void
     {

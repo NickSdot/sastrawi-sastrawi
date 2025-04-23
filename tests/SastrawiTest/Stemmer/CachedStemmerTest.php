@@ -4,16 +4,18 @@ declare(strict_types=1);
 
 namespace SastrawiTest\Stemmer;
 
+use PHPUnit\Framework\TestCase;
 use Sastrawi\Stemmer\CachedStemmer;
 use Sastrawi\Stemmer\Cache\ArrayCache;
 use Sastrawi\Stemmer\Stemmer;
 use Sastrawi\Dictionary\ArrayDictionary;
+use Sastrawi\Stemmer\StemmerInterface;
 
-final class CachedStemmerTest extends \PHPUnit\Framework\TestCase
+final class CachedStemmerTest extends TestCase
 {
-    public $arrayCache;
+    public ArrayCache $arrayCache;
 
-    private \Sastrawi\Stemmer\CachedStemmer $cachedStemmer;
+    private CachedStemmer $cachedStemmer;
 
     protected function setUp(): void
     {
@@ -25,7 +27,7 @@ final class CachedStemmerTest extends \PHPUnit\Framework\TestCase
 
     public function testInstanceOfStemmerInterface(): void
     {
-        self::assertInstanceOf(\Sastrawi\Stemmer\StemmerInterface::class, $this->cachedStemmer);
+        self::assertInstanceOf(StemmerInterface::class, $this->cachedStemmer);
     }
 
     public function testGetCache(): void

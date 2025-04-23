@@ -10,17 +10,20 @@ declare(strict_types=1);
  */
 namespace SastrawiTest\Morphology\Disambiguator;
 
+use PHPUnit\Framework\TestCase;
+use Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule5;
+
 /**
  * Disambiguate Prefix Rule 5
  * Rule 5 : beC1erC2 -> be-C1erC2 where C1  !==  'r'
  */
-final class DisambiguatorPrefixRule5Test extends \PHPUnit\Framework\TestCase
+final class DisambiguatorPrefixRule5Test extends TestCase
 {
-    public $subject;
+    public DisambiguatorPrefixRule5 $subject;
 
     protected function setUp(): void
     {
-        $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule5();
+        $this->subject = new DisambiguatorPrefixRule5();
     }
 
     public function testDisambiguate(): void

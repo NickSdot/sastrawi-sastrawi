@@ -16,7 +16,8 @@ use Sastrawi\Morphology\Disambiguator\DisambiguatorInterface;
 
 abstract class AbstractDisambiguatePrefixRule implements VisitorInterface
 {
-    protected $disambiguators = [];
+    /** @var list<DisambiguatorInterface> */
+    protected array $disambiguators = [];
 
     public function visit(ContextInterface $context): void
     {
@@ -48,6 +49,7 @@ abstract class AbstractDisambiguatePrefixRule implements VisitorInterface
         $context->setCurrentWord($result);
     }
 
+    /** @param list<DisambiguatorInterface> $disambiguators */
     public function addDisambiguators(array $disambiguators): void
     {
         foreach ($disambiguators as $disambiguator) {

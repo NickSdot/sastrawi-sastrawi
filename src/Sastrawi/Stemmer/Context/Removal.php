@@ -10,6 +10,8 @@ declare(strict_types=1);
  */
 namespace Sastrawi\Stemmer\Context;
 
+use Sastrawi\Stemmer\Context\Visitor\VisitorInterface;
+
 /**
  * Standard implementation of Removal Interface.
  */
@@ -21,11 +23,11 @@ class Removal implements RemovalInterface
      * @param string                                             $removedPart
      * @param string                                             $affixType
      */
-    public function __construct(protected \Sastrawi\Stemmer\Context\Visitor\VisitorInterface $visitor, protected $subject, protected $result, protected $removedPart, protected $affixType)
+    public function __construct(protected VisitorInterface $visitor, protected $subject, protected $result, protected $removedPart, protected $affixType)
     {
     }
 
-    public function getVisitor(): \Sastrawi\Stemmer\Context\Visitor\VisitorInterface
+    public function getVisitor(): VisitorInterface
     {
         return $this->visitor;
     }

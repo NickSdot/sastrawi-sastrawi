@@ -12,19 +12,20 @@ namespace Sastrawi\Stemmer\Cache;
 
 class ArrayCache implements CacheInterface
 {
-    protected $data = [];
+    /** @var array<string, string>  */
+    protected array $data = [];
 
-    public function set($key, $value): void
+    public function set(string $key, string $value): void
     {
         $this->data[$key] = $value;
     }
 
-    public function get($key)
+    public function get(string $key): ?string
     {
         return $this->data[$key] ?? null;
     }
 
-    public function has($key): bool
+    public function has(string $key): bool
     {
         return isset($this->data[$key]);
     }

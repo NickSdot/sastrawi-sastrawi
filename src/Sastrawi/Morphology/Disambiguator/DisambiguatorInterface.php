@@ -15,5 +15,5 @@ interface DisambiguatorInterface
     /**
      * @return string|null
      */
-    public function disambiguate($word);
+    public function disambiguate(string $word): ?string;
 }

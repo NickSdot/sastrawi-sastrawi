@@ -20,9 +20,9 @@ class DisambiguatorPrefixRule28b implements DisambiguatorInterface
      * Disambiguate Prefix Rule 28b
      * Rule 28b : pen{V} -> pe-t{V}
      */
-    public function disambiguate($word): ?string
+    public function disambiguate(string $word): ?string
     {
-        if (preg_match('/^pen([aiueo])(.*)$/', (string) $word, $matches)) {
+        if (preg_match('/^pen([aiueo])(.*)$/', $word, $matches)) {
             return 't' . $matches[1] . $matches[2];
         }
 

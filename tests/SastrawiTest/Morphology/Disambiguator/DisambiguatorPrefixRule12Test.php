@@ -10,6 +10,7 @@ declare(strict_types=1);
  */
 namespace SastrawiTest\Morphology\Disambiguator;
 
+use PHPUnit\Framework\TestCase;
 use Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule12;
 
 /**
@@ -17,7 +18,7 @@ use Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule12;
  * Nazief and Adriani Rule 12 : mempe{r|l} -> mem-pe{r|l}
  * Modified by Jelita Asian's CS Rule 12 : mempe -> mem-pe to stem mempengaruhi
  */
-final class DisambiguatorPrefixRule12Test extends \PHPUnit\Framework\TestCase
+final class DisambiguatorPrefixRule12Test extends TestCase
 {
     public DisambiguatorPrefixRule12 $subject;
 

@@ -20,10 +20,10 @@ class DisambiguatorPrefixRule6b implements DisambiguatorInterface
      * Disambiguate Prefix Rule 6b
      * Rule 6b : terV -> te-rV
      */
-    public function disambiguate($word): ?string
+    public function disambiguate(string $word): ?string
     {
         $matches  = null;
-        $contains = preg_match('/^ter([aiueo].*)$/', (string) $word, $matches);
+        $contains = preg_match('/^ter([aiueo].*)$/', $word, $matches);
 
         if ($contains === 1) {
             return 'r' . $matches[1];

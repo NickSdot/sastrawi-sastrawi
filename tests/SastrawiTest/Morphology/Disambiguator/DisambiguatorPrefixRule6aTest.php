@@ -10,17 +10,20 @@ declare(strict_types=1);
  */
 namespace SastrawiTest\Morphology\Disambiguator;
 
+use PHPUnit\Framework\TestCase;
+use Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule6a;
+
 /**
  * Disambiguate Prefix Rule 6a
  * Rule 6a : terV -> ter-V
  */
-final class DisambiguatorPrefixRule6aTest extends \PHPUnit\Framework\TestCase
+final class DisambiguatorPrefixRule6aTest extends TestCase
 {
-    public $subject;
+    public DisambiguatorPrefixRule6a $subject;
 
     protected function setUp(): void
     {
-        $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule6a();
+        $this->subject = new DisambiguatorPrefixRule6a();
     }
 
     public function testDisambiguate(): void

@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 namespace SastrawiTest\StopWordRemover;
 
+use PHPUnit\Framework\TestCase;
 use Sastrawi\StopWordRemover\StopWordRemover;
 use Sastrawi\Dictionary\ArrayDictionary;
 
-final class StopWordRemoverTest extends \PHPUnit\Framework\TestCase
+final class StopWordRemoverTest extends TestCase
 {
-    public $dictionary;
+    public ArrayDictionary $dictionary;
 
-    public $stopWordRemover;
+    public StopWordRemover $stopWordRemover;
 
     protected function setUp(): void
     {

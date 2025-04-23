@@ -28,9 +28,9 @@ class DisambiguatorPrefixRule27 implements DisambiguatorInterface
      *
      * Original CS Rule 27 was : pen{c|d|j|z} -> pen-{c|d|j|z}
      */
-    public function disambiguate($word): ?string
+    public function disambiguate(string $word): ?string
     {
-        if (preg_match('/^pen([cdjstz])(.*)$/', (string) $word, $matches)) {
+        if (preg_match('/^pen([cdjstz])(.*)$/', $word, $matches)) {
             return $matches[1] . $matches[2];
         }
 

@@ -20,9 +20,9 @@ class DisambiguatorPrefixRule34 implements DisambiguatorInterface
      * Disambiguate Prefix Rule 34
      * Rule 34 : peCP -> pe-CP where C  !==  {r|w|y|l|m|n} and P  !==  'er'
      */
-    public function disambiguate($word): ?string
+    public function disambiguate(string $word): ?string
     {
-        if (preg_match('/^pe([bcdfghjklmnpqrstvwxyz])(.*)$/', (string) $word, $matches)) {
+        if (preg_match('/^pe([bcdfghjklmnpqrstvwxyz])(.*)$/', $word, $matches)) {
             if (preg_match('/^er(.*)$/', $matches[2]) === 1) {
                 return null;
             }

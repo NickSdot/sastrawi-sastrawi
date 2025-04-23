@@ -8,7 +8,7 @@ use Sastrawi\Dictionary\ArrayDictionary;
 
 class StopWordRemoverFactory
 {
-    public function createStopWordRemover(): \Sastrawi\StopWordRemover\StopWordRemover
+    public function createStopWordRemover(): StopWordRemover
     {
         $stopWords = $this->getStopWords();
 
@@ -17,6 +17,9 @@ class StopWordRemoverFactory
         return new StopWordRemover($dictionary);
     }
 
+    /**
+     * @return list<string>
+     */
     public function getStopWords(): array
     {
         return [

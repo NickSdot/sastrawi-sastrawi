@@ -10,19 +10,22 @@ declare(strict_types=1);
  */
 namespace SastrawiTest\Morphology\Disambiguator;
 
+use PHPUnit\Framework\TestCase;
+use Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule29;
+
 /**
  * Disambiguate Prefix Rule 29
  * Original Rule 29 : peng{g|h|q} -> peng-{g|h|q}
  * Modified Rule 29 by ECS : pengC -> peng-C
  */
 
-final class DisambiguatorPrefixRule29Test extends \PHPUnit\Framework\TestCase
+final class DisambiguatorPrefixRule29Test extends TestCase
 {
-    public $subject;
+    public DisambiguatorPrefixRule29 $subject;
 
     protected function setUp(): void
     {
-        $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule29();
+        $this->subject = new DisambiguatorPrefixRule29();
     }
 
     public function testDisambiguate(): void

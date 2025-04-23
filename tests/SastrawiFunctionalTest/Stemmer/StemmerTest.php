@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace SastrawiFunctionalTest\Stemmer;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\TestCase;
 use Sastrawi\Dictionary\ArrayDictionary;
 use Sastrawi\Stemmer\Stemmer;
 
-final class StemmerTest extends \PHPUnit\Framework\TestCase
+final class StemmerTest extends TestCase
 {
-    private \Sastrawi\Stemmer\Stemmer $stemmer;
+    private Stemmer $stemmer;
 
     protected function setUp(): void
     {
@@ -41,12 +43,13 @@ final class StemmerTest extends \PHPUnit\Framework\TestCase
         $this->stemmer = new Stemmer($dictionary);
     }
 
-    #[\PHPUnit\Framework\Attributes\DataProvider('stemDataProvider')]
-    public function testStem($word, $stem): void
+    #[DataProvider('stemDataProvider')]
+    public function testStem(string $word, string $stem): void
     {
         self::assertEquals($stem, $this->stemmer->stem($word));
     }
 
+    /** @return list<list<string>> */
     public static function stemDataProvider(): array
     {
         $data = [];
@@ -55,7 +58,7 @@ final class StemmerTest extends \PHPUnit\Framework\TestCase
         $data[] = ['mei', 'mei'];
         $data[] = ['bui', 'bui'];
 
-        // lookup up the dictionary, to prevent overstemming
+        // lookup up the dictionary, to prevent over-stemming (todo?)
         // don't stem nilai to nila
         $data[] = ['nilai', 'nilai'];
 
@@ -89,7 +92,7 @@ final class StemmerTest extends \PHPUnit\Framework\TestCase
         $data[] = ['kesakitan', 'sakit'];
         $data[] = ['sesuap', 'suap'];
 
-        //$data[] = array('teriakanmu', 'teriak'); // wtf? kok jadi ria?
+        //$data[] = ['teriakanmu', 'teriak']; // wtf? kok jadi ria?
         //teriakanmu -> te-ria-kan-mu
 
         /* template formulas for derivation prefix rules (disambiguation) */
@@ -352,14 +355,14 @@ final class StemmerTest extends \PHPUnit\Framework\TestCase
         $data[] = ['medannya', 'medan'];
 
         // TODO:
-        //$data[] = array('sebagai', 'bagai');
-        //$data[] = array('bagian', 'bagian');
-        //$data[] = array('berbadan', 'badan');
-        //$data[] = array('abdullah', 'abdullah');
+        //$data[] = ['sebagai', 'bagai'];
+        //$data[] = ['bagian', 'bagian'];
+        //$data[] = ['berbadan', 'badan'];
+        //$data[] = ['abdullah', 'abdullah'];
 
         // adopted foreign suffixes
-        //$data[] = array('budayawan', 'budaya');
-        //$data[] = array('karyawati', 'karya');
+        //$data[] = ['budayawan', 'budaya'];
+        //$data[] = ['karyawati', 'karya'];
         $data[] = ['idealis', 'ideal'];
         $data[] = ['idealisme', 'ideal'];
         $data[] = ['finalisasi', 'final'];

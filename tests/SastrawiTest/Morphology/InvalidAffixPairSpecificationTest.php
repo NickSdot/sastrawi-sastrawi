@@ -4,13 +4,16 @@ declare(strict_types=1);
 
 namespace SastrawiTest\Morphology;
 
-final class InvalidAffixPairSpecificationTest extends \PHPUnit\Framework\TestCase
+use PHPUnit\Framework\TestCase;
+use Sastrawi\Morphology\InvalidAffixPairSpecification;
+
+final class InvalidAffixPairSpecificationTest extends TestCase
 {
-    public $specification;
+    public InvalidAffixPairSpecification $specification;
 
     protected function setUp(): void
     {
-        $this->specification = new \Sastrawi\Morphology\InvalidAffixPairSpecification();
+        $this->specification = new InvalidAffixPairSpecification();
     }
 
     /**

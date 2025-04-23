@@ -10,17 +10,20 @@ declare(strict_types=1);
  */
 namespace SastrawiTest\Morphology\Disambiguator;
 
+use PHPUnit\Framework\TestCase;
+use Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule1b;
+
 /**
 * Disambiguate Prefix Rule 1a
 * Rule 1b : berV -> be-rV
 */
-final class DisambiguatorPrefixRule1bTest extends \PHPUnit\Framework\TestCase
+final class DisambiguatorPrefixRule1bTest extends TestCase
 {
-    public $subject;
+    public DisambiguatorPrefixRule1b $subject;
 
     protected function setUp(): void
     {
-        $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule1b();
+        $this->subject = new DisambiguatorPrefixRule1b();
     }
 
     public function testDisambiguate(): void

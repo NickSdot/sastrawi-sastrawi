@@ -10,6 +10,8 @@ declare(strict_types=1);
  */
 namespace Sastrawi\Stemmer\Context;
 
+use Sastrawi\Dictionary\DictionaryInterface;
+
 /**
  * Stemming Context Interface
  *
@@ -18,43 +20,20 @@ namespace Sastrawi\Stemmer\Context;
  */
 interface ContextInterface
 {
-    /**
-     * @return string
-     */
-    public function getOriginalWord();
+    public function getOriginalWord(): string;
 
-    /**
-     * @return void
-     */
-    public function setCurrentWord($word);
+    public function setCurrentWord(string $word): void;
 
-    /**
-     * @return string
-     */
-    public function getCurrentWord();
+    public function getCurrentWord(): string;
 
-    /**
-     * @return \Sastrawi\Dictionary\DictionaryInterface
-     */
-    public function getDictionary();
+    public function getDictionary(): DictionaryInterface;
 
-    /**
-     * @return void
-     */
-    public function stopProcess();
+    public function stopProcess(): void;
 
-    /**
-     * @return boolean
-     */
-    public function processIsStopped();
+    public function processIsStopped(): bool;
 
-    /**
-     * @return void
-     */
-    public function addRemoval(RemovalInterface $removal);
+    public function addRemoval(RemovalInterface $removal): void;
 
-    /**
-     * @return RemovalInterface[]
-     */
-    public function getRemovals();
+    /** @return RemovalInterface[] */
+    public function getRemovals(): array;
 }

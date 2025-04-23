@@ -20,9 +20,9 @@ class DisambiguatorPrefixRule20 implements DisambiguatorInterface
      * Disambiguate Prefix Rule 20
      * Rule 20 : pe{w|y}V -> pe-{w|y}V
      */
-    public function disambiguate($word): ?string
+    public function disambiguate(string $word): ?string
     {
-        $contains = preg_match('/^pe([wy])([aiueo])(.*)$/', (string) $word, $matches);
+        $contains = preg_match('/^pe([wy])([aiueo])(.*)$/', $word, $matches);
 
         if ($contains === 1) {
             return $matches[1] . $matches[2] . $matches[3];

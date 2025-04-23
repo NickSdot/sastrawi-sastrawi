@@ -20,9 +20,9 @@ class DisambiguatorPrefixRule23 implements DisambiguatorInterface
      * Disambiguate Prefix Rule 23
      * Rule 23 : perCAP -> per-CAP where C  !==  'r' AND P  !==  'er'
      */
-    public function disambiguate($word): ?string
+    public function disambiguate(string $word): ?string
     {
-        $contains = preg_match('/^per([bcdfghjklmnpqrstvwxyz])([a-z])(.*)$/', (string) $word, $matches);
+        $contains = preg_match('/^per([bcdfghjklmnpqrstvwxyz])([a-z])(.*)$/', $word, $matches);
 
         if ($contains === 1) {
             if (preg_match('/^er(.*)$/', $matches[3]) === 1) {

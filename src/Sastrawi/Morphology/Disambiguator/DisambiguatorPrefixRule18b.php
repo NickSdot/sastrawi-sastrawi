@@ -22,9 +22,9 @@ class DisambiguatorPrefixRule18b implements DisambiguatorInterface
      * Original Rule 18 : menyV -> meny-sV
      * Modified by CC (shifted into 18b, see also 18a)
      */
-    public function disambiguate($word): ?string
+    public function disambiguate(string $word): ?string
     {
-        if (preg_match('/^meny([aiueo])(.*)$/', (string) $word, $matches)) {
+        if (preg_match('/^meny([aiueo])(.*)$/', $word, $matches)) {
             return 's' . $matches[1] . $matches[2];
         }
 

@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace SastrawiTest\Stemmer;
 
+use PHPUnit\Framework\TestCase;
 use Sastrawi\Stemmer\Stemmer;
 use Sastrawi\Dictionary\ArrayDictionary;
+use Sastrawi\Stemmer\StemmerInterface;
 
-final class StemmerTest extends \PHPUnit\Framework\TestCase
+final class StemmerTest extends TestCase
 {
     private \Sastrawi\Stemmer\Stemmer $stemmer;
 
@@ -19,7 +21,7 @@ final class StemmerTest extends \PHPUnit\Framework\TestCase
 
     public function testStemmerImplementsStemmerInterface(): void
     {
-        self::assertInstanceOf(\Sastrawi\Stemmer\StemmerInterface::class, $this->stemmer);
+        self::assertInstanceOf(StemmerInterface::class, $this->stemmer);
     }
 
     /**

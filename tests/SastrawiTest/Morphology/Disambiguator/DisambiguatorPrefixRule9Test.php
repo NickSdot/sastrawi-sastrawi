@@ -10,22 +10,25 @@ declare(strict_types=1);
  */
 namespace SastrawiTest\Morphology\Disambiguator;
 
+use PHPUnit\Framework\TestCase;
+use Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule9;
+
 /**
  * Disambiguate Prefix Rule 9
  * Rule 9 : te-C1erC2 -> te-C1erC2 where C1  !==  'r'
  */
-final class DisambiguatorPrefixRule9Test extends \PHPUnit\Framework\TestCase
+final class DisambiguatorPrefixRule9Test extends TestCase
 {
-    public $subject;
+    public DisambiguatorPrefixRule9 $subject;
 
     protected function setUp(): void
     {
-        $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule9();
+        $this->subject = new DisambiguatorPrefixRule9();
     }
 
     public function testDisambiguate(): void
     {
-        //TODO - need a real world example
+        // todo: need a real world example
         self::assertEquals('terbang', $this->subject->disambiguate('teterbang'));
         self::assertNull($this->subject->disambiguate('terperuk'));
     }

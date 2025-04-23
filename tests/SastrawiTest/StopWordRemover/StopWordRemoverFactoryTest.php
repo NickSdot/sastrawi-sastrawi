@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace SastrawiTest\StopWordRemover;
 
+use PHPUnit\Framework\TestCase;
+use Sastrawi\StopWordRemover\StopWordRemover;
 use Sastrawi\StopWordRemover\StopWordRemoverFactory;
 
-final class StopWordRemoverFactoryTest extends \PHPUnit\Framework\TestCase
+final class StopWordRemoverFactoryTest extends TestCase
 {
-    private \Sastrawi\StopWordRemover\StopWordRemoverFactory $factory;
+    private StopWordRemoverFactory $factory;
 
     protected function setUp(): void
     {
@@ -18,7 +20,7 @@ final class StopWordRemoverFactoryTest extends \PHPUnit\Framework\TestCase
     public function testCreateStopWordRemover(): void
     {
         self::assertInstanceOf(
-            \Sastrawi\StopWordRemover\StopWordRemover::class,
+            StopWordRemover::class,
             $this->factory->createStopWordRemover()
         );
     }

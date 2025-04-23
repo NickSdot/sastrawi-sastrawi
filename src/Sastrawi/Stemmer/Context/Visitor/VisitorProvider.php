@@ -14,18 +14,21 @@ use Sastrawi\Morphology\Disambiguator;
 
 class VisitorProvider
 {
-    protected $visitors = [];
+    /** @var list<VisitorInterface> */
+    protected array $visitors = [];
 
-    protected $suffixVisitors = [];
+    /** @var list<VisitorInterface> */
+    protected array $suffixVisitors = [];
 
-    protected $prefixVisitors = [];
+    /** @var list<VisitorInterface> */
+    protected array $prefixVisitors = [];
 
     public function __construct()
     {
         $this->initVisitors();
     }
 
-    protected function initVisitors()
+    protected function initVisitors(): void
     {
         $this->visitors[] = new DontStemShortWord();
 
@@ -174,17 +177,20 @@ class VisitorProvider
         $this->prefixVisitors[] = new PrefixDisambiguator([new Disambiguator\DisambiguatorPrefixRule42()]);
     }
 
-    public function getVisitors()
+    /** @return list<VisitorInterface> */
+    public function getVisitors(): array
     {
         return $this->visitors;
     }
 
-    public function getSuffixVisitors()
+    /** @return list<VisitorInterface> */
+    public function getSuffixVisitors(): array
     {
         return $this->suffixVisitors;
     }
 
-    public function getPrefixVisitors()
+    /** @return list<VisitorInterface> */
+    public function getPrefixVisitors(): array
     {
         return $this->prefixVisitors;
     }

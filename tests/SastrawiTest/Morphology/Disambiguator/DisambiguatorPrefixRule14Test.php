@@ -10,6 +10,9 @@ declare(strict_types=1);
  */
 namespace SastrawiTest\Morphology\Disambiguator;
 
+use PHPUnit\Framework\TestCase;
+use Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule14;
+
 /**
  * Disambiguate Prefix Rule no 14
  *
@@ -22,13 +25,13 @@ namespace SastrawiTest\Morphology\Disambiguator;
  * Original CS Rule no 14 was : men{c|d|j|z} -> men-{c|d|j|z}
  */
 
-final class DisambiguatorPrefixRule14Test extends \PHPUnit\Framework\TestCase
+final class DisambiguatorPrefixRule14Test extends TestCase
 {
-    public $subject;
+    public DisambiguatorPrefixRule14 $subject;
 
     protected function setUp(): void
     {
-        $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule14();
+        $this->subject = new DisambiguatorPrefixRule14();
     }
 
     public function testDisambiguate(): void

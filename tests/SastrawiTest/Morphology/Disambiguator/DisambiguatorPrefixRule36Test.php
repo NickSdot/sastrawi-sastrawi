@@ -10,18 +10,21 @@ declare(strict_types=1);
  */
 namespace SastrawiTest\Morphology\Disambiguator;
 
+use PHPUnit\Framework\TestCase;
+use Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule36;
+
 /**
  * Disambiguate Prefix Rule 36 (CS additional rules)
  * Rule 36 : peC1erC2 -> pe-C1erC2 where C1  !==  {r|w|y|l|m|n}
  */
 
-final class DisambiguatorPrefixRule36Test extends \PHPUnit\Framework\TestCase
+final class DisambiguatorPrefixRule36Test extends TestCase
 {
-    public $subject;
+    public DisambiguatorPrefixRule36 $subject;
 
     protected function setUp(): void
     {
-        $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule36();
+        $this->subject = new DisambiguatorPrefixRule36();
     }
 
     public function testDisambiguate(): void

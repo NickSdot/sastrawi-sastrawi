@@ -10,18 +10,21 @@ declare(strict_types=1);
  */
 namespace SastrawiTest\Morphology\Disambiguator;
 
+use PHPUnit\Framework\TestCase;
+use Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule41;
+
 /**
  * Disambiguate Prefix Rule 41
  * Rule 41 : kuA -> ku-A
  */
 
-final class DisambiguatorPrefixRule41Test extends \PHPUnit\Framework\TestCase
+final class DisambiguatorPrefixRule41Test extends TestCase
 {
-    public $subject;
+    public DisambiguatorPrefixRule41 $subject;
 
     protected function setUp(): void
     {
-        $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule41();
+        $this->subject = new DisambiguatorPrefixRule41();
     }
 
     public function testDisambiguate(): void

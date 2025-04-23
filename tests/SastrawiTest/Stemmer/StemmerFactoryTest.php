@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace SastrawiTest\Stemmer;
 
+use PHPUnit\Framework\TestCase;
 use Sastrawi\Stemmer\StemmerFactory;
 use Sastrawi\Stemmer\StemmerInterface;
 
-final class StemmerFactoryTest extends \PHPUnit\Framework\TestCase
+final class StemmerFactoryTest extends TestCase
 {
     private StemmerFactory $factory;
 

@@ -10,17 +10,20 @@ declare(strict_types=1);
  */
 namespace SastrawiTest\Morphology\Disambiguator;
 
+use PHPUnit\Framework\TestCase;
+use Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule10;
+
 /**
  * Disambiguate Prefix Rule 10
  * Rule 10 : me{l|r|w|y}V -> me-{l|r|w|y}V
  */
-final class DisambiguatorPrefixRule10Test extends \PHPUnit\Framework\TestCase
+final class DisambiguatorPrefixRule10Test extends TestCase
 {
-    public $subject;
+    public DisambiguatorPrefixRule10 $subject;
 
     protected function setUp(): void
     {
-        $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule10();
+        $this->subject = new DisambiguatorPrefixRule10();
     }
 
     public function testDisambiguate(): void

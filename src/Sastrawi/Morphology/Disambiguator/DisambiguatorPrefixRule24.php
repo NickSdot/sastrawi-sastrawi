@@ -20,10 +20,10 @@ class DisambiguatorPrefixRule24 implements DisambiguatorInterface
      * Disambiguate Prefix Rule 24
      * Rule 24 : perCAerV -> per-CAerV where C  !==  'r'
      */
-    public function disambiguate($word): ?string
+    public function disambiguate(string $word): ?string
     {
         $matches  = null;
-        $contains = preg_match('/^per([bcdfghjklmnpqrstvwxyz])([a-z])er([aiueo])(.*)$/', (string) $word, $matches);
+        $contains = preg_match('/^per([bcdfghjklmnpqrstvwxyz])([a-z])er([aiueo])(.*)$/', $word, $matches);
 
         if ($contains === 1) {
             if ($matches[1] === 'r') {

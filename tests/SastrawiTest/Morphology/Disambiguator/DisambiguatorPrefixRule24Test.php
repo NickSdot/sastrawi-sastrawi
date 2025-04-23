@@ -10,17 +10,20 @@ declare(strict_types=1);
  */
 namespace SastrawiTest\Morphology\Disambiguator;
 
+use PHPUnit\Framework\TestCase;
+use Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule24;
+
 /**
  * Disambiguate Prefix Rule 24
  * Rule 24 : perCAerV -> per-CAerV where C  !==  'r'
  */
-final class DisambiguatorPrefixRule24Test extends \PHPUnit\Framework\TestCase
+final class DisambiguatorPrefixRule24Test extends TestCase
 {
-    public $subject;
+    public DisambiguatorPrefixRule24 $subject;
 
     protected function setUp(): void
     {
-        $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule24();
+        $this->subject = new DisambiguatorPrefixRule24();
     }
 
     public function testDisambiguate(): void

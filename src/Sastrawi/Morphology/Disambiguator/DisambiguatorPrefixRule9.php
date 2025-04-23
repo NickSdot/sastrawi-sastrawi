@@ -20,10 +20,10 @@ class DisambiguatorPrefixRule9 implements DisambiguatorInterface
      * Disambiguate Prefix Rule 9
      * Rule 9 : te-C1erC2 -> te-C1erC2 where C1  !==  'r'
      */
-    public function disambiguate($word): ?string
+    public function disambiguate(string $word): ?string
     {
         $matches  = null;
-        $contains = preg_match('/^te([bcdfghjklmnpqrstvwxyz])er([bcdfghjklmnpqrstvwxyz])(.*)$/', (string) $word, $matches);
+        $contains = preg_match('/^te([bcdfghjklmnpqrstvwxyz])er([bcdfghjklmnpqrstvwxyz])(.*)$/', $word, $matches);
 
         if ($contains === 1) {
             if ($matches[1] === 'r') {

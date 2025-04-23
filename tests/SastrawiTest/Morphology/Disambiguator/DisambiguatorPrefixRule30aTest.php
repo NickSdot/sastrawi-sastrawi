@@ -10,6 +10,9 @@ declare(strict_types=1);
  */
 namespace SastrawiTest\Morphology\Disambiguator;
 
+use PHPUnit\Framework\TestCase;
+use Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule30a;
+
 /**
  * Disambiguate Prefix Rule 30a
  * Rule 30a : pengV -> peng-V
@@ -17,13 +20,13 @@ namespace SastrawiTest\Morphology\Disambiguator;
  */
 
 //TODO: Maybe this rule can be combined with rule 29?
-final class DisambiguatorPrefixRule30aTest extends \PHPUnit\Framework\TestCase
+final class DisambiguatorPrefixRule30aTest extends TestCase
 {
-    public $subject;
+    public DisambiguatorPrefixRule30a $subject;
 
     protected function setUp(): void
     {
-        $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule30a();
+        $this->subject = new DisambiguatorPrefixRule30a();
     }
 
     public function testDisambiguate(): void

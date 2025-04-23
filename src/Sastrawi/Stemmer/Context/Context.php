@@ -21,39 +21,22 @@ use Sastrawi\Stemmer\Context\Visitor\VisitorProvider;
  */
 class Context implements ContextInterface, VisitableInterface
 {
-    /**
-     * @var string
-     */
     protected string $currentWord;
 
-    /**
-     * @var boolean
-     */
     protected bool $processIsStopped = false;
 
-    /**
-     * @var \Sastrawi\Stemmer\Context\RemovalInterface[]
-     */
+    /**  @var \Sastrawi\Stemmer\Context\RemovalInterface[]  */
     protected array $removals = [];
 
-    /**
-     * @var \Sastrawi\Stemmer\Context\Visitor\VisitorInterface[]
-     */
+    /** @var \Sastrawi\Stemmer\Context\Visitor\VisitorInterface[]  */
     protected array $visitors = [];
 
-    /**
-     * @var \Sastrawi\Stemmer\Context\Visitor\VisitorInterface[]
-     */
+    /**  @var \Sastrawi\Stemmer\Context\Visitor\VisitorInterface[]  */
     protected array $suffixVisitors = [];
 
-    /**
-     * @var \Sastrawi\Stemmer\Context\Visitor\VisitorInterface[]
-     */
+    /** @var \Sastrawi\Stemmer\Context\Visitor\VisitorInterface[]  */
     protected array $prefixVisitors = [];
 
-    /**
-     * @var string
-     */
     protected string $result;
 
     /**
@@ -99,7 +82,7 @@ class Context implements ContextInterface, VisitableInterface
         return $this->originalWord;
     }
 
-    public function setCurrentWord($word): void
+    public function setCurrentWord(string $word): void
     {
         $this->currentWord = $word;
     }
@@ -224,6 +207,11 @@ class Context implements ContextInterface, VisitableInterface
         $visitor->visit($this);
     }
 
+    /**
+     * @param \Sastrawi\Stemmer\Context\Visitor\VisitorInterface[] $visitors
+     *
+     * @return string|null
+     */
     protected function acceptVisitors(array $visitors): ?string
     {
         foreach ($visitors as $visitor) {
@@ -241,6 +229,11 @@ class Context implements ContextInterface, VisitableInterface
         return null;
     }
 
+    /**
+     * @param \Sastrawi\Stemmer\Context\Visitor\VisitorInterface[] $visitors
+     *
+     * @return string|null
+     */
     protected function acceptPrefixVisitors(array $visitors): ?string
     {
         $removalCount = count($this->removals);

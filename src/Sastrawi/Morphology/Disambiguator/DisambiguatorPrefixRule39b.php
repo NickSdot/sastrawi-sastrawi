@@ -20,9 +20,9 @@ class DisambiguatorPrefixRule39b implements DisambiguatorInterface
      * Disambiguate Prefix Rule 39b (CC infix rules)
      * Rule 39b : CemV -> CV
      */
-    public function disambiguate($word): ?string
+    public function disambiguate(string $word): ?string
     {
-        $contains = preg_match('/^([bcdfghjklmnpqrstvwxyz])em([aiueo])(.*)$/', (string) $word, $matches);
+        $contains = preg_match('/^([bcdfghjklmnpqrstvwxyz])em([aiueo])(.*)$/', $word, $matches);
 
         if ($contains === 1) {
             return $matches[1] . $matches[2] . $matches[3];

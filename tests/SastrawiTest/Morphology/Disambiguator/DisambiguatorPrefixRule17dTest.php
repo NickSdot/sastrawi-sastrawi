@@ -10,17 +10,20 @@ declare(strict_types=1);
  */
 namespace SastrawiTest\Morphology\Disambiguator;
 
+use PHPUnit\Framework\TestCase;
+use Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule17d;
+
 /**
  * Disambiguate Prefix Rule 17d
  * Rule 17d : mengV -> me-ngV
  */
-final class DisambiguatorPrefixRule17dTest extends \PHPUnit\Framework\TestCase
+final class DisambiguatorPrefixRule17dTest extends TestCase
 {
-    public $subject;
+    public DisambiguatorPrefixRule17d $subject;
 
     protected function setUp(): void
     {
-        $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule17d();
+        $this->subject = new DisambiguatorPrefixRule17d();
     }
 
     public function testDisambiguate(): void

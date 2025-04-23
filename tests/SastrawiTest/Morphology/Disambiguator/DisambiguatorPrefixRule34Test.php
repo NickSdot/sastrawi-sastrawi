@@ -10,18 +10,21 @@ declare(strict_types=1);
  */
 namespace SastrawiTest\Morphology\Disambiguator;
 
+use PHPUnit\Framework\TestCase;
+use Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule34;
+
 /**
  * Disambiguate Prefix Rule 34
  * Rule 34 : peCP -> pe-CP where C  !==  {r|w|y|l|m|n} and P  !==  'er'
  */
 
-final class DisambiguatorPrefixRule34Test extends \PHPUnit\Framework\TestCase
+final class DisambiguatorPrefixRule34Test extends TestCase
 {
-    public $subject;
+    public DisambiguatorPrefixRule34 $subject;
 
     protected function setUp(): void
     {
-        $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule34();
+        $this->subject = new DisambiguatorPrefixRule34();
     }
 
     public function testDisambiguate(): void

@@ -10,8 +10,11 @@ declare(strict_types=1);
  */
 namespace Sastrawi\Stemmer\Context\Visitor;
 
+use Sastrawi\Morphology\Disambiguator\DisambiguatorInterface;
+
 class PrefixDisambiguator extends AbstractDisambiguatePrefixRule implements VisitorInterface
 {
+    /** @param list<DisambiguatorInterface> $disambiguators */
     public function __construct(array $disambiguators)
     {
         $this->addDisambiguators($disambiguators);

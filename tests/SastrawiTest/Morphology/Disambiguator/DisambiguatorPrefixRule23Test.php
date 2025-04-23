@@ -10,17 +10,20 @@ declare(strict_types=1);
  */
 namespace SastrawiTest\Morphology\Disambiguator;
 
+use PHPUnit\Framework\TestCase;
+use Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule23;
+
 /**
  * Disambiguate Prefix Rule 23
  * Rule 23 : perCAP -> per-CAP where C  !==  'r' AND P  !==  'er'
  */
-final class DisambiguatorPrefixRule23Test extends \PHPUnit\Framework\TestCase
+final class DisambiguatorPrefixRule23Test extends TestCase
 {
-    public $subject;
+    public DisambiguatorPrefixRule23 $subject;
 
     protected function setUp(): void
     {
-        $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule23();
+        $this->subject = new DisambiguatorPrefixRule23();
     }
 
     public function testDisambiguate(): void

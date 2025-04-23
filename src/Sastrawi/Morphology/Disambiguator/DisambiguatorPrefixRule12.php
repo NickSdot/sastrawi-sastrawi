@@ -22,10 +22,10 @@ class DisambiguatorPrefixRule12 implements DisambiguatorInterface
      * Nazief and Adriani Original Rule 12 : mempe{r|l} -> mem-pe{r|l}
      * Modified by Jelita Asian's CS Rule 12 : mempe -> mem-pe to stem mempengaruhi
      */
-    public function disambiguate($word): ?string
+    public function disambiguate(string $word): ?string
     {
         $matches  = null;
-        $contains = preg_match('/^mempe(.*)$/', (string) $word, $matches);
+        $contains = preg_match('/^mempe(.*)$/', $word, $matches);
 
         if ($contains === 1) {
             return 'pe' . $matches[1];

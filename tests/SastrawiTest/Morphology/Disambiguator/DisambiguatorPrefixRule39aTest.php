@@ -10,18 +10,21 @@ declare(strict_types=1);
  */
 namespace SastrawiTest\Morphology\Disambiguator;
 
+use PHPUnit\Framework\TestCase;
+use Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule39a;
+
 /**
  * Disambiguate Prefix Rule 39a (CC infix rules)
  * Rule 39a : CemV -> CemV
  */
 
-final class DisambiguatorPrefixRule39aTest extends \PHPUnit\Framework\TestCase
+final class DisambiguatorPrefixRule39aTest extends TestCase
 {
-    public $subject;
+    public DisambiguatorPrefixRule39a $subject;
 
     protected function setUp(): void
     {
-        $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule39a();
+        $this->subject = new DisambiguatorPrefixRule39a();
     }
 
     public function testDisambiguate(): void

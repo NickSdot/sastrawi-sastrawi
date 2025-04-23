@@ -10,18 +10,21 @@ declare(strict_types=1);
  */
 namespace SastrawiTest\Morphology\Disambiguator;
 
+use PHPUnit\Framework\TestCase;
+use Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule37b;
+
 /**
  * Disambiguate Prefix Rule 37b (CC infix rules)
  * Rule 37b : CerV -> CV
  */
 
-final class DisambiguatorPrefixRule37bTest extends \PHPUnit\Framework\TestCase
+final class DisambiguatorPrefixRule37bTest extends TestCase
 {
-    public $subject;
+    public DisambiguatorPrefixRule37b $subject;
 
     protected function setUp(): void
     {
-        $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule37b();
+        $this->subject = new DisambiguatorPrefixRule37b();
     }
 
     public function testDisambiguate(): void

@@ -10,18 +10,21 @@ declare(strict_types=1);
  */
 namespace SastrawiTest\Morphology\Disambiguator;
 
+use PHPUnit\Framework\TestCase;
+use Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule16;
+
 /**
  * Disambiguate Prefix Rule 16
- * Original Nazief and Adriani's Rule 16 : meng{g|h|q} -> meng-{g|h|q}
+ * Original Nazief and Adrian's Rule 16 : meng{g|h|q} -> meng-{g|h|q}
  * Modified Jelita Asian's CS Rule 16 : meng{g|h|q|k} -> meng-{g|h|q|k} to stem mengkritik
  */
-final class DisambiguatorPrefixRule16Test extends \PHPUnit\Framework\TestCase
+final class DisambiguatorPrefixRule16Test extends TestCase
 {
-    public $subject;
+    public DisambiguatorPrefixRule16 $subject;
 
     protected function setUp(): void
     {
-        $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule16();
+        $this->subject = new DisambiguatorPrefixRule16();
     }
 
     public function testDisambiguate(): void

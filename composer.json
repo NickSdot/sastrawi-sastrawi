@@ -57,7 +57,9 @@
         }
     },
     "scripts": {
-        "test": "./vendor/bin/phpunit tests"
+        "test": "./vendor/bin/phpunit tests",
+        "stan": "./vendor/bin/phpstan analyse",
+        "rector": "./vendor/bin/rector"
     },
     "config": {
         "allow-plugins": {

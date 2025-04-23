@@ -10,20 +10,24 @@ declare(strict_types=1);
  */
 namespace Sastrawi\Dictionary;
 
+use Countable;
+
 /**
  * The Dictionary interface used by the stemmer.
  *
  * @since  0.1.0
  * @author Andy Librian <andylibrian@gmail.com>
  */
-interface DictionaryInterface extends \Countable
+interface DictionaryInterface extends Countable
 {
     /**
      * Checks whether a word is contained in the dictionary.
      *
-     * @param string $word The word to search for.
+     * @param string|null $word The word to search for.
      *
      * @return boolean TRUE if the dictionary contains the word, FALSE otherwise.
      */
-    public function contains($word);
+    public function contains(string|null $word): bool;
+
+    public function addWordsFromTextFile($filePath, string $delimiter = "\n"): void;
 }

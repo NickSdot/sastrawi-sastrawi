@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit
-        bootstrap="./tests/Bootstrap.php"
         colors="true"
         stopOnFailure="false"
         displayDetailsOnTestsThatTriggerDeprecations="true"
@@ -9,7 +8,6 @@
         displayDetailsOnTestsThatTriggerWarnings="true"
         displayDetailsOnPhpunitDeprecations="true"
 >
-
     <testsuites>
         <testsuite name="Sastrawi tests">
             <directory suffix=".php">./tests/SastrawiTest</directory>

@@ -32,8 +32,15 @@
         "phpstan/phpstan-deprecation-rules": "^2.0"
     },
     "autoload": {
-        "psr-0": {
-            "Sastrawi\\": "src"
+        "psr-4": {
+            "Sastrawi\\": "src/Sastrawi"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "SastrawiTest\\": "tests/SastrawiTest/",
+            "SastrawiFunctionalTest\\": "tests/SastrawiFunctionalTest/",
+            "SastrawiIntegrationTest\\": "tests/SastrawiIntegrationTest/"
         }
     },
     "license": "MIT",

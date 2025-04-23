@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Sastrawi (https://github.com/sastrawi/sastrawi)
  *
@@ -8,21 +11,26 @@
 
 namespace SastrawiTest\Morphology\Disambiguator;
 
+use PHPUnit\Framework\TestCase;
+use Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule9;
+
 /**
  * Disambiguate Prefix Rule 9
- * Rule 9 : te-C1erC2 -> te-C1erC2 where C1 != 'r'
+ * Rule 9 : te-C1erC2 -> te-C1erC2 where C1  !==  'r'
  */
-class DisambiguatorPrefixRule9Test extends \PHPUnit_Framework_TestCase
+final class DisambiguatorPrefixRule9Test extends TestCase
 {
-    public function setUp()
+    public DisambiguatorPrefixRule9 $subject;
+
+    protected function setUp(): void
     {
-        $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule9();
+        $this->subject = new DisambiguatorPrefixRule9();
     }
 
-    public function testDisambiguate()
+    public function testDisambiguate(): void
     {
-        //TODO - need a real world example
-        $this->assertEquals('terbang', $this->subject->disambiguate('teterbang'));
-        $this->assertNull($this->subject->disambiguate('terperuk'));
+        // todo: need a real world example
+        self::assertSame('terbang', $this->subject->disambiguate('teterbang'));
+        self::assertNull($this->subject->disambiguate('terperuk'));
     }
 }

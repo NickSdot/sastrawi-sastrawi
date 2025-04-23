@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Sastrawi (https://github.com/sastrawi/sastrawi)
  *
@@ -8,24 +11,24 @@
 
 namespace Sastrawi\Stemmer;
 
-class CachedStemmer implements StemmerInterface
+use Sastrawi\Stemmer\Cache\CacheInterface;
+
+use function explode;
+use function implode;
+
+final class CachedStemmer implements StemmerInterface
 {
-    protected $cache;
+    public function __construct(
+        protected CacheInterface $cache,
+        protected StemmerInterface $delegatedStemmer
+    ) {}
 
-    protected $delegatedStemmer;
-
-    public function __construct(Cache\CacheInterface $cache, StemmerInterface $delegatedStemmer)
-    {
-        $this->cache = $cache;
-        $this->delegatedStemmer = $delegatedStemmer;
-    }
-
-    public function stem($text)
+    public function stem(string $text): string
     {
         $normalizedText = Filter\TextNormalizer::normalizeText($text);
 
         $words = explode(' ', $normalizedText);
-        $stems = array();
+        $stems = [];
 
         foreach ($words as $word) {
             if ($this->cache->has($word)) {
@@ -40,12 +43,12 @@ class CachedStemmer implements StemmerInterface
         return implode(' ', $stems);
     }
 
-    public function getCache()
+    public function getCache(): CacheInterface
     {
         return $this->cache;
     }
 
-    public function getDelegatedStemmer()
+    public function getDelegatedStemmer(): StemmerInterface
     {
         return $this->delegatedStemmer;
     }

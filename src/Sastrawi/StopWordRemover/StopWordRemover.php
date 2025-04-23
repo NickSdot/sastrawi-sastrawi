@@ -1,25 +1,21 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Sastrawi\StopWordRemover;
 
 use Sastrawi\Dictionary\DictionaryInterface;
 
-class StopWordRemover
+use function explode;
+use function implode;
+
+final class StopWordRemover
 {
-    /**
-     * @var \Sastrawi\Dictionary\DictionaryInterface
-     */
-    protected $dictionary;
+    public function __construct(
+        protected DictionaryInterface $dictionary
+    ) {}
 
-    public function __construct(DictionaryInterface $dictionary)
-    {
-        $this->dictionary = $dictionary;
-    }
-
-    /**
-     * @return \Sastrawi\Dictionary\DictionaryInterface
-     */
-    public function getDictionary()
+    public function getDictionary(): DictionaryInterface
     {
         return $this->dictionary;
     }
@@ -27,10 +23,11 @@ class StopWordRemover
     /**
      * Remove stop words.
      *
-     * @param  string $text The text which stop words to be removed
+     * @param string $text The text which stop words to be removed
+     *
      * @return string The text after removal
      */
-    public function remove($text)
+    public function remove(string $text): string
     {
         $words = explode(' ', $text);
 

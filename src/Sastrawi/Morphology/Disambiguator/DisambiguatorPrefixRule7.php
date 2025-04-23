@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Sastrawi (https://github.com/sastrawi/sastrawi)
  *
@@ -8,27 +11,31 @@
 
 namespace Sastrawi\Morphology\Disambiguator;
 
+use function preg_match;
+
 /**
  * Disambiguate Prefix Rule 7
- * Rule 7 : terCerv -> ter-CerV where C != 'r'
+ * Rule 7 : terCerV -> ter-CerV where C  !==  'r'
  */
-class DisambiguatorPrefixRule7 implements DisambiguatorInterface
+final class DisambiguatorPrefixRule7 implements DisambiguatorInterface
 {
     /**
      * Disambiguate Prefix Rule 7
-     * Rule 7 : terCerv -> ter-CerV where C != 'r'
+     * Rule 7 : terCerV -> ter-CerV where C  !==  'r'
      */
-    public function disambiguate($word)
+    public function disambiguate(string $word): ?string
     {
         $matches  = null;
         $contains = preg_match('/^ter([bcdfghjklmnpqrstvwxyz])er([aiueo].*)$/', $word, $matches);
 
-        if ($contains === 1) {
-            if ($matches[1] === 'r') {
-                return;
+        if (1 === $contains) {
+            if ('r' === $matches[1]) {
+                return null;
             }
 
             return $matches[1] . 'er' . $matches[2];
         }
+
+        return null;
     }
 }

@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Sastrawi (https://github.com/sastrawi/sastrawi)
  *
@@ -19,8 +22,9 @@ interface StemmerInterface
     /**
      * Stem a text to its common stem form
      *
-     * @param  string $text the text string to stem, e.g : memberdayakan pembangunan
+     * @param string $text the text string to stem, e.g : memberdayakan pembangunan
+     *
      * @return string common stem form, e.g : daya bangun
      */
-    public function stem($text);
+    public function stem(string $text): string;
 }

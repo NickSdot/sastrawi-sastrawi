@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Sastrawi (https://github.com/sastrawi/sastrawi)
  *
@@ -8,23 +11,28 @@
 
 namespace SastrawiTest\Morphology\Disambiguator;
 
+use PHPUnit\Framework\TestCase;
+use Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule12;
+
 /**
  * Disambiguate Prefix Rule 12
  * Nazief and Adriani Rule 12 : mempe{r|l} -> mem-pe{r|l}
  * Modified by Jelita Asian's CS Rule 12 : mempe -> mem-pe to stem mempengaruhi
  */
-class DisambiguatorPrefixRule12Test extends \PHPUnit_Framework_TestCase
+final class DisambiguatorPrefixRule12Test extends TestCase
 {
-    public function setUp()
+    public DisambiguatorPrefixRule12 $subject;
+
+    protected function setUp(): void
     {
-        $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule12();
+        $this->subject = new DisambiguatorPrefixRule12();
     }
 
-    public function testDisambiguate()
+    public function testDisambiguate(): void
     {
-        $this->assertEquals('pengaruhi', $this->subject->disambiguate('mempengaruhi'));
-        $this->assertEquals('perbaharui', $this->subject->disambiguate('memperbaharui'));
+        self::assertSame('pengaruhi', $this->subject->disambiguate('mempengaruhi'));
+        self::assertSame('perbaharui', $this->subject->disambiguate('memperbaharui'));
 
-        $this->assertNull($this->subject->disambiguate('mewarnai'));
+        self::assertNull($this->subject->disambiguate('mewarnai'));
     }
 }

@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Sastrawi (https://github.com/sastrawi/sastrawi)
  *
@@ -8,20 +11,24 @@
 
 namespace Sastrawi\Morphology\Disambiguator;
 
+use function preg_match;
+
 /**
  * Disambiguate Prefix Rule 21a
  * Rule 21a : perV -> per-V
  */
-class DisambiguatorPrefixRule21a implements DisambiguatorInterface
+final class DisambiguatorPrefixRule21a implements DisambiguatorInterface
 {
     /**
      * Disambiguate Prefix Rule 21a
      * Rule 21a : perV -> per-V
      */
-    public function disambiguate($word)
+    public function disambiguate(string $word): ?string
     {
-        if (preg_match('/^per([aiueo])(.*)$/', $word, $matches)) {
+        if (1 === preg_match('/^per([aiueo])(.*)$/', $word, $matches)) {
             return $matches[1] . $matches[2];
         }
+
+        return null;
     }
 }

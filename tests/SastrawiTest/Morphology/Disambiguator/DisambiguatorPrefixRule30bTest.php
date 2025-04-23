@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Sastrawi (https://github.com/sastrawi/sastrawi)
  *
@@ -8,24 +11,29 @@
 
 namespace SastrawiTest\Morphology\Disambiguator;
 
+use PHPUnit\Framework\TestCase;
+use Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule30b;
+
 /**
  * Disambiguate Prefix Rule 30b
  * Rule 30b : pengV -> peng-kV
  */
 
-class DisambiguatorPrefixRule30bTest extends \PHPUnit_Framework_TestCase
+final class DisambiguatorPrefixRule30bTest extends TestCase
 {
-    public function setUp()
+    public DisambiguatorPrefixRule30b $subject;
+
+    protected function setUp(): void
     {
-        $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule30b();
+        $this->subject = new DisambiguatorPrefixRule30b();
     }
 
-    public function testDisambiguate()
+    public function testDisambiguate(): void
     {
-        $this->assertEquals('kawal', $this->subject->disambiguate('pengawal'));
-        $this->assertEquals('ketat', $this->subject->disambiguate('pengetat'));
-        $this->assertEquals('kira', $this->subject->disambiguate('pengira'));
-        $this->assertEquals('korban', $this->subject->disambiguate('pengorban'));
-        $this->assertEquals('kuat', $this->subject->disambiguate('penguat'));
+        self::assertSame('kawal', $this->subject->disambiguate('pengawal'));
+        self::assertSame('ketat', $this->subject->disambiguate('pengetat'));
+        self::assertSame('kira', $this->subject->disambiguate('pengira'));
+        self::assertSame('korban', $this->subject->disambiguate('pengorban'));
+        self::assertSame('kuat', $this->subject->disambiguate('penguat'));
     }
 }

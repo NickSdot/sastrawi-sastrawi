@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Sastrawi (https://github.com/sastrawi/sastrawi)
  *
@@ -7,6 +10,9 @@
  */
 
 namespace SastrawiTest\Morphology\Disambiguator;
+
+use PHPUnit\Framework\TestCase;
+use Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule14;
 
 /**
  * Disambiguate Prefix Rule no 14
@@ -20,23 +26,25 @@ namespace SastrawiTest\Morphology\Disambiguator;
  * Original CS Rule no 14 was : men{c|d|j|z} -> men-{c|d|j|z}
  */
 
-class DisambiguatorPrefixRule14Test extends \PHPUnit_Framework_TestCase
+final class DisambiguatorPrefixRule14Test extends TestCase
 {
-    public function setUp()
+    public DisambiguatorPrefixRule14 $subject;
+
+    protected function setUp(): void
     {
-        $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule14();
+        $this->subject = new DisambiguatorPrefixRule14();
     }
 
-    public function testDisambiguate()
+    public function testDisambiguate(): void
     {
-        $this->assertEquals('cantum', $this->subject->disambiguate('mencantum'));
-        $this->assertEquals('duduki', $this->subject->disambiguate('menduduki'));
-        $this->assertEquals('jemput', $this->subject->disambiguate('menjemput'));
-        $this->assertEquals('syukuri', $this->subject->disambiguate('mensyukuri'));
-        $this->assertEquals('syaratkan', $this->subject->disambiguate('mensyaratkan'));
-        $this->assertEquals('taati', $this->subject->disambiguate('mentaati'));
-        $this->assertEquals('ziarahi', $this->subject->disambiguate('menziarahi'));
+        self::assertSame('cantum', $this->subject->disambiguate('mencantum'));
+        self::assertSame('duduki', $this->subject->disambiguate('menduduki'));
+        self::assertSame('jemput', $this->subject->disambiguate('menjemput'));
+        self::assertSame('syukuri', $this->subject->disambiguate('mensyukuri'));
+        self::assertSame('syaratkan', $this->subject->disambiguate('mensyaratkan'));
+        self::assertSame('taati', $this->subject->disambiguate('mentaati'));
+        self::assertSame('ziarahi', $this->subject->disambiguate('menziarahi'));
 
-        $this->assertNull($this->subject->disambiguate('menyayangi'));
+        self::assertNull($this->subject->disambiguate('menyayangi'));
     }
 }

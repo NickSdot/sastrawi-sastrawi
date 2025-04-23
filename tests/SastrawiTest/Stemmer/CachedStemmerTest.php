@@ -1,45 +1,51 @@
 <?php
 
+declare(strict_types=1);
+
 namespace SastrawiTest\Stemmer;
 
-use Sastrawi\Stemmer\CachedStemmer;
-use Sastrawi\Stemmer\Cache\ArrayCache;
-use Sastrawi\Stemmer\Stemmer;
+use PHPUnit\Framework\TestCase;
 use Sastrawi\Dictionary\ArrayDictionary;
+use Sastrawi\Stemmer\Cache\ArrayCache;
+use Sastrawi\Stemmer\CachedStemmer;
+use Sastrawi\Stemmer\Stemmer;
+use Sastrawi\Stemmer\StemmerInterface;
 
-class CachedStemmerTest extends \PHPUnit_Framework_TestCase
+final class CachedStemmerTest extends TestCase
 {
-    protected $cachedStemmer;
+    public ArrayCache $arrayCache;
 
-    public function setUp()
+    private CachedStemmer $cachedStemmer;
+
+    protected function setUp(): void
     {
-        $arrayDictionary = new ArrayDictionary(array('makan'));
-        $this->delegatedStemmer = new Stemmer($arrayDictionary);
+        $arrayDictionary = new ArrayDictionary(['makan']);
+        $delegatedStemmer = new Stemmer($arrayDictionary);
         $this->arrayCache    = new ArrayCache();
-        $this->cachedStemmer = new CachedStemmer($this->arrayCache, $this->delegatedStemmer);
+        $this->cachedStemmer = new CachedStemmer($this->arrayCache, $delegatedStemmer);
     }
 
-    public function testInstanceOfStemmerInterface()
+    public function testInstanceOfStemmerInterface(): void
     {
-        $this->assertInstanceOf('Sastrawi\Stemmer\StemmerInterface', $this->cachedStemmer);
+        self::assertInstanceOf(StemmerInterface::class, $this->cachedStemmer);
     }
 
-    public function testGetCache()
+    public function testGetCache(): void
     {
-        $this->assertSame($this->arrayCache, $this->cachedStemmer->getCache());
+        self::assertSame($this->arrayCache, $this->cachedStemmer->getCache());
     }
 
-    public function testStemLookupTheCache()
+    public function testStemLookupTheCache(): void
     {
-        $this->assertEquals('makan makan', $this->cachedStemmer->stem('memakan makanan'));
+        self::assertSame('makan makan', $this->cachedStemmer->stem('memakan makanan'));
         $this->cachedStemmer->getCache()->set('memakan', 'minum');
-        $this->assertEquals('minum makan', $this->cachedStemmer->stem('memakan makanan'));
+        self::assertSame('minum makan', $this->cachedStemmer->stem('memakan makanan'));
     }
 
-    public function testStemStoreResultToCache()
+    public function testStemStoreResultToCache(): void
     {
-        $this->assertEquals('makan makan', $this->cachedStemmer->stem('memakan makanan'));
-        $this->assertEquals('makan', $this->cachedStemmer->getCache()->get('memakan'));
-        $this->assertEquals('makan', $this->cachedStemmer->getCache()->get('makanan'));
+        self::assertSame('makan makan', $this->cachedStemmer->stem('memakan makanan'));
+        self::assertSame('makan', $this->cachedStemmer->getCache()->get('memakan'));
+        self::assertSame('makan', $this->cachedStemmer->getCache()->get('makanan'));
     }
 }

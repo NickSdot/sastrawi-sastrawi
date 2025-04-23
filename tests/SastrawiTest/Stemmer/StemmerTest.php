@@ -1,45 +1,47 @@
 <?php
 
+declare(strict_types=1);
+
 namespace SastrawiTest\Stemmer;
 
-use Sastrawi\Stemmer\Stemmer;
+use PHPUnit\Framework\TestCase;
 use Sastrawi\Dictionary\ArrayDictionary;
+use Sastrawi\Stemmer\Stemmer;
+use Sastrawi\Stemmer\StemmerInterface;
 
-class StemmerTest extends \PHPUnit_Framework_TestCase
+final class StemmerTest extends TestCase
 {
-    protected $dictionary;
+    private \Sastrawi\Stemmer\Stemmer $stemmer;
 
-    protected $stemmer;
-
-    public function setUp()
+    protected function setUp(): void
     {
-        $this->dictionary = new ArrayDictionary(array('beri'));
-        $this->stemmer = new Stemmer($this->dictionary);
+        $dictionary = new ArrayDictionary(['beri']);
+        $this->stemmer = new Stemmer($dictionary);
     }
 
-    public function testStemmerImplementsStemmerInterface()
+    public function testStemmerImplementsStemmerInterface(): void
     {
-        $this->assertInstanceOf('Sastrawi\Stemmer\StemmerInterface', $this->stemmer);
+        self::assertInstanceOf(StemmerInterface::class, $this->stemmer);
     }
 
     /**
      * Don't stem such a short word (three or fewer characters)
      */
-    public function testStemReturnImmediatelyOnShortWord()
+    public function testStemReturnImmediatelyOnShortWord(): void
     {
-        $this->assertEquals('mei', $this->stemmer->stem('mei'));
-        $this->assertEquals('bui', $this->stemmer->stem('bui'));
+        self::assertSame('mei', $this->stemmer->stem('mei'));
+        self::assertSame('bui', $this->stemmer->stem('bui'));
     }
 
     /**
      * To prevent overstemming : nilai could have been overstemmed to nila
      * if we don't lookup against the dictionary
      */
-    public function testStemReturnImmediatelyIfFoundOnDictionary()
+    public function testStemReturnImmediatelyIfFoundOnDictionary(): void
     {
         $this->stemmer->getDictionary()->add('nila');
-        $this->assertEquals('nila', $this->stemmer->stem('nilai'));
+        self::assertSame('nila', $this->stemmer->stem('nilai'));
         $this->stemmer->getDictionary()->add('nilai');
-        $this->assertEquals('nilai', $this->stemmer->stem('nilai'));
+        self::assertSame('nilai', $this->stemmer->stem('nilai'));
     }
 }

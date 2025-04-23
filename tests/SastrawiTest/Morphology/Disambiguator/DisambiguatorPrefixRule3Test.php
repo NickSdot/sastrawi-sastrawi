@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Sastrawi (https://github.com/sastrawi/sastrawi)
  *
@@ -8,20 +11,25 @@
 
 namespace SastrawiTest\Morphology\Disambiguator;
 
+use PHPUnit\Framework\TestCase;
+use Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule3;
+
 /**
 * Disambiguate Prefix Rule 3
-* Rule 3 : berCAerV -> ber-CAerV where C != 'r'
+* Rule 3 : berCAerV -> ber-CAerV where C  !==  'r'
 *
 */
-class DisambiguatorPrefixRule3Test extends \PHPUnit_Framework_TestCase
+final class DisambiguatorPrefixRule3Test extends TestCase
 {
-    public function setUp()
+    public DisambiguatorPrefixRule3 $subject;
+
+    protected function setUp(): void
     {
-        $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule3();
+        $this->subject = new DisambiguatorPrefixRule3();
     }
 
-    public function testDisambiguate()
+    public function testDisambiguate(): void
     {
-        $this->assertEquals('hierarki', $this->subject->disambiguate('berhierarki'));
+        self::assertSame('hierarki', $this->subject->disambiguate('berhierarki'));
     }
 }

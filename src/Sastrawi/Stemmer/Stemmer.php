@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Sastrawi (https://github.com/sastrawi/sastrawi)
  *
@@ -12,38 +15,33 @@ use Sastrawi\Dictionary\DictionaryInterface;
 use Sastrawi\Stemmer\Context\Context;
 use Sastrawi\Stemmer\Context\Visitor\VisitorProvider;
 
+use function explode;
+use function implode;
+use function in_array;
+use function preg_match;
+use function str_contains;
+
 /**
  * Indonesian Stemmer.
  * Nazief & Adriani, CS Stemmer, ECS Stemmer, Improved ECS.
  *
  * @link https://github.com/sastrawi/sastrawi/wiki/Resources
  */
-class Stemmer implements StemmerInterface
+final class Stemmer implements StemmerInterface
 {
     /**
-     * The dictionary containing root words
-     *
-     * @var \Sastrawi\Dictionary\DictionaryInterface
-     */
-    protected $dictionary;
-
-    /**
      * Visitor provider
-     *
-     * @var \Sastrawi\Stemmer\Context\Visitor\VisitorProvider
      */
-    protected $visitorProvider;
+    protected VisitorProvider $visitorProvider;
 
-    public function __construct(DictionaryInterface $dictionary)
-    {
-        $this->dictionary      = $dictionary;
+    public function __construct(
+        /** The dictionary containing root words */
+        protected DictionaryInterface $dictionary
+    ) {
         $this->visitorProvider = new VisitorProvider();
     }
 
-    /**
-     * @return \Sastrawi\Dictionary\DictionaryInterface
-     */
-    public function getDictionary()
+    public function getDictionary(): DictionaryInterface
     {
         return $this->dictionary;
     }
@@ -51,15 +49,16 @@ class Stemmer implements StemmerInterface
     /**
      * Stem a text string to its common stem form.
      *
-     * @param  string $text the text string to stem, e.g : memberdayakan pembangunan
+     * @param string $text the text string to stem, e.g : memberdayakan pembangunan
+     *
      * @return string common stem form, e.g : daya bangun
      */
-    public function stem($text)
+    public function stem(string $text): string
     {
         $normalizedText = Filter\TextNormalizer::normalizeText($text);
 
         $words = explode(' ', $normalizedText);
-        $stems = array();
+        $stems = [];
 
         foreach ($words as $word) {
             $stems[] = $this->stemWord($word);
@@ -71,42 +70,40 @@ class Stemmer implements StemmerInterface
     /**
      * Stem a word to its common stem form.
      *
-     * @param  string $word the word to stem, e.g : memberdayakan
+     * @param string $word the word to stem, e.g : memberdayakan
+     *
      * @return string common stem form, e.g : daya
      */
-    protected function stemWord($word)
+    protected function stemWord(string $word): string
     {
         if ($this->isPlural($word)) {
             return $this->stemPluralWord($word);
-        } else {
-            return $this->stemSingularWord($word);
         }
+
+        return $this->stemSingularWord($word);
     }
 
-    /**
-     * @param  string  $word
-     * @return boolean
-     */
-    protected function isPlural($word)
+    protected function isPlural(string $word): bool
     {
         // -ku|-mu|-nya
         // nikmat-Ku, etc
-        if (preg_match('/^(.*)-(ku|mu|nya|lah|kah|tah|pun)$/', $word, $words)) {
-            return strpos($words[1], '-') !== false;
+        if (1 === preg_match('/^(.*)-(ku|mu|nya|lah|kah|tah|pun)$/', $word, $words)) {
+            return str_contains($words[1], '-');
         }
 
-        return strpos($word, '-') !== false;
+        return str_contains($word, '-');
     }
 
     /**
      * Stem a plural word to its common stem form.
      * Asian J. (2007) “Effective Techniques for Indonesian Text Retrieval” page 76-77.
      *
-     * @param  string $plural the word to stem, e.g : bersama-sama
+     * @param string $plural the word to stem, e.g : bersama-sama
+     *
      * @return string common stem form, e.g : sama
      * @link   http://researchbank.rmit.edu.au/eserv/rmit:6312/Asian.pdf
      */
-    protected function stemPluralWord($plural)
+    protected function stemPluralWord(string $plural): string
     {
         preg_match('/^(.*)-(.*)$/', $plural, $words);
 
@@ -116,8 +113,10 @@ class Stemmer implements StemmerInterface
 
         // malaikat-malaikat-nya -> malaikat malaikat-nya
         $suffix = $words[2];
-        if (in_array($suffix, array('ku', 'mu', 'nya', 'lah', 'kah', 'tah', 'pun')) &&
-            preg_match('/^(.*)-(.*)$/', $words[1], $words)) {
+
+        if (
+            true === in_array($suffix, [ 'ku', 'mu', 'nya', 'lah', 'kah', 'tah', 'pun' ], true)
+            && 1 === preg_match('/^(.*)-(.*)$/', $words[1], $words)) {
             $words[2] .= '-' . $suffix;
         }
 
@@ -130,20 +129,21 @@ class Stemmer implements StemmerInterface
             $rootWord2 = $this->stemSingularWord('me' . $words[2]);
         }
 
-        if ($rootWord1 == $rootWord2) {
+        if ($rootWord1 === $rootWord2) {
             return $rootWord1;
-        } else {
-            return $plural;
         }
+
+        return $plural;
     }
 
     /**
      * Stem a singular word to its common stem form.
      *
-     * @param  string $word the word to stem, e.g : mengalahkan
+     * @param string $word the word to stem, e.g : mengalahkan
+     *
      * @return string common stem form, e.g : kalah
      */
-    protected function stemSingularWord($word)
+    protected function stemSingularWord(string $word): string
     {
         $context = new Context($word, $this->dictionary, $this->visitorProvider);
         $context->execute();

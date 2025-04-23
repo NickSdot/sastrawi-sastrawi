@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Sastrawi (https://github.com/sastrawi/sastrawi)
  *
@@ -10,8 +13,5 @@ namespace Sastrawi\Morphology\Disambiguator;
 
 interface DisambiguatorInterface
 {
-    /**
-     * @return string|null
-     */
-    public function disambiguate($word);
+    public function disambiguate(string $word): ?string;
 }

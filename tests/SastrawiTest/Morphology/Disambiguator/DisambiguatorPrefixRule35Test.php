@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Sastrawi (https://github.com/sastrawi/sastrawi)
  *
@@ -8,20 +11,25 @@
 
 namespace SastrawiTest\Morphology\Disambiguator;
 
+use PHPUnit\Framework\TestCase;
+use Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule35;
+
 /**
  * Disambiguate Prefix Rule 35 (CS additional rules)
- * Rule 35 : terC1erC2 -> ter-C1erC2 where C1 != {r}
+ * Rule 35 : terC1erC2 -> ter-C1erC2 where C1  !==  {r}
  */
 
-class DisambiguatorPrefixRule35Test extends \PHPUnit_Framework_TestCase
+final class DisambiguatorPrefixRule35Test extends TestCase
 {
-    public function setUp()
+    public DisambiguatorPrefixRule35 $subject;
+
+    protected function setUp(): void
     {
-        $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule35();
+        $this->subject = new DisambiguatorPrefixRule35();
     }
 
-    public function testDisambiguate()
+    public function testDisambiguate(): void
     {
-        $this->assertEquals('percaya', $this->subject->disambiguate('terpercaya'));
+        self::assertSame('percaya', $this->subject->disambiguate('terpercaya'));
     }
 }

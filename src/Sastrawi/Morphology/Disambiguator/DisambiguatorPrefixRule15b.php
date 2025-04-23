@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Sastrawi (https://github.com/sastrawi/sastrawi)
  *
@@ -8,23 +11,27 @@
 
 namespace Sastrawi\Morphology\Disambiguator;
 
+use function preg_match;
+
 /**
  * Disambiguate Prefix Rule 15b
  * Rule 15 : men{V} -> me-t{V}
  */
-class DisambiguatorPrefixRule15b implements DisambiguatorInterface
+final class DisambiguatorPrefixRule15b implements DisambiguatorInterface
 {
     /**
      * Disambiguate Prefix Rule 15b
      * Rule 15 : men{V} -> me-t{V}
      */
-    public function disambiguate($word)
+    public function disambiguate(string $word): ?string
     {
         $matches  = null;
         $contains = preg_match('/^men([aiueo])(.*)$/', $word, $matches);
 
-        if ($contains === 1) {
+        if (1 === $contains) {
             return 't' . $matches[1] . $matches[2];
         }
+
+        return null;
     }
 }

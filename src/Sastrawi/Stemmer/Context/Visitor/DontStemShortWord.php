@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Sastrawi (https://github.com/sastrawi/sastrawi)
  *
@@ -10,20 +13,19 @@ namespace Sastrawi\Stemmer\Context\Visitor;
 
 use Sastrawi\Stemmer\Context\ContextInterface;
 
-class DontStemShortWord implements VisitorInterface
+use function mb_strlen;
+
+final class DontStemShortWord implements VisitorInterface
 {
-    public function visit(ContextInterface $context)
+    public function visit(ContextInterface $context): void
     {
         if ($this->isShortWord($context->getCurrentWord())) {
             $context->stopProcess();
         }
     }
 
-    /**
-     * @param string $word
-     */
-    protected function isShortWord($word)
+    protected function isShortWord(string $word): bool
     {
-        return (strlen($word) <= 3);
+        return (mb_strlen($word) <= 3);
     }
 }

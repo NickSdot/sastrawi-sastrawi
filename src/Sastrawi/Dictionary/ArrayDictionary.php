@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Sastrawi (https://github.com/sastrawi/sastrawi)
  *
@@ -8,17 +11,23 @@
 
 namespace Sastrawi\Dictionary;
 
+use function count;
+use function file;
+
 /**
  * Implementation of the DictionaryInterface using Array
  */
-class ArrayDictionary implements DictionaryInterface
+final class ArrayDictionary implements DictionaryInterface
 {
     /**
      * @var string[]
      */
-    protected $words = array();
+    protected array $words = [];
 
-    public function __construct(array $words = array())
+    /**
+     * @param list<string> $words
+     */
+    public function __construct(array $words = [])
     {
         $this->addWords($words);
     }
@@ -26,7 +35,7 @@ class ArrayDictionary implements DictionaryInterface
     /**
      * {@inheritdoc}
      */
-    public function contains($word)
+    public function contains(string $word): bool
     {
         return isset($this->words[$word]);
     }
@@ -34,7 +43,7 @@ class ArrayDictionary implements DictionaryInterface
     /**
      * {@inheritdoc}
      */
-    public function count()
+    public function count(): int
     {
         return count($this->words);
     }
@@ -42,10 +51,9 @@ class ArrayDictionary implements DictionaryInterface
     /**
      * Add multiple words to the dictionary
      *
-     * @param  array $words
-     * @return void
+     * @param list<string> $words
      */
-    public function addWords(array $words)
+    public function addWords(array $words): void
     {
         foreach ($words as $word) {
             $this->add($word);
@@ -54,13 +62,10 @@ class ArrayDictionary implements DictionaryInterface
 
     /**
      * Add a word to the dictionary
-     *
-     * @param  string $word
-     * @return void
      */
-    public function add($word)
+    public function add(string $word): void
     {
-        if ($word === '') {
+        if ('' === $word) {
             return;
         }
 
@@ -69,11 +74,8 @@ class ArrayDictionary implements DictionaryInterface
 
     /**
      * Remove a word from the dictionary
-     *
-     * @param  string $word
-     * @return void
      */
-    public function remove($word)
+    public function remove(string $word): void
     {
         unset($this->words[$word]);
     }
@@ -81,12 +83,17 @@ class ArrayDictionary implements DictionaryInterface
     /**
      * Add words from a text file to the dictionary
      *
-     * @param  string $word
-     * @return void
+     *
+     * @throws \Exception
      */
-    public function addWordsFromTextFile($filePath, $delimiter = "\n")
+    public function addWordsFromTextFile(string $filePath, string $delimiter = "\n"): void
     {
-        $words = explode($delimiter, file_get_contents($filePath));
+        $words = file($filePath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+
+        if ([] === $words || false === $words) {
+            throw new \Exception('Dictionary file could not be read.');
+        }
+
         $this->addWords($words);
     }
 }

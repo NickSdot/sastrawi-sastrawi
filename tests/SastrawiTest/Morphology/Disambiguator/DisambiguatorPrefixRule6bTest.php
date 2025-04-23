@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Sastrawi (https://github.com/sastrawi/sastrawi)
  *
@@ -8,20 +11,25 @@
 
 namespace SastrawiTest\Morphology\Disambiguator;
 
+use PHPUnit\Framework\TestCase;
+use Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule6b;
+
 /**
  * Disambiguate Prefix Rule 6b
  * Rule 6b : terV -> te-rV
  */
-class DisambiguatorPrefixRule6bTest extends \PHPUnit_Framework_TestCase
+final class DisambiguatorPrefixRule6bTest extends TestCase
 {
-    public function setUp()
+    public DisambiguatorPrefixRule6b $subject;
+
+    protected function setUp(): void
     {
-        $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule6b();
+        $this->subject = new DisambiguatorPrefixRule6b();
     }
 
-    public function testDisambiguate()
+    public function testDisambiguate(): void
     {
-        $this->assertEquals('racun', $this->subject->disambiguate('teracun'));
-        $this->assertNull($this->subject->disambiguate('terbalik'));
+        self::assertSame('racun', $this->subject->disambiguate('teracun'));
+        self::assertNull($this->subject->disambiguate('terbalik'));
     }
 }

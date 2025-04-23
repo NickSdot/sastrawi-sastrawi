@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Sastrawi (https://github.com/sastrawi/sastrawi)
  *
@@ -8,21 +11,26 @@
 
 namespace SastrawiTest\Morphology\Disambiguator;
 
+use PHPUnit\Framework\TestCase;
+use Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule19;
+
 /**
  * Disambiguate Prefix Rule 19
- * Original Rule 19 : mempV -> mem-pV where V != 'e'
- * Modified Rule 19 by ECS : mempA -> mem-pA where A != 'e' in order to stem memproteksi
+ * Original Rule 19 : mempV -> mem-pV where V  !==  'e'
+ * Modified Rule 19 by ECS : mempA -> mem-pA where A  !==  'e' in order to stem memproteksi
  */
-class DisambiguatorPrefixRule19Test extends \PHPUnit_Framework_TestCase
+final class DisambiguatorPrefixRule19Test extends TestCase
 {
-    public function setUp()
+    public DisambiguatorPrefixRule19 $subject;
+
+    protected function setUp(): void
     {
-        $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule19();
+        $this->subject = new DisambiguatorPrefixRule19();
     }
 
-    public function testDisambiguate()
+    public function testDisambiguate(): void
     {
-        $this->assertEquals('proteksi', $this->subject->disambiguate('memproteksi'));
-        $this->assertEquals('patroli', $this->subject->disambiguate('mempatroli'));
+        self::assertSame('proteksi', $this->subject->disambiguate('memproteksi'));
+        self::assertSame('patroli', $this->subject->disambiguate('mempatroli'));
     }
 }

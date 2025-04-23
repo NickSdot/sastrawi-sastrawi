@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Sastrawi (https://github.com/sastrawi/sastrawi)
  *
@@ -8,22 +11,26 @@
 
 namespace Sastrawi\Morphology\Disambiguator;
 
+use function preg_match;
+
 /**
  * Disambiguate Prefix Rule 31b
  * Original Rule 31 : penyV -> peny-sV
  * Modified by CC, shifted to 31b
  */
-class DisambiguatorPrefixRule31b implements DisambiguatorInterface
+final class DisambiguatorPrefixRule31b implements DisambiguatorInterface
 {
     /**
      * Disambiguate Prefix Rule 31b
      * Original Rule 31 : penyV -> peny-sV
      * Modified by CC, shifted to 31b
      */
-    public function disambiguate($word)
+    public function disambiguate(string $word): ?string
     {
-        if (preg_match('/^peny([aiueo])(.*)$/', $word, $matches)) {
+        if (1 === preg_match('/^peny([aiueo])(.*)$/', $word, $matches)) {
             return 's' . $matches[1] . $matches[2];
         }
+
+        return null;
     }
 }

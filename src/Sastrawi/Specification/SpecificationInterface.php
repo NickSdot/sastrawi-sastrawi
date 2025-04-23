@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Sastrawi (https://github.com/sastrawi/sastrawi)
  *
@@ -16,8 +19,5 @@ namespace Sastrawi\Specification;
  */
 interface SpecificationInterface
 {
-    /**
-     * @return boolean
-     */
-    public function isSatisfiedBy($value);
+    public function isSatisfiedBy(string $word): bool;
 }

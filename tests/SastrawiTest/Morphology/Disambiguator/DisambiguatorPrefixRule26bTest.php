@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Sastrawi (https://github.com/sastrawi/sastrawi)
  *
@@ -8,20 +11,25 @@
 
 namespace SastrawiTest\Morphology\Disambiguator;
 
+use PHPUnit\Framework\TestCase;
+use Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule26b;
+
 /**
  * Disambiguate Prefix Rule 26b
  * Rule 26b : pem{rV|V} -> pe-p{rV|V}
  */
-class DisambiguatorPrefixRule26bTest extends \PHPUnit_Framework_TestCase
+final class DisambiguatorPrefixRule26bTest extends TestCase
 {
-    public function setUp()
+    public DisambiguatorPrefixRule26b $subject;
+
+    protected function setUp(): void
     {
-        $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule26b();
+        $this->subject = new DisambiguatorPrefixRule26b();
     }
 
-    public function testDisambiguate()
+    public function testDisambiguate(): void
     {
-        $this->assertEquals('pilih', $this->subject->disambiguate('pemilih'));
-        $this->assertEquals('pukul', $this->subject->disambiguate('pemukul'));
+        self::assertSame('pilih', $this->subject->disambiguate('pemilih'));
+        self::assertSame('pukul', $this->subject->disambiguate('pemukul'));
     }
 }

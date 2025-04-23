@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Sastrawi (https://github.com/sastrawi/sastrawi)
  *
@@ -8,23 +11,28 @@
 
 namespace SastrawiTest\Morphology\Disambiguator;
 
+use PHPUnit\Framework\TestCase;
+use Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule28b;
+
 /**
  * Disambiguate Prefix Rule 28b
  * Rule 28b : pen{V} -> pe-t{V}
  */
-class DisambiguatorPrefixRule28bTest extends \PHPUnit_Framework_TestCase
+final class DisambiguatorPrefixRule28bTest extends TestCase
 {
-    public function setUp()
+    public DisambiguatorPrefixRule28b $subject;
+
+    protected function setUp(): void
     {
-        $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule28b();
+        $this->subject = new DisambiguatorPrefixRule28b();
     }
 
-    public function testDisambiguate()
+    public function testDisambiguate(): void
     {
-        $this->assertEquals('tari', $this->subject->disambiguate('penari'));
-        $this->assertEquals('terap', $this->subject->disambiguate('penerap'));
-        $this->assertEquals('tinggalan', $this->subject->disambiguate('peninggalan'));
-        $this->assertEquals('tolong', $this->subject->disambiguate('penolong'));
-        $this->assertEquals('tulis', $this->subject->disambiguate('penulis'));
+        self::assertSame('tari', $this->subject->disambiguate('penari'));
+        self::assertSame('terap', $this->subject->disambiguate('penerap'));
+        self::assertSame('tinggalan', $this->subject->disambiguate('peninggalan'));
+        self::assertSame('tolong', $this->subject->disambiguate('penolong'));
+        self::assertSame('tulis', $this->subject->disambiguate('penulis'));
     }
 }

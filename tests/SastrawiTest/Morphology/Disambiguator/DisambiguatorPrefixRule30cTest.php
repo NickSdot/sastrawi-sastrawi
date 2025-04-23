@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Sastrawi (https://github.com/sastrawi/sastrawi)
  *
@@ -8,22 +11,27 @@
 
 namespace SastrawiTest\Morphology\Disambiguator;
 
+use PHPUnit\Framework\TestCase;
+use Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule30c;
+
 /**
  * Disambiguate Prefix Rule 30c
  * Rule 30c : pengV -> pengV- where V = 'e'
  */
 
-class DisambiguatorPrefixRule30cTest extends \PHPUnit_Framework_TestCase
+final class DisambiguatorPrefixRule30cTest extends TestCase
 {
-    public function setUp()
+    public DisambiguatorPrefixRule30c $subject;
+
+    protected function setUp(): void
     {
-        $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule30c();
+        $this->subject = new DisambiguatorPrefixRule30c();
     }
 
-    public function testDisambiguate()
+    public function testDisambiguate(): void
     {
-        $this->assertEquals('tahuan', $this->subject->disambiguate('pengetahuan'));
-        $this->assertEquals('blog', $this->subject->disambiguate('pengeblog'));
-        $this->assertEquals('test', $this->subject->disambiguate('pengetest'));
+        self::assertSame('tahuan', $this->subject->disambiguate('pengetahuan'));
+        self::assertSame('blog', $this->subject->disambiguate('pengeblog'));
+        self::assertSame('test', $this->subject->disambiguate('pengetest'));
     }
 }

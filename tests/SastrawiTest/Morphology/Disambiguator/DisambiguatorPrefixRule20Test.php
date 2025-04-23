@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Sastrawi (https://github.com/sastrawi/sastrawi)
  *
@@ -8,20 +11,25 @@
 
 namespace SastrawiTest\Morphology\Disambiguator;
 
+use PHPUnit\Framework\TestCase;
+use Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule20;
+
 /**
  * Disambiguate Prefix Rule 20
  * Rule 20 : pe{w|y}V -> pe-{w|y}V
  */
-class DisambiguatorPrefixRule20Test extends \PHPUnit_Framework_TestCase
+final class DisambiguatorPrefixRule20Test extends TestCase
 {
-    public function setUp()
+    public DisambiguatorPrefixRule20 $subject;
+
+    protected function setUp(): void
     {
-        $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule20();
+        $this->subject = new DisambiguatorPrefixRule20();
     }
 
-    public function testDisambiguate()
+    public function testDisambiguate(): void
     {
-        $this->assertEquals('warna', $this->subject->disambiguate('pewarna'));
-        $this->assertEquals('yoga', $this->subject->disambiguate('peyoga'));
+        self::assertSame('warna', $this->subject->disambiguate('pewarna'));
+        self::assertSame('yoga', $this->subject->disambiguate('peyoga'));
     }
 }

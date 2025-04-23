@@ -1,67 +1,69 @@
 <?php
 
+declare(strict_types=1);
+
 namespace SastrawiIntegrationTest\Stemmer;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\TestCase;
 use Sastrawi\Stemmer\StemmerFactory;
+use Sastrawi\Stemmer\StemmerInterface;
 
-class StemmerTest extends \PHPUnit_Framework_TestCase
+final class StemmerTest extends TestCase
 {
-    public function setUp()
+    public StemmerInterface $stemmer;
+
+    protected function setUp(): void
     {
-        $stemmerFactory = new StemmerFactory();
-        $this->stemmer  = $stemmerFactory->createStemmer(false);
+        $this->stemmer  =  new StemmerFactory()->createStemmer();
     }
 
-    /**
-     * @dataProvider stemDataProvider
-     */
-    public function testStem($word, $stem)
+    #[DataProvider('stemDataProvider')]
+    public function testStem(string $word, string $stem): void
     {
-        $this->assertEquals($stem, $this->stemmer->stem($word));
+        self::assertSame($stem, $this->stemmer->stem($word));
     }
 
-    public function stemDataProvider()
+
+    /** @return \Iterator<array{string, string}> */
+    public static function stemDataProvider(): \Iterator
     {
-        $data = array();
-
-        $data[] = array('kebijakan', 'bijak');
-        //$data[] = array('karyawan', 'karya');
-        //$data[] = array('karyawati', 'karya');
-        $data[] = array('kinerja', 'kerja');
-        $data[] = array('mengandung', 'kandung');
-        $data[] = array('memakan', 'makan');
-        $data[] = array('asean', 'asean');
-        $data[] = array('pemandu', 'pandu');
-        $data[] = array('mengurangi', 'kurang');
-        $data[] = array('pemerintah', 'perintah');
-        $data[] = array('mengabulkan', 'kabul');
-        $data[] = array('mengupas', 'kupas');
-        $data[] = array('keterpurukan', 'puruk');
-        $data[] = array('ditemukan', 'temu');
-        $data[] = array('mengerti', 'erti');
-        $data[] = array('kebon', 'kebon');
-        $data[] = array('terdepan', 'depan');
-        $data[] = array('mengikis', 'kikis');
-        $data[] = array('kedudukan', 'duduk');
-        $data[] = array('menekan', 'tekan');
-        $data[] = array('perusakan', 'rusa'); // overstemming, it's better than perusa
-        $data[] = array('ditemui', 'temu');
-        $data[] = array('di', 'di');
-        $data[] = array('mengalahkan', 'kalah');
-        $data[] = array('melewati', 'lewat');
-        $data[] = array('bernafas', 'nafas');
-        $data[] = array('meniru-niru', 'tiru');
-        $data[] = array('memanggil-manggil', 'panggil');
-        $data[] = array('menyebut-nyebut', 'sebut');
-        $data[] = array('menganga', 'nganga');
-        $data[] = array('besaran', 'besar');
-        $data[] = array('terhenyak', 'henyak');
-        $data[] = array('mengokohkan', 'kokoh');
-        $data[] = array('melainkan', 'lain');
-        $data[] = array('kuasa-Mu', 'kuasa');
-        $data[] = array('malaikat-malaikat-Nya', 'malaikat');
-        $data[] = array('nikmat-Ku', 'nikmat');
-
-        return $data;
+        yield ['kebijakan', 'bijak'];
+        //$data[] = ['karyawan', 'karya'];
+        //$data[] = ['karyawati', 'karya'];
+        yield ['kinerja', 'kerja'];
+        yield ['mengandung', 'kandung'];
+        yield ['memakan', 'makan'];
+        yield ['asean', 'asean'];
+        yield ['pemandu', 'pandu'];
+        yield ['mengurangi', 'kurang'];
+        yield ['pemerintah', 'perintah'];
+        yield ['mengabulkan', 'kabul'];
+        yield ['mengupas', 'kupas'];
+        yield ['keterpurukan', 'puruk'];
+        yield ['ditemukan', 'temu'];
+        yield ['mengerti', 'erti'];
+        yield ['kebon', 'kebon'];
+        yield ['terdepan', 'depan'];
+        yield ['mengikis', 'kikis'];
+        yield ['kedudukan', 'duduk'];
+        yield ['menekan', 'tekan'];
+        yield ['perusakan', 'rusa']; // over-stemming, it's better than perusa (todo?)
+        yield ['ditemui', 'temu'];
+        yield ['di', 'di'];
+        yield ['mengalahkan', 'kalah'];
+        yield ['melewati', 'lewat'];
+        yield ['bernafas', 'nafas'];
+        yield ['meniru-niru', 'tiru'];
+        yield ['memanggil-manggil', 'panggil'];
+        yield ['menyebut-nyebut', 'sebut'];
+        yield ['menganga', 'nganga'];
+        yield ['besaran', 'besar'];
+        yield ['terhenyak', 'henyak'];
+        yield ['mengokohkan', 'kokoh'];
+        yield ['melainkan', 'lain'];
+        yield ['kuasa-Mu', 'kuasa'];
+        yield ['malaikat-malaikat-Nya', 'malaikat'];
+        yield ['nikmat-Ku', 'nikmat'];
     }
 }

@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Sastrawi (https://github.com/sastrawi/sastrawi)
  *
@@ -18,10 +21,16 @@ interface DictionaryInterface extends \Countable
 {
     /**
      * Checks whether a word is contained in the dictionary.
-     *
-     * @param string $word The word to search for.
-     *
-     * @return boolean TRUE if the dictionary contains the word, FALSE otherwise.
      */
-    public function contains($word);
+    public function contains(string $word): bool;
+
+    /**
+     * Add a word to the dictionary
+     */
+    public function add(string $word): void;
+
+    /**
+     * Add words from a text file to the dictionary
+     */
+    public function addWordsFromTextFile(string $filePath, string $delimiter = "\n"): void;
 }

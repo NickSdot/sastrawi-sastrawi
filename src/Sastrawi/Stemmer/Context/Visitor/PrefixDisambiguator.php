@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Sastrawi (https://github.com/sastrawi/sastrawi)
  *
@@ -8,8 +11,11 @@
 
 namespace Sastrawi\Stemmer\Context\Visitor;
 
-class PrefixDisambiguator extends AbstractDisambiguatePrefixRule implements VisitorInterface
+use Sastrawi\Morphology\Disambiguator\DisambiguatorInterface;
+
+final class PrefixDisambiguator extends AbstractDisambiguatePrefixRule implements VisitorInterface
 {
+    /** @param list<DisambiguatorInterface> $disambiguators */
     public function __construct(array $disambiguators)
     {
         $this->addDisambiguators($disambiguators);

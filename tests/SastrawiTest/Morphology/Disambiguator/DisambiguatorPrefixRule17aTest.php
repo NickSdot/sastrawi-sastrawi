@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Sastrawi (https://github.com/sastrawi/sastrawi)
  *
@@ -8,19 +11,24 @@
 
 namespace SastrawiTest\Morphology\Disambiguator;
 
+use PHPUnit\Framework\TestCase;
+use Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule17a;
+
 /**
  * Disambiguate Prefix Rule 17a
  * Rule 17a : mengV -> meng-V
  */
-class DisambiguatorPrefixRule17aTest extends \PHPUnit_Framework_TestCase
+final class DisambiguatorPrefixRule17aTest extends TestCase
 {
-    public function setUp()
+    public DisambiguatorPrefixRule17a $subject;
+
+    protected function setUp(): void
     {
-        $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule17a();
+        $this->subject = new DisambiguatorPrefixRule17a();
     }
 
-    public function testDisambiguate()
+    public function testDisambiguate(): void
     {
-        $this->assertEquals('erat', $this->subject->disambiguate('mengerat'));
+        self::assertSame('erat', $this->subject->disambiguate('mengerat'));
     }
 }

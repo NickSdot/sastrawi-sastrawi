@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Sastrawi (https://github.com/sastrawi/sastrawi)
  *
@@ -11,32 +14,39 @@ namespace Sastrawi\Stemmer\Context\Visitor;
 use Sastrawi\Stemmer\Context\ContextInterface;
 use Sastrawi\Stemmer\Context\Removal;
 
+use function preg_replace;
+use function sprintf;
+
 /**
  * Remove Derivational Suffix.
  *
  * Asian J. (2007) “Effective Techniques for Indonesian Text Retrieval”. page 61
  * @link http://researchbank.rmit.edu.au/eserv/rmit:6312/Asian.pdf
  */
-class RemoveDerivationalSuffix implements VisitorInterface
+final class RemoveDerivationalSuffix implements VisitorInterface
 {
-    public function visit(ContextInterface $context)
+    public function visit(ContextInterface $context): void
     {
-        $result = $this->removeSuffix($context->getCurrentWord());
-
-        if ($result != $context->getCurrentWord()) {
-            $removedPart = preg_replace("/$result/", '', $context->getCurrentWord(), 1);
-
-            $removal = new Removal(
-                $this,
-                $context->getCurrentWord(),
-                $result,
-                $removedPart,
-                'DS'
-            );
-
-            $context->addRemoval($removal);
-            $context->setCurrentWord($result);
+        if ($context->getCurrentWord() === $result = $this->removeSuffix($context->getCurrentWord())) {
+            return;
         }
+
+        $removedPart = preg_replace(sprintf('/%s/', $result), '', $context->getCurrentWord(), 1);
+
+        if (null === $removedPart) {
+            throw new \RuntimeException('Could not get removed word part.');
+        }
+
+        $removal = new Removal(
+            $this,
+            $context->getCurrentWord(),
+            $result,
+            $removedPart,
+            'DS'
+        );
+
+        $context->addRemoval($removal);
+        $context->setCurrentWord($result);
     }
 
     /**
@@ -44,11 +54,14 @@ class RemoveDerivationalSuffix implements VisitorInterface
      * Original rule : i|kan|an
      * Added the adopted foreign suffix rule : is|isme|isasi
      *
-     * @param  string $word
      * @return string word after its derivational suffix removed
      */
-    public function removeSuffix($word)
+    public function removeSuffix(string $word): string
     {
-        return preg_replace('/(is|isme|isasi|i|kan|an)$/', '', $word, 1);
+        if (null === $result = preg_replace('/(is|isme|isasi|i|kan|an)$/', '', $word, 1)) {
+            throw new \RuntimeException(sprintf("The word '%s' does not exist", $word));
+        }
+
+        return $result;
     }
 }

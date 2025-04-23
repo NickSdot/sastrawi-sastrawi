@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Sastrawi (https://github.com/sastrawi/sastrawi)
  *
@@ -8,20 +11,24 @@
 
 namespace Sastrawi\Morphology\Disambiguator;
 
+use function preg_match;
+
 /**
  * Disambiguate Prefix Rule 25
  * Rule 25 : pem{b|f|v} -> pem-{b|f|v}
  */
-class DisambiguatorPrefixRule25 implements DisambiguatorInterface
+final class DisambiguatorPrefixRule25 implements DisambiguatorInterface
 {
     /**
      * Disambiguate Prefix Rule 25
      * Rule 25 : pem{b|f|v} -> pem-{b|f|v}
      */
-    public function disambiguate($word)
+    public function disambiguate(string $word): ?string
     {
-        if (preg_match('/^pem([bfv])(.*)$/', $word, $matches) === 1) {
+        if (1 === preg_match('/^pem([bfv])(.*)$/', $word, $matches)) {
             return $matches[1] . $matches[2];
         }
+
+        return null;
     }
 }

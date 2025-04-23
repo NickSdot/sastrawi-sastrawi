@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Sastrawi (https://github.com/sastrawi/sastrawi)
  *
@@ -10,60 +13,79 @@ namespace Sastrawi\Stemmer;
 
 use Sastrawi\Dictionary\ArrayDictionary;
 
+use function file;
+use function function_exists;
+use function is_readable;
+
 /**
- * Stemmer factory helps creating pre-configured stemmer
+ * Stemmer factory helps to create pre-configured stemmer
  */
-class StemmerFactory
+final class StemmerFactory
 {
-    const APC_KEY = 'sastrawi_cache_dictionary';
+    public const string APC_KEY = 'sastrawi_cache_dictionary';
+
+    public const string KATA_DASAR_FILE_PATH = __DIR__ . '/../../../data/kata-dasar.txt';
 
     /**
-     * @return \Sastrawi\Stemmer\Stemmer
+     * @throws \Exception
      */
-    public function createStemmer($isDev = false)
+    public function createStemmer(bool $isDev = false): StemmerInterface
     {
         $stemmer    = new Stemmer($this->createDefaultDictionary($isDev));
 
         $resultCache   = new Cache\ArrayCache();
-        $cachedStemmer = new CachedStemmer($resultCache, $stemmer);
 
-        return $cachedStemmer;
+        return new CachedStemmer($resultCache, $stemmer);
     }
 
     /**
-     * @return \Sastrawi\Dictionary\ArrayDictionary
+     * @throws \Exception
      */
-    public function createDefaultDictionary($isDev = false)
+    public function createDefaultDictionary(bool $isDev = false): ArrayDictionary
     {
         $words      = $this->getWords($isDev);
-        $dictionary = new ArrayDictionary($words);
 
-        return $dictionary;
+        return new ArrayDictionary($words);
     }
 
-    protected function getWords($isDev = false)
+    /**
+     * @return list<string>
+     *
+     * @throws \Exception
+     */
+    protected function getWords(bool $isDev = false): array
     {
         if ($isDev || !function_exists('apc_fetch')) {
-            $words = $this->getWordsFromFile();
-        } else {
-            $words = apc_fetch(self::APC_KEY);
-
-            if ($words === false) {
-                $words = $this->getWordsFromFile();
-                apc_store(self::APC_KEY, $words);
-            }
+            return $this->getWordsFromFile();
         }
 
+        $words = (array) apc_fetch(self::APC_KEY);
+
+        if ([] === $words) {
+            $words = $this->getWordsFromFile();
+
+            apc_store(self::APC_KEY, $words);
+        }
+
+        /** @var list<string> $words */
         return $words;
     }
 
-    protected function getWordsFromFile()
+    /**
+     * @return list<string>
+     *
+     * @throws \Exception
+     */
+    protected function getWordsFromFile(): array
     {
-        $dictionaryFile = __DIR__ . '/../../../data/kata-dasar.txt';
-        if (!is_readable($dictionaryFile)) {
+        if (false === is_readable($dictionaryFile = self::KATA_DASAR_FILE_PATH)) {
             throw new \Exception('Dictionary file is missing. It seems that your installation is corrupted.');
         }
 
-        return explode("\n", file_get_contents($dictionaryFile));
+        if (false === $data = file($dictionaryFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES)) {
+            throw new \Exception('Dictionary file could not be read.');
+        }
+
+        return $data;
     }
 }

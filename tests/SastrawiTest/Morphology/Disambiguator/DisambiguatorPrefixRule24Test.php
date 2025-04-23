@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Sastrawi (https://github.com/sastrawi/sastrawi)
  *
@@ -8,19 +11,24 @@
 
 namespace SastrawiTest\Morphology\Disambiguator;
 
+use PHPUnit\Framework\TestCase;
+use Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule24;
+
 /**
  * Disambiguate Prefix Rule 24
- * Rule 24 : perCAerV -> per-CAerV where C != 'r'
+ * Rule 24 : perCAerV -> per-CAerV where C  !==  'r'
  */
-class DisambiguatorPrefixRule24Test extends \PHPUnit_Framework_TestCase
+final class DisambiguatorPrefixRule24Test extends TestCase
 {
-    public function setUp()
+    public DisambiguatorPrefixRule24 $subject;
+
+    protected function setUp(): void
     {
-        $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule24();
+        $this->subject = new DisambiguatorPrefixRule24();
     }
 
-    public function testDisambiguate()
+    public function testDisambiguate(): void
     {
-        $this->assertEquals('daerah', $this->subject->disambiguate('perdaerah'));
+        self::assertSame('daerah', $this->subject->disambiguate('perdaerah'));
     }
 }

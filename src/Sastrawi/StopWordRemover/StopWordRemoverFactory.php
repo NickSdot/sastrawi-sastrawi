@@ -1,24 +1,28 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Sastrawi\StopWordRemover;
 
 use Sastrawi\Dictionary\ArrayDictionary;
 
-class StopWordRemoverFactory
+final class StopWordRemoverFactory
 {
-    public function createStopWordRemover()
+    public function createStopWordRemover(): StopWordRemover
     {
         $stopWords = $this->getStopWords();
 
         $dictionary = new ArrayDictionary($stopWords);
-        $stopWordRemover = new StopWordRemover($dictionary);
 
-        return $stopWordRemover;
+        return new StopWordRemover($dictionary);
     }
 
-    public function getStopWords()
+    /**
+     * @return list<string>
+     */
+    public function getStopWords(): array
     {
-        return array(
+        return [
             'yang', 'untuk', 'pada', 'ke', 'para', 'namun', 'menurut', 'antara', 'dia', 'dua',
             'ia', 'seperti', 'jika', 'jika', 'sehingga', 'kembali', 'dan', 'tidak', 'ini', 'karena',
             'kepada', 'oleh', 'saat', 'harus', 'sementara', 'setelah', 'belum', 'kami', 'sekitar',
@@ -33,6 +37,6 @@ class StopWordRemoverFactory
             'juga', 'nggak', 'mari', 'nanti', 'melainkan', 'oh', 'ok', 'seharusnya', 'sebetulnya',
             'setiap', 'setidaknya', 'sesuatu', 'pasti', 'saja', 'toh', 'ya', 'walau', 'tolong',
             'tentu', 'amat', 'apalagi', 'bagaimanapun',
-        );
+        ];
     }
 }

@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Sastrawi (https://github.com/sastrawi/sastrawi)
  *
@@ -8,21 +11,26 @@
 
 namespace SastrawiTest\Morphology\Disambiguator;
 
+use PHPUnit\Framework\TestCase;
+use Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule36;
+
 /**
  * Disambiguate Prefix Rule 36 (CS additional rules)
- * Rule 36 : peC1erC2 -> pe-C1erC2 where C1 != {r|w|y|l|m|n}
+ * Rule 36 : peC1erC2 -> pe-C1erC2 where C1  !==  {r|w|y|l|m|n}
  */
 
-class DisambiguatorPrefixRule36Test extends \PHPUnit_Framework_TestCase
+final class DisambiguatorPrefixRule36Test extends TestCase
 {
-    public function setUp()
+    public DisambiguatorPrefixRule36 $subject;
+
+    protected function setUp(): void
     {
-        $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule36();
+        $this->subject = new DisambiguatorPrefixRule36();
     }
 
-    public function testDisambiguate()
+    public function testDisambiguate(): void
     {
-        $this->assertEquals('kerja', $this->subject->disambiguate('pekerja'));
-        $this->assertEquals('serta', $this->subject->disambiguate('peserta'));
+        self::assertSame('kerja', $this->subject->disambiguate('pekerja'));
+        self::assertSame('serta', $this->subject->disambiguate('peserta'));
     }
 }

@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Sastrawi (https://github.com/sastrawi/sastrawi)
  *
@@ -8,23 +11,28 @@
 
 namespace SastrawiTest\Morphology\Disambiguator;
 
+use PHPUnit\Framework\TestCase;
+use Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule11;
+
 /**
  * Disambiguate Prefix Rule 11
  * Rule 11 : mem{b|f|v} -> mem-{b|f|v}
  */
-class DisambiguatorPrefixRule11Test extends \PHPUnit_Framework_TestCase
+final class DisambiguatorPrefixRule11Test extends TestCase
 {
-    public function setUp()
+    public DisambiguatorPrefixRule11 $subject;
+
+    protected function setUp(): void
     {
-        $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule11();
+        $this->subject = new DisambiguatorPrefixRule11();
     }
 
-    public function testDisambiguate()
+    public function testDisambiguate(): void
     {
-        $this->assertEquals('bantu', $this->subject->disambiguate('membantu'));
-        $this->assertEquals('fasilitasi', $this->subject->disambiguate('memfasilitasi'));
-        $this->assertEquals('vonis', $this->subject->disambiguate('memvonis'));
+        self::assertSame('bantu', $this->subject->disambiguate('membantu'));
+        self::assertSame('fasilitasi', $this->subject->disambiguate('memfasilitasi'));
+        self::assertSame('vonis', $this->subject->disambiguate('memvonis'));
 
-        $this->assertNull($this->subject->disambiguate('mewarnai'));
+        self::assertNull($this->subject->disambiguate('mewarnai'));
     }
 }

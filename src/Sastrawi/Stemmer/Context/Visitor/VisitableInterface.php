@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Sastrawi (https://github.com/sastrawi/sastrawi)
  *
@@ -15,8 +18,5 @@ namespace Sastrawi\Stemmer\Context\Visitor;
  */
 interface VisitableInterface
 {
-    /**
-     * @return void
-     */
-    public function accept(VisitorInterface $visitor);
+    public function accept(VisitorInterface $visitor): void;
 }

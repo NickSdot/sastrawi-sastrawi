@@ -1,26 +1,33 @@
 <?php
 
+declare(strict_types=1);
+
 namespace SastrawiTest\StopWordRemover;
 
-use Sastrawi\StopWordRemover\StopWordRemover;
+use PHPUnit\Framework\TestCase;
 use Sastrawi\Dictionary\ArrayDictionary;
+use Sastrawi\StopWordRemover\StopWordRemover;
 
-class StopWordRemoverTest extends \PHPUnit_Framework_TestCase
+final class StopWordRemoverTest extends TestCase
 {
-    public function setUp()
+    public ArrayDictionary $dictionary;
+
+    public StopWordRemover $stopWordRemover;
+
+    protected function setUp(): void
     {
-        $this->dictionary = new ArrayDictionary(array('di', 'ke'));
+        $this->dictionary = new ArrayDictionary(['di', 'ke']);
         $this->stopWordRemover = new StopWordRemover($this->dictionary);
     }
 
-    public function testGetDictionaryPreserveInstance()
+    public function testGetDictionaryPreserveInstance(): void
     {
-        $this->assertSame($this->dictionary, $this->stopWordRemover->getDictionary());
+        self::assertSame($this->dictionary, $this->stopWordRemover->getDictionary());
     }
 
-    public function testRemoveStopWord()
+    public function testRemoveStopWord(): void
     {
-        $this->assertEquals('pergi sekolah', $this->stopWordRemover->remove('pergi ke sekolah'));
-        $this->assertEquals('makan rumah', $this->stopWordRemover->remove('makan di rumah'));
+        self::assertSame('pergi sekolah', $this->stopWordRemover->remove('pergi ke sekolah'));
+        self::assertSame('makan rumah', $this->stopWordRemover->remove('makan di rumah'));
     }
 }

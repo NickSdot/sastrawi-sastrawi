@@ -1,28 +1,35 @@
 <?php
 
+declare(strict_types=1);
+
 namespace SastrawiTest\Morphology;
 
-class InvalidAffixPairSpecificationTest extends \PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+use Sastrawi\Morphology\InvalidAffixPairSpecification;
+
+final class InvalidAffixPairSpecificationTest extends TestCase
 {
-    public function setUp()
+    public InvalidAffixPairSpecification $specification;
+
+    protected function setUp(): void
     {
-        $this->specification = new \Sastrawi\Morphology\InvalidAffixPairSpecification();
+        $this->specification = new InvalidAffixPairSpecification();
     }
 
     /**
      * Test contains invalid affix pair ber-i|di-an|ke-i|ke-kan|me-an|ter-an|per-an
      */
-    public function testContainsInvalidAffixPair()
+    public function testContainsInvalidAffixPair(): void
     {
-        $this->assertFalse($this->specification->isSatisfiedBy('memberikan'));
-        $this->assertFalse($this->specification->isSatisfiedBy('ketahui'));
+        self::assertFalse($this->specification->isSatisfiedBy('memberikan'));
+        self::assertFalse($this->specification->isSatisfiedBy('ketahui'));
 
-        $this->assertTrue($this->specification->isSatisfiedBy('berjatuhi'));
-        $this->assertTrue($this->specification->isSatisfiedBy('dipukulan'));
-        $this->assertTrue($this->specification->isSatisfiedBy('ketiduri'));
-        $this->assertTrue($this->specification->isSatisfiedBy('ketidurkan'));
-        $this->assertTrue($this->specification->isSatisfiedBy('menduaan'));
-        $this->assertTrue($this->specification->isSatisfiedBy('terduaan'));
-        $this->assertTrue($this->specification->isSatisfiedBy('perkataan')); // wtf?
+        self::assertTrue($this->specification->isSatisfiedBy('berjatuhi'));
+        self::assertTrue($this->specification->isSatisfiedBy('dipukulan'));
+        self::assertTrue($this->specification->isSatisfiedBy('ketiduri'));
+        self::assertTrue($this->specification->isSatisfiedBy('ketidurkan'));
+        self::assertTrue($this->specification->isSatisfiedBy('menduaan'));
+        self::assertTrue($this->specification->isSatisfiedBy('terduaan'));
+        self::assertTrue($this->specification->isSatisfiedBy('perkataan')); // wtf?
     }
 }

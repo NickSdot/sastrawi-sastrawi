@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Sastrawi (https://github.com/sastrawi/sastrawi)
  *
@@ -8,26 +11,30 @@
 
 namespace Sastrawi\Morphology\Disambiguator;
 
+use function preg_match;
+
 /**
  * Disambiguate Prefix Rule 23
- * Rule 23 : perCAP -> per-CAP where C != 'r' AND P != 'er'
+ * Rule 23 : perCAP -> per-CAP where C  !==  'r' AND P  !==  'er'
  */
-class DisambiguatorPrefixRule23 implements DisambiguatorInterface
+final class DisambiguatorPrefixRule23 implements DisambiguatorInterface
 {
     /**
      * Disambiguate Prefix Rule 23
-     * Rule 23 : perCAP -> per-CAP where C != 'r' AND P != 'er'
+     * Rule 23 : perCAP -> per-CAP where C  !==  'r' AND P  !==  'er'
      */
-    public function disambiguate($word)
+    public function disambiguate(string $word): ?string
     {
         $contains = preg_match('/^per([bcdfghjklmnpqrstvwxyz])([a-z])(.*)$/', $word, $matches);
 
-        if ($contains === 1) {
-            if (preg_match('/^er(.*)$/', $matches[3]) === 1) {
-                return;
+        if (1 === $contains) {
+            if (1 === preg_match('/^er(.*)$/', $matches[3])) {
+                return null;
             }
 
             return $matches[1] . $matches[2] . $matches[3];
         }
+
+        return null;
     }
 }

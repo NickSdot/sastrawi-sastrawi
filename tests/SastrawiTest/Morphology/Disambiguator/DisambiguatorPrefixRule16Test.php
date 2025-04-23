@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Sastrawi (https://github.com/sastrawi/sastrawi)
  *
@@ -8,25 +11,30 @@
 
 namespace SastrawiTest\Morphology\Disambiguator;
 
+use PHPUnit\Framework\TestCase;
+use Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule16;
+
 /**
  * Disambiguate Prefix Rule 16
- * Original Nazief and Adriani's Rule 16 : meng{g|h|q} -> meng-{g|h|q}
+ * Original Nazief and Adrian's Rule 16 : meng{g|h|q} -> meng-{g|h|q}
  * Modified Jelita Asian's CS Rule 16 : meng{g|h|q|k} -> meng-{g|h|q|k} to stem mengkritik
  */
-class DisambiguatorPrefixRule16Test extends \PHPUnit_Framework_TestCase
+final class DisambiguatorPrefixRule16Test extends TestCase
 {
-    public function setUp()
+    public DisambiguatorPrefixRule16 $subject;
+
+    protected function setUp(): void
     {
-        $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule16();
+        $this->subject = new DisambiguatorPrefixRule16();
     }
 
-    public function testDisambiguate()
+    public function testDisambiguate(): void
     {
-        $this->assertEquals('gunakan', $this->subject->disambiguate('menggunakan'));
-        $this->assertEquals('hambat', $this->subject->disambiguate('menghambat'));
-        $this->assertEquals('qasar', $this->subject->disambiguate('mengqasar'));
-        $this->assertEquals('kritik', $this->subject->disambiguate('mengkritik'));
+        self::assertSame('gunakan', $this->subject->disambiguate('menggunakan'));
+        self::assertSame('hambat', $this->subject->disambiguate('menghambat'));
+        self::assertSame('qasar', $this->subject->disambiguate('mengqasar'));
+        self::assertSame('kritik', $this->subject->disambiguate('mengkritik'));
 
-        $this->assertNull($this->subject->disambiguate('mengira'));
+        self::assertNull($this->subject->disambiguate('mengira'));
     }
 }

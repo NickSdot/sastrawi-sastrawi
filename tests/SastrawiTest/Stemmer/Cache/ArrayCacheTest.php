@@ -1,28 +1,34 @@
 <?php
 
+declare(strict_types=1);
+
 namespace SastrawiTest\Stemmer\Cache;
 
-class ArrayCacheTest extends \PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+use Sastrawi\Stemmer\Cache\ArrayCache;
+use Sastrawi\Stemmer\Cache\CacheInterface;
+
+final class ArrayCacheTest extends TestCase
 {
-    protected $arrayCache;
+    private ArrayCache $arrayCache;
 
-    public function setUp()
+    protected function setUp(): void
     {
-        $this->arrayCache = new \Sastrawi\Stemmer\Cache\ArrayCache();
+        $this->arrayCache = new ArrayCache();
     }
 
-    public function testInstanceOfCacheInterface()
+    public function testInstanceOfCacheInterface(): void
     {
-        $this->assertInstanceOf('Sastrawi\Stemmer\Cache\CacheInterface', $this->arrayCache);
+        self::assertInstanceOf(CacheInterface::class, $this->arrayCache);
     }
 
-    public function testSetGetHas()
+    public function testSetGetHas(): void
     {
-        $this->assertFalse($this->arrayCache->has('abc'));
-        $this->assertNull($this->arrayCache->get('abc'));
+        self::assertFalse($this->arrayCache->has('abc'));
+        self::assertNull($this->arrayCache->get('abc'));
 
-        $this->arrayCache->set('abc', 123);
-        $this->assertTrue($this->arrayCache->has('abc'));
-        $this->assertEquals(123, $this->arrayCache->get('abc'));
+        $this->arrayCache->set('abc', 'foo');
+        self::assertTrue($this->arrayCache->has('abc'));
+        self::assertSame('foo', $this->arrayCache->get('abc'));
     }
 }

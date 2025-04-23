@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Sastrawi (https://github.com/sastrawi/sastrawi)
  *
@@ -8,31 +11,42 @@
 
 namespace Sastrawi\Stemmer\Context\Visitor;
 
+use Sastrawi\Morphology\Disambiguator\DisambiguatorInterface;
 use Sastrawi\Stemmer\Context\ContextInterface;
 use Sastrawi\Stemmer\Context\Removal;
-use Sastrawi\Morphology\Disambiguator\DisambiguatorInterface;
+
+use function preg_replace;
+use function sprintf;
 
 abstract class AbstractDisambiguatePrefixRule implements VisitorInterface
 {
-    protected $disambiguators = array();
+    /** @var list<DisambiguatorInterface> */
+    protected array $disambiguators = [];
 
-    public function visit(ContextInterface $context)
+    public function visit(ContextInterface $context): void
     {
         $result = null;
 
         foreach ($this->disambiguators as $disambiguator) {
-            $result = $disambiguator->disambiguate($context->getCurrentWord());
+
+            if (null === $result = $disambiguator->disambiguate($context->getCurrentWord())) {
+                continue;
+            }
 
             if ($context->getDictionary()->contains($result)) {
                 break;
             }
         }
 
-        if ($result === null) {
+        if (null === $result) {
             return;
         }
 
-        $removedPart = preg_replace("/$result/", '', $context->getCurrentWord(), 1);
+        $removedPart = preg_replace(sprintf('/%s/', $result), '', $context->getCurrentWord(), 1);
+
+        if (null === $removedPart) {
+            throw new \RuntimeException('Could not get removed word part.');
+        }
 
         $removal = new Removal(
             $this,
@@ -46,14 +60,15 @@ abstract class AbstractDisambiguatePrefixRule implements VisitorInterface
         $context->setCurrentWord($result);
     }
 
-    public function addDisambiguators(array $disambiguators)
+    /** @param list<DisambiguatorInterface> $disambiguators */
+    public function addDisambiguators(array $disambiguators): void
     {
         foreach ($disambiguators as $disambiguator) {
             $this->addDisambiguator($disambiguator);
         }
     }
 
-    public function addDisambiguator(DisambiguatorInterface $disambiguator)
+    public function addDisambiguator(DisambiguatorInterface $disambiguator): void
     {
         $this->disambiguators[] = $disambiguator;
     }

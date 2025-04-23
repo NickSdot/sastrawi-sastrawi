@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Sastrawi (https://github.com/sastrawi/sastrawi)
  *
@@ -8,20 +11,25 @@
 
 namespace SastrawiTest\Morphology\Disambiguator;
 
+use PHPUnit\Framework\TestCase;
+use Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule1a;
+
 /**
 * Disambiguate Prefix Rule 1a
 * Rule 1a : berV -> ber-V
 */
-class DisambiguatorPrefixRule1aTest extends \PHPUnit_Framework_TestCase
+final class DisambiguatorPrefixRule1aTest extends TestCase
 {
-    public function setUp()
+    public DisambiguatorPrefixRule1a $subject;
+
+    protected function setUp(): void
     {
-        $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule1a();
+        $this->subject = new DisambiguatorPrefixRule1a();
     }
 
-    public function testDisambiguate()
+    public function testDisambiguate(): void
     {
-        $this->assertEquals('ia-ia', $this->subject->disambiguate('beria-ia'));
-        $this->assertNull($this->subject->disambiguate('berlari'));
+        self::assertSame('ia-ia', $this->subject->disambiguate('beria-ia'));
+        self::assertNull($this->subject->disambiguate('berlari'));
     }
 }

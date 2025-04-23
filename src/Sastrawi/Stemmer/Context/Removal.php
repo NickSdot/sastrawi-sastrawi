@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Sastrawi (https://github.com/sastrawi/sastrawi)
  *
@@ -8,78 +11,42 @@
 
 namespace Sastrawi\Stemmer\Context;
 
+use Sastrawi\Stemmer\Context\Visitor\VisitorInterface;
+
 /**
  * Standard implementation of Removal Interface.
  */
-class Removal implements RemovalInterface
+final class Removal implements RemovalInterface
 {
-    /**
-     * @var \Sastrawi\Stemmer\Context\Visitor\VisitorInterface
-     */
-    protected $visitor;
-
-    /**
-     * @var string
-     */
-    protected $subject;
-
-    /**
-     * @var string
-     */
-    protected $result;
-
-    /**
-     * @var string
-     */
-    protected $removedPart;
-
-    /**
-     * @var string
-     */
-    protected $affixType;
-
-    /**
-     * @param \Sastrawi\Stemmer\Context\Visitor\VisitorInterface $visitor
-     * @param string                                             $subject
-     * @param string                                             $result
-     * @param string                                             $removedPart
-     * @param string                                             $affixType
-     */
     public function __construct(
-        Visitor\VisitorInterface $visitor,
-        $subject,
-        $result,
-        $removedPart,
-        $affixType
-    ) {
-        $this->visitor = $visitor;
-        $this->subject = $subject;
-        $this->result  = $result;
-        $this->removedPart = $removedPart;
-        $this->affixType = $affixType;
-    }
+        protected VisitorInterface $visitor,
+        protected string $subject,
+        protected string $result,
+        protected string $removedPart,
+        protected string $affixType
+    ) {}
 
-    public function getVisitor()
+    public function getVisitor(): VisitorInterface
     {
         return $this->visitor;
     }
 
-    public function getSubject()
+    public function getSubject(): string
     {
         return $this->subject;
     }
 
-    public function getResult()
+    public function getResult(): string
     {
         return $this->result;
     }
 
-    public function getRemovedPart()
+    public function getRemovedPart(): string
     {
         return $this->removedPart;
     }
 
-    public function getAffixType()
+    public function getAffixType(): string
     {
         return $this->affixType;
     }

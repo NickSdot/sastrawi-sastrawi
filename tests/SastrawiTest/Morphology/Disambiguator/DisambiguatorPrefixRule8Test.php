@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Sastrawi (https://github.com/sastrawi/sastrawi)
  *
@@ -8,21 +11,26 @@
 
 namespace SastrawiTest\Morphology\Disambiguator;
 
+use PHPUnit\Framework\TestCase;
+use Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule8;
+
 /**
  * Disambiguate Prefix Rule 8
- * Rule 8 : terCP -> ter-CP where C != 'r' and P != 'er'
+ * Rule 8 : terCP -> ter-CP where C  !==  'r' and P  !==  'er'
  */
-class DisambiguatorPrefixRule8Test extends \PHPUnit_Framework_TestCase
+final class DisambiguatorPrefixRule8Test extends TestCase
 {
-    public function setUp()
+    public DisambiguatorPrefixRule8 $subject;
+
+    protected function setUp(): void
     {
-        $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule8();
+        $this->subject = new DisambiguatorPrefixRule8();
     }
 
-    public function testDisambiguate()
+    public function testDisambiguate(): void
     {
-        $this->assertEquals('tangkap', $this->subject->disambiguate('tertangkap'));
-        $this->assertNull($this->subject->disambiguate('teracun'));
-        $this->assertNull($this->subject->disambiguate('terperuk'));
+        self::assertSame('tangkap', $this->subject->disambiguate('tertangkap'));
+        self::assertNull($this->subject->disambiguate('teracun'));
+        self::assertNull($this->subject->disambiguate('terperuk'));
     }
 }

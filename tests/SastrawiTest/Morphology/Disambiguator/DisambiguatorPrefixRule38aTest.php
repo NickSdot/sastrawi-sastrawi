@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Sastrawi (https://github.com/sastrawi/sastrawi)
  *
@@ -8,20 +11,25 @@
 
 namespace SastrawiTest\Morphology\Disambiguator;
 
+use PHPUnit\Framework\TestCase;
+use Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule38a;
+
 /**
  * Disambiguate Prefix Rule 38a (CC infix rules)
  * Rule 38a : CelV -> CelV
  */
 
-class DisambiguatorPrefixRule38aTest extends \PHPUnit_Framework_TestCase
+final class DisambiguatorPrefixRule38aTest extends TestCase
 {
-    public function setUp()
+    public DisambiguatorPrefixRule38a $subject;
+
+    protected function setUp(): void
     {
-        $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule38a();
+        $this->subject = new DisambiguatorPrefixRule38a();
     }
 
-    public function testDisambiguate()
+    public function testDisambiguate(): void
     {
-        $this->assertEquals('pelawat', $this->subject->disambiguate('pelawat'));
+        self::assertSame('pelawat', $this->subject->disambiguate('pelawat'));
     }
 }

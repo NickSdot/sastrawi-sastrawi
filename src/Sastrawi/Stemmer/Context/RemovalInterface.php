@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Sastrawi (https://github.com/sastrawi/sastrawi)
  *
@@ -16,28 +19,13 @@ namespace Sastrawi\Stemmer\Context;
  */
 interface RemovalInterface
 {
-    /**
-     * @return Visitor\VisitorInterface
-     */
-    public function getVisitor();
+    public function getVisitor(): Visitor\VisitorInterface;
 
-    /**
-     * @return string
-     */
-    public function getSubject();
+    public function getSubject(): string;
 
-    /**
-     * @return string
-     */
-    public function getResult();
+    public function getResult(): string;
 
-    /**
-     * @return string
-     */
-    public function getRemovedPart();
+    public function getRemovedPart(): string;
 
-    /**
-     * @return string
-     */
-    public function getAffixType();
+    public function getAffixType(): string;
 }

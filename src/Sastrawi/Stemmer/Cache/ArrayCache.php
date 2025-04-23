@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Sastrawi (https://github.com/sastrawi/sastrawi)
  *
@@ -8,23 +11,22 @@
 
 namespace Sastrawi\Stemmer\Cache;
 
-class ArrayCache implements CacheInterface
+final class ArrayCache implements CacheInterface
 {
-    protected $data = array();
+    /** @var array<string, string>  */
+    protected array $data = [];
 
-    public function set($key, $value)
+    public function set(string $key, string $value): void
     {
         $this->data[$key] = $value;
     }
 
-    public function get($key)
+    public function get(string $key): ?string
     {
-        if (isset($this->data[$key])) {
-            return $this->data[$key];
-        }
+        return $this->data[$key] ?? null;
     }
 
-    public function has($key)
+    public function has(string $key): bool
     {
         return isset($this->data[$key]);
     }

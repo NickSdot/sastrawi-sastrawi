@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Sastrawi (https://github.com/sastrawi/sastrawi)
  *
@@ -8,21 +11,26 @@
 
 namespace SastrawiTest\Morphology\Disambiguator;
 
+use PHPUnit\Framework\TestCase;
+use Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule18b;
+
 /**
  * Disambiguate Prefix Rule 18b
  * Original Rule 18 : menyV -> meny-sV
  * Modified by CC (shifted into 18b, see also 18a)
  */
-class DisambiguatorPrefixRule18bTest extends \PHPUnit_Framework_TestCase
+final class DisambiguatorPrefixRule18bTest extends TestCase
 {
-    public function setUp()
+    public DisambiguatorPrefixRule18b $subject;
+
+    protected function setUp(): void
     {
-        $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule18b();
+        $this->subject = new DisambiguatorPrefixRule18b();
     }
 
-    public function testDisambiguate()
+    public function testDisambiguate(): void
     {
-        $this->assertEquals('sapu', $this->subject->disambiguate('menyapu'));
-        $this->assertEquals('sikat', $this->subject->disambiguate('menyikat'));
+        self::assertSame('sapu', $this->subject->disambiguate('menyapu'));
+        self::assertSame('sikat', $this->subject->disambiguate('menyikat'));
     }
 }

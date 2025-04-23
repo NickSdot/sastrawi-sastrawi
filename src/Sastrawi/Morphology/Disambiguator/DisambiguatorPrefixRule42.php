@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Sastrawi (https://github.com/sastrawi/sastrawi)
  *
@@ -8,20 +11,24 @@
 
 namespace Sastrawi\Morphology\Disambiguator;
 
+use function preg_match;
+
 /**
  * Disambiguate Prefix Rule 42
  * Rule 42 : kauA -> kau-A
  */
-class DisambiguatorPrefixRule42 implements DisambiguatorInterface
+final class DisambiguatorPrefixRule42 implements DisambiguatorInterface
 {
     /**
      * Disambiguate Prefix Rule 42
      * Rule 42 : kauA -> kau-A
      */
-    public function disambiguate($word)
+    public function disambiguate(string $word): ?string
     {
-        if (preg_match('/^kau(.*)$/', $word, $matches)) {
+        if (1 === preg_match('/^kau(.*)$/', $word, $matches)) {
             return $matches[1];
         }
+
+        return null;
     }
 }

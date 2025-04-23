@@ -1,20 +1,22 @@
 <?php
 
+declare(strict_types=1);
+
 namespace SastrawiFunctionalTest\Stemmer;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\TestCase;
 use Sastrawi\Dictionary\ArrayDictionary;
 use Sastrawi\Stemmer\Stemmer;
 
-class StemmerTest extends \PHPUnit_Framework_TestCase
+final class StemmerTest extends TestCase
 {
-    protected $dictionary;
+    private Stemmer $stemmer;
 
-    protected $stemmer;
-
-    public function setUp()
+    protected function setUp(): void
     {
-        $this->dictionary = new ArrayDictionary(
-            array(
+        $dictionary = new ArrayDictionary(
+            [
                 'hancur', 'benar', 'apa', 'siapa', 'jubah', 'baju', 'beli',
                 'celana', 'hantu', 'jual', 'buku', 'milik', 'kulit', 'sakit', 'kasih', 'buang', 'suap',
                 'nilai', 'beri', 'rambut', 'adu', 'suara', 'daerah', 'ajar', 'kerja', 'ternak',
@@ -36,354 +38,353 @@ class StemmerTest extends \PHPUnit_Framework_TestCase
                 // sastrawi additional rules
                 'taat', 'tiru', 'sepak', 'kuasa', 'malaikat', 'nikmat', 'stabil', 'transkripsi',
                 'lewat', 'nganga', 'allah',
-            )
+            ]
         );
-        $this->stemmer = new Stemmer($this->dictionary);
+        $this->stemmer = new Stemmer($dictionary);
     }
 
-    /**
-     * @dataProvider stemDataProvider
-     */
-    public function testStem($word, $stem)
+    #[DataProvider('stemDataProvider')]
+    public function testStem(string $word, string $stem): void
     {
-        $this->assertEquals($stem, $this->stemmer->stem($word));
+        self::assertSame($stem, $this->stemmer->stem($word));
     }
 
-    public function stemDataProvider()
+    /** @return list<list<string>> */
+    public static function stemDataProvider(): array
     {
-        $data = array();
+        $data = [];
 
         // don't stem short words
-        $data[] = array('mei', 'mei');
-        $data[] = array('bui', 'bui');
+        $data[] = ['mei', 'mei'];
+        $data[] = ['bui', 'bui'];
 
-        // lookup up the dictionary, to prevent overstemming
+        // lookup up the dictionary, to prevent over-stemming (todo?)
         // don't stem nilai to nila
-        $data[] = array('nilai', 'nilai');
+        $data[] = ['nilai', 'nilai'];
 
         // lah|kah|tah|pun
-        $data[] = array('hancurlah', 'hancur');
-        $data[] = array('benarkah', 'benar');
-        $data[] = array('apatah', 'apa');
-        $data[] = array('siapapun', 'siapa');
+        $data[] = ['hancurlah', 'hancur'];
+        $data[] = ['benarkah', 'benar'];
+        $data[] = ['apatah', 'apa'];
+        $data[] = ['siapapun', 'siapa'];
 
         // ku|mu|nya
-        $data[] = array('jubahku', 'jubah');
-        $data[] = array('bajumu', 'baju');
-        $data[] = array('celananya', 'celana');
+        $data[] = ['jubahku', 'jubah'];
+        $data[] = ['bajumu', 'baju'];
+        $data[] = ['celananya', 'celana'];
 
         // i|kan|an
-        $data[] = array('hantui', 'hantu');
-        $data[] = array('belikan', 'beli');
-        $data[] = array('jualan', 'jual');
+        $data[] = ['hantui', 'hantu'];
+        $data[] = ['belikan', 'beli'];
+        $data[] = ['jualan', 'jual'];
 
         // combination of suffixes
-        $data[] = array('bukumukah', 'buku');
-        $data[] = array('miliknyalah', 'milik');
-        $data[] = array('kulitkupun', 'kulit');
-        $data[] = array('berikanku', 'beri');
-        $data[] = array('sakitimu', 'sakit');
-        $data[] = array('beriannya', 'beri');
-        $data[] = array('kasihilah', 'kasih');
+        $data[] = ['bukumukah', 'buku'];
+        $data[] = ['miliknyalah', 'milik'];
+        $data[] = ['kulitkupun', 'kulit'];
+        $data[] = ['berikanku', 'beri'];
+        $data[] = ['sakitimu', 'sakit'];
+        $data[] = ['beriannya', 'beri'];
+        $data[] = ['kasihilah', 'kasih'];
 
         // plain prefix
-        $data[] = array('dibuang', 'buang');
-        $data[] = array('kesakitan', 'sakit');
-        $data[] = array('sesuap', 'suap');
+        $data[] = ['dibuang', 'buang'];
+        $data[] = ['kesakitan', 'sakit'];
+        $data[] = ['sesuap', 'suap'];
 
-        //$data[] = array('teriakanmu', 'teriak'); // wtf? kok jadi ria?
+        //$data[] = ['teriakanmu', 'teriak']; // wtf? kok jadi ria?
         //teriakanmu -> te-ria-kan-mu
 
         /* template formulas for derivation prefix rules (disambiguation) */
 
         // rule 1a : berV -> ber-V
-        $data[] = array('beradu', 'adu');
+        $data[] = ['beradu', 'adu'];
 
         // rule 1b : berV -> be-rV
-        $data[] = array('berambut', 'rambut');
+        $data[] = ['berambut', 'rambut'];
 
         // rule 2 : berCAP -> ber-CAP
-        $data[] = array('bersuara', 'suara');
+        $data[] = ['bersuara', 'suara'];
 
-        // rule 3 : berCAerV -> ber-CAerV where C != 'r'
-        $data[] = array('berdaerah', 'daerah');
+        // rule 3 : berCAerV -> ber-CAerV where C  !==  'r'
+        $data[] = ['berdaerah', 'daerah'];
 
         // rule 4 : belajar -> bel-ajar
-        $data[] = array('belajar', 'ajar');
+        $data[] = ['belajar', 'ajar'];
 
-        // rule 5 : beC1erC2 -> be-C1erC2 where C1 != {'r'|'l'}
-        $data[] = array('bekerja', 'kerja');
-        $data[] = array('beternak', 'ternak');
+        // rule 5 : beC1erC2 -> be-C1erC2 where C1  !==  {'r'|'l'}
+        $data[] = ['bekerja', 'kerja'];
+        $data[] = ['beternak', 'ternak'];
 
         // rule 6a : terV -> ter-V
-        $data[] = array('terasing', 'asing');
+        $data[] = ['terasing', 'asing'];
 
         // rule 6b : terV -> te-rV
-        $data[] = array('teraup', 'raup');
+        $data[] = ['teraup', 'raup'];
 
-        // rule 7 : terCerV -> ter-CerV where C != 'r'
-        $data[] = array('tergerak', 'gerak');
+        // rule 7 : terCerV -> ter-CerV where C  !==  'r'
+        $data[] = ['tergerak', 'gerak'];
 
-        // rule 8 : terCP -> ter-CP where C != 'r' and P != 'er'
-        $data[] = array('terpuruk', 'puruk');
+        // rule 8 : terCP -> ter-CP where C  !==  'r' and P  !==  'er'
+        $data[] = ['terpuruk', 'puruk'];
 
-        // rule 9 : teC1erC2 -> te-C1erC2 where C1 != 'r'
-        $data[] = array('teterbang', 'terbang');
+        // rule 9 : teC1erC2 -> te-C1erC2 where C1  !==  'r'
+        $data[] = ['teterbang', 'terbang'];
 
         // rule 10 : me{l|r|w|y}V -> me-{l|r|w|y}V
-        $data[] = array('melipat', 'lipat');
-        $data[] = array('meringkas', 'ringkas');
-        $data[] = array('mewarnai', 'warna');
-        $data[] = array('meyakinkan', 'yakin');
+        $data[] = ['melipat', 'lipat'];
+        $data[] = ['meringkas', 'ringkas'];
+        $data[] = ['mewarnai', 'warna'];
+        $data[] = ['meyakinkan', 'yakin'];
 
         // rule 11 : mem{b|f|v} -> mem-{b|f|v}
-        $data[] = array('membangun', 'bangun');
-        $data[] = array('memfitnah', 'fitnah');
-        $data[] = array('memvonis', 'vonis');
+        $data[] = ['membangun', 'bangun'];
+        $data[] = ['memfitnah', 'fitnah'];
+        $data[] = ['memvonis', 'vonis'];
 
         // rule 12 : mempe{r|l} -> mem-pe
-        $data[] = array('memperbarui', 'baru');
-        $data[] = array('mempelajari', 'ajar');
+        $data[] = ['memperbarui', 'baru'];
+        $data[] = ['mempelajari', 'ajar'];
 
         // rule 13a : mem{rV|V} -> mem{rV|V}
-        $data[] = array('meminum', 'minum');
+        $data[] = ['meminum', 'minum'];
 
         // rule 13b : mem{rV|V} -> me-p{rV|V}
-        $data[] = array('memukul', 'pukul');
+        $data[] = ['memukul', 'pukul'];
 
         // rule 14 : men{c|d|j|z} -> men-{c|d|j|z}
-        $data[] = array('mencinta', 'cinta');
-        $data[] = array('mendua', 'dua');
-        $data[] = array('menjauh', 'jauh');
-        $data[] = array('menziarah', 'ziarah');
+        $data[] = ['mencinta', 'cinta'];
+        $data[] = ['mendua', 'dua'];
+        $data[] = ['menjauh', 'jauh'];
+        $data[] = ['menziarah', 'ziarah'];
 
         // rule 15a : men{V} -> me-n{V}
-        $data[] = array('menuklir', 'nuklir');
+        $data[] = ['menuklir', 'nuklir'];
 
         // rule 15b : men{V} -> me-t{V}
-        $data[] = array('menangkap', 'tangkap');
+        $data[] = ['menangkap', 'tangkap'];
 
         // rule 16 : meng{g|h|q} -> meng-{g|h|q}
-        $data[] = array('menggila', 'gila');
-        $data[] = array('menghajar', 'hajar');
-        $data[] = array('mengqasar', 'qasar');
+        $data[] = ['menggila', 'gila'];
+        $data[] = ['menghajar', 'hajar'];
+        $data[] = ['mengqasar', 'qasar'];
 
         // rule 17a : mengV -> meng-V
-        $data[] = array('mengudara', 'udara');
+        $data[] = ['mengudara', 'udara'];
 
         // rule 17b : mengV -> meng-kV
-        $data[] = array('mengupas', 'kupas');
+        $data[] = ['mengupas', 'kupas'];
 
         // rule 18 : menyV -> meny-sV
-        $data[] = array('menyuarakan', 'suara');
+        $data[] = ['menyuarakan', 'suara'];
 
-        // rule 19 : mempV -> mem-pV where V != 'e'
-        $data[] = array('mempopulerkan', 'populer');
+        // rule 19 : mempV -> mem-pV where V  !==  'e'
+        $data[] = ['mempopulerkan', 'populer'];
 
         // rule 20 : pe{w|y}V -> pe-{w|y}V
-        $data[] = array('pewarna', 'warna');
-        $data[] = array('peyoga', 'yoga');
+        $data[] = ['pewarna', 'warna'];
+        $data[] = ['peyoga', 'yoga'];
 
         // rule 21a : perV -> per-V
-        $data[] = array('peradilan', 'adil');
+        $data[] = ['peradilan', 'adil'];
 
         // rule 21b : perV -> pe-rV
-        $data[] = array('perumahan', 'rumah');
+        $data[] = ['perumahan', 'rumah'];
 
         // rule 22 is missing in the document?
 
-        // rule 23 : perCAP -> per-CAP where C != 'r' and P != 'er'
-        $data[] = array('permuka', 'muka');
+        // rule 23 : perCAP -> per-CAP where C  !==  'r' and P  !==  'er'
+        $data[] = ['permuka', 'muka'];
 
-        // rule 24 : perCAerV -> per-CAerV where C != 'r'
-        $data[] = array('perdaerah', 'daerah');
+        // rule 24 : perCAerV -> per-CAerV where C  !==  'r'
+        $data[] = ['perdaerah', 'daerah'];
 
         // rule 25 : pem{b|f|v} -> pem-{b|f|v}
-        $data[] = array('pembangun', 'bangun');
-        $data[] = array('pemfitnah', 'fitnah');
-        $data[] = array('pemvonis', 'vonis');
+        $data[] = ['pembangun', 'bangun'];
+        $data[] = ['pemfitnah', 'fitnah'];
+        $data[] = ['pemvonis', 'vonis'];
 
         // rule 26a : pem{rV|V} -> pe-m{rV|V}
-        $data[] = array('peminum', 'minum');
+        $data[] = ['peminum', 'minum'];
 
         // rule 26b : pem{rV|V} -> pe-p{rV|V}
-        $data[] = array('pemukul', 'pukul');
+        $data[] = ['pemukul', 'pukul'];
 
         // rule 27 : men{c|d|j|z} -> men-{c|d|j|z}
-        $data[] = array('pencinta', 'cinta');
-        $data[] = array('pendahulu', 'dahulu');
-        $data[] = array('penjarah', 'jarah');
-        $data[] = array('penziarah', 'ziarah');
+        $data[] = ['pencinta', 'cinta'];
+        $data[] = ['pendahulu', 'dahulu'];
+        $data[] = ['penjarah', 'jarah'];
+        $data[] = ['penziarah', 'ziarah'];
 
         // rule 28a : pen{V} -> pe-n{V}
-        $data[] = array('penasihat', 'nasihat');
+        $data[] = ['penasihat', 'nasihat'];
 
         // rule 28b : pen{V} -> pe-t{V}
-        $data[] = array('penangkap', 'tangkap');
+        $data[] = ['penangkap', 'tangkap'];
 
         // rule 29 : peng{g|h|q} -> peng-{g|h|q}
-        $data[] = array('penggila', 'gila');
-        $data[] = array('penghajar', 'hajar');
-        $data[] = array('pengqasar', 'qasar');
+        $data[] = ['penggila', 'gila'];
+        $data[] = ['penghajar', 'hajar'];
+        $data[] = ['pengqasar', 'qasar'];
 
         // rule 30a : pengV -> peng-V
-        $data[] = array('pengudara', 'udara');
+        $data[] = ['pengudara', 'udara'];
 
         // rule 30b : pengV -> peng-kV
-        $data[] = array('pengupas', 'kupas');
+        $data[] = ['pengupas', 'kupas'];
 
         // rule 31 : penyV -> peny-sV
-        $data[] = array('penyuara', 'suara');
+        $data[] = ['penyuara', 'suara'];
 
         // rule 32 : pelV -> pe-lV except pelajar -> ajar
-        $data[] = array('pelajar', 'ajar');
-        $data[] = array('pelabuhan', 'labuh');
+        $data[] = ['pelajar', 'ajar'];
+        $data[] = ['pelabuhan', 'labuh'];
 
-        // rule 33 : peCerV -> per-erV where C != {r|w|y|l|m|n}
+        // rule 33 : peCerV -> per-erV where C  !==  {r|w|y|l|m|n}
         // TODO : find the examples
 
-        // rule 34 : peCP -> pe-CP where C != {r|w|y|l|m|n} and P != 'er'
-        $data[] = array('petarung', 'tarung');
+        // rule 34 : peCP -> pe-CP where C  !==  {r|w|y|l|m|n} and P  !==  'er'
+        $data[] = ['petarung', 'tarung'];
 
         // CS additional rules
 
-        // rule 35 : terC1erC2 -> ter-C1erC2 where C1 != 'r'
-        $data[] = array('terpercaya', 'percaya');
+        // rule 35 : terC1erC2 -> ter-C1erC2 where C1  !==  'r'
+        $data[] = ['terpercaya', 'percaya'];
 
-        // rule 36 : peC1erC2 -> pe-C1erC2 where C1 != {r|w|y|l|m|n}
-        $data[] = array('pekerja', 'kerja');
-        $data[] = array('peserta', 'serta');
+        // rule 36 : peC1erC2 -> pe-C1erC2 where C1  !==  {r|w|y|l|m|n}
+        $data[] = ['pekerja', 'kerja'];
+        $data[] = ['peserta', 'serta'];
 
         // CS modify rule 12
-        $data[] = array('mempengaruhi', 'pengaruh');
+        $data[] = ['mempengaruhi', 'pengaruh'];
 
         // CS modify rule 16
-        $data[] = array('mengkritik', 'kritik');
+        $data[] = ['mengkritik', 'kritik'];
 
         // CS adjusting rule precedence
-        $data[] = array('bersekolah', 'sekolah');
-        $data[] = array('bertahan', 'tahan');
-        $data[] = array('mencapai', 'capai');
-        $data[] = array('dimulai', 'mulai');
-        $data[] = array('petani', 'tani');
-        $data[] = array('terabai', 'abai');
+        $data[] = ['bersekolah', 'sekolah'];
+        $data[] = ['bertahan', 'tahan'];
+        $data[] = ['mencapai', 'capai'];
+        $data[] = ['dimulai', 'mulai'];
+        $data[] = ['petani', 'tani'];
+        $data[] = ['terabai', 'abai'];
 
         // ECS
-        $data[] = array('mensyaratkan', 'syarat');
-        $data[] = array('mensyukuri', 'syukur');
-        $data[] = array('mengebom', 'bom');
-        $data[] = array('mempromosikan', 'promosi');
-        $data[] = array('memproteksi', 'proteksi');
-        $data[] = array('memprediksi', 'prediksi');
-        $data[] = array('pengkajian', 'kaji');
-        $data[] = array('pengebom', 'bom');
+        $data[] = ['mensyaratkan', 'syarat'];
+        $data[] = ['mensyukuri', 'syukur'];
+        $data[] = ['mengebom', 'bom'];
+        $data[] = ['mempromosikan', 'promosi'];
+        $data[] = ['memproteksi', 'proteksi'];
+        $data[] = ['memprediksi', 'prediksi'];
+        $data[] = ['pengkajian', 'kaji'];
+        $data[] = ['pengebom', 'bom'];
 
         // ECS loop pengembalian akhiran
-        $data[] = array('bersembunyi', 'sembunyi');
-        $data[] = array('bersembunyilah', 'sembunyi');
-        $data[] = array('pelanggan', 'langgan');
-        $data[] = array('pelaku', 'laku');
-        $data[] = array('pelangganmukah', 'langgan');
-        $data[] = array('pelakunyalah', 'laku');
+        $data[] = ['bersembunyi', 'sembunyi'];
+        $data[] = ['bersembunyilah', 'sembunyi'];
+        $data[] = ['pelanggan', 'langgan'];
+        $data[] = ['pelaku', 'laku'];
+        $data[] = ['pelangganmukah', 'langgan'];
+        $data[] = ['pelakunyalah', 'laku'];
 
-        $data[] = array('perbaikan', 'baik');
-        $data[] = array('kebaikannya', 'baik');
-        $data[] = array('bisikan', 'bisik');
-        $data[] = array('menerangi', 'terang');
-        $data[] = array('berimanlah', 'iman');
+        $data[] = ['perbaikan', 'baik'];
+        $data[] = ['kebaikannya', 'baik'];
+        $data[] = ['bisikan', 'bisik'];
+        $data[] = ['menerangi', 'terang'];
+        $data[] = ['berimanlah', 'iman'];
 
-        $data[] = array('memuaskan', 'puas');
-        $data[] = array('berpelanggan', 'langgan');
-        $data[] = array('bermakanan', 'makan');
+        $data[] = ['memuaskan', 'puas'];
+        $data[] = ['berpelanggan', 'langgan'];
+        $data[] = ['bermakanan', 'makan'];
 
         // CC (Modified ECS)
-        $data[] = array('menyala', 'nyala');
-        $data[] = array('menyanyikan', 'nyanyi');
-        $data[] = array('menyatakannya', 'nyata');
+        $data[] = ['menyala', 'nyala'];
+        $data[] = ['menyanyikan', 'nyanyi'];
+        $data[] = ['menyatakannya', 'nyata'];
 
-        $data[] = array('penyanyi', 'nyanyi');
-        $data[] = array('penyawaan', 'nyawa');
+        $data[] = ['penyanyi', 'nyanyi'];
+        $data[] = ['penyawaan', 'nyawa'];
 
         // CC infix
-        $data[] = array('rerata', 'rata');
-        $data[] = array('lelembut', 'lembut');
-        $data[] = array('lemigas', 'ligas');
-        $data[] = array('kinerja', 'kerja');
+        $data[] = ['rerata', 'rata'];
+        $data[] = ['lelembut', 'lembut'];
+        $data[] = ['lemigas', 'ligas'];
+        $data[] = ['kinerja', 'kerja'];
 
         // plurals
-        $data[] = array('buku-buku', 'buku');
-        $data[] = array('berbalas-balasan', 'balas');
-        $data[] = array('bolak-balik', 'bolak-balik');
+        $data[] = ['buku-buku', 'buku'];
+        $data[] = ['berbalas-balasan', 'balas'];
+        $data[] = ['bolak-balik', 'bolak-balik'];
 
         // combination of prefix + suffix
-        $data[] = array('bertebaran', 'tebar');
-        $data[] = array('terasingkan', 'asing');
-        $data[] = array('membangunkan', 'bangun');
-        $data[] = array('mencintai', 'cinta');
-        $data[] = array('menduakan', 'dua');
-        $data[] = array('menjauhi', 'jauh');
-        $data[] = array('menggilai', 'gila');
-        $data[] = array('pembangunan', 'bangun');
+        $data[] = ['bertebaran', 'tebar'];
+        $data[] = ['terasingkan', 'asing'];
+        $data[] = ['membangunkan', 'bangun'];
+        $data[] = ['mencintai', 'cinta'];
+        $data[] = ['menduakan', 'dua'];
+        $data[] = ['menjauhi', 'jauh'];
+        $data[] = ['menggilai', 'gila'];
+        $data[] = ['pembangunan', 'bangun'];
 
         // return the word if not found in the dictionary
-        $data[] = array('marwan', 'marwan');
-        $data[] = array('subarkah', 'subarkah');
+        $data[] = ['marwan', 'marwan'];
+        $data[] = ['subarkah', 'subarkah'];
 
         // recursively remove prefix
-        $data[] = array('memberdayakan', 'daya');
-        $data[] = array('persemakmuran', 'makmur');
-        $data[] = array('keberuntunganmu', 'untung');
-        $data[] = array('kesepersepuluhnya', 'sepuluh');
+        $data[] = ['memberdayakan', 'daya'];
+        $data[] = ['persemakmuran', 'makmur'];
+        $data[] = ['keberuntunganmu', 'untung'];
+        $data[] = ['kesepersepuluhnya', 'sepuluh'];
 
         // test stem sentence
-        $data[] = array('siapakah memberdayakan pembangunan', 'siapa daya bangun');
+        $data[] = ['siapakah memberdayakan pembangunan', 'siapa daya bangun'];
 
         // issues
-        $data[] = array('Perekonomian', 'ekonomi');
-        $data[] = array('menahan', 'tahan');
+        $data[] = ['Perekonomian', 'ekonomi'];
+        $data[] = ['menahan', 'tahan'];
 
         // test stem multiple sentences
         $multipleSentence1 = 'Cinta telah bertebaran.Keduanya saling mencintai.';
         $multipleSentence2 = "(Cinta telah bertebaran)\n\n\n\nKeduanya saling mencintai.";
-        $data[]            = array($multipleSentence1, 'cinta telah tebar dua saling cinta');
-        $data[]            = array($multipleSentence2, 'cinta telah tebar dua saling cinta');
+        $data[]            = [$multipleSentence1, 'cinta telah tebar dua saling cinta'];
+        $data[]            = [$multipleSentence2, 'cinta telah tebar dua saling cinta'];
 
         // failed on other method / algorithm but we should succeed
-        $data[] = array('peranan', 'peran');
-        $data[] = array('memberikan', 'beri');
-        $data[] = array('medannya', 'medan');
+        $data[] = ['peranan', 'peran'];
+        $data[] = ['memberikan', 'beri'];
+        $data[] = ['medannya', 'medan'];
 
         // TODO:
-        //$data[] = array('sebagai', 'bagai');
-        //$data[] = array('bagian', 'bagian');
-        //$data[] = array('berbadan', 'badan');
-        //$data[] = array('abdullah', 'abdullah');
+        //$data[] = ['sebagai', 'bagai'];
+        //$data[] = ['bagian', 'bagian'];
+        //$data[] = ['berbadan', 'badan'];
+        //$data[] = ['abdullah', 'abdullah'];
 
         // adopted foreign suffixes
-        //$data[] = array('budayawan', 'budaya');
-        //$data[] = array('karyawati', 'karya');
-        $data[] = array('idealis', 'ideal');
-        $data[] = array('idealisme', 'ideal');
-        $data[] = array('finalisasi', 'final');
+        //$data[] = ['budayawan', 'budaya'];
+        //$data[] = ['karyawati', 'karya'];
+        $data[] = ['idealis', 'ideal'];
+        $data[] = ['idealisme', 'ideal'];
+        $data[] = ['finalisasi', 'final'];
 
         // sastrawi additional rules
-        $data[] = array('penstabilan', 'stabil');
-        $data[] = array('pentranskripsi', 'transkripsi');
+        $data[] = ['penstabilan', 'stabil'];
+        $data[] = ['pentranskripsi', 'transkripsi'];
 
-        $data[] = array('mentaati', 'taat');
-        $data[] = array('meniru-nirukan', 'tiru');
-        $data[] = array('menyepak-nyepak', 'sepak');
+        $data[] = ['mentaati', 'taat'];
+        $data[] = ['meniru-nirukan', 'tiru'];
+        $data[] = ['menyepak-nyepak', 'sepak'];
 
-        $data[] = array('melewati', 'lewat');
-        $data[] = array('menganga', 'nganga');
+        $data[] = ['melewati', 'lewat'];
+        $data[] = ['menganga', 'nganga'];
 
-        $data[] = array('kupukul', 'pukul');
-        $data[] = array('kauhajar', 'hajar');
+        $data[] = ['kupukul', 'pukul'];
+        $data[] = ['kauhajar', 'hajar'];
 
-        $data[] = array('kuasa-Mu', 'kuasa');
-        $data[] = array('malaikat-malaikat-Nya', 'malaikat');
-        $data[] = array('nikmat-Ku', 'nikmat');
-        $data[] = array('allah-lah', 'allah');
+        $data[] = ['kuasa-Mu', 'kuasa'];
+        $data[] = ['malaikat-malaikat-Nya', 'malaikat'];
+        $data[] = ['nikmat-Ku', 'nikmat'];
+        $data[] = ['allah-lah', 'allah'];
 
         return $data;
     }

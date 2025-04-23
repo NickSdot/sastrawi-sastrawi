@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Sastrawi (https://github.com/sastrawi/sastrawi)
  *
@@ -8,20 +11,25 @@
 
 namespace SastrawiTest\Morphology\Disambiguator;
 
+use PHPUnit\Framework\TestCase;
+use Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule4;
+
 /**
 * Disambiguate Prefix Rule 4
 * Rule 4 : belajar -> bel-ajar
 */
-class DisambiguatorPrefixRule4Test extends \PHPUnit_Framework_TestCase
+final class DisambiguatorPrefixRule4Test extends TestCase
 {
-    public function setUp()
+    public DisambiguatorPrefixRule4 $subject;
+
+    protected function setUp(): void
     {
-        $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule4();
+        $this->subject = new DisambiguatorPrefixRule4();
     }
 
-    public function testDisambiguate()
+    public function testDisambiguate(): void
     {
-        $this->assertEquals('ajar', $this->subject->disambiguate('belajar'));
-        $this->assertNull($this->subject->disambiguate('bekerja'));
+        self::assertSame('ajar', $this->subject->disambiguate('belajar'));
+        self::assertNull($this->subject->disambiguate('bekerja'));
     }
 }

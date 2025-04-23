@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Sastrawi (https://github.com/sastrawi/sastrawi)
  *
@@ -8,25 +11,30 @@
 
 namespace SastrawiTest\Morphology\Disambiguator;
 
+use PHPUnit\Framework\TestCase;
+use Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule32;
+
 /**
  * Disambiguate Prefix Rule 32
  * Rule 32 : pelV -> pe-lV except pelajar -> ajar
  */
 
-class DisambiguatorPrefixRule32Test extends \PHPUnit_Framework_TestCase
+final class DisambiguatorPrefixRule32Test extends TestCase
 {
-    public function setUp()
+    public DisambiguatorPrefixRule32 $subject;
+
+    protected function setUp(): void
     {
-        $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule32();
+        $this->subject = new DisambiguatorPrefixRule32();
     }
 
-    public function testDisambiguate()
+    public function testDisambiguate(): void
     {
-        $this->assertEquals('ajar', $this->subject->disambiguate('pelajar'));
-        $this->assertEquals('layan', $this->subject->disambiguate('pelayan'));
-        $this->assertEquals('ledak', $this->subject->disambiguate('peledak'));
-        $this->assertEquals('lirik', $this->subject->disambiguate('pelirik'));
-        $this->assertEquals('lobi', $this->subject->disambiguate('pelobi'));
-        $this->assertEquals('lupa', $this->subject->disambiguate('pelupa'));
+        self::assertSame('ajar', $this->subject->disambiguate('pelajar'));
+        self::assertSame('layan', $this->subject->disambiguate('pelayan'));
+        self::assertSame('ledak', $this->subject->disambiguate('peledak'));
+        self::assertSame('lirik', $this->subject->disambiguate('pelirik'));
+        self::assertSame('lobi', $this->subject->disambiguate('pelobi'));
+        self::assertSame('lupa', $this->subject->disambiguate('pelupa'));
     }
 }

@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Sastrawi (https://github.com/sastrawi/sastrawi)
  *
@@ -8,20 +11,25 @@
 
 namespace SastrawiTest\Morphology\Disambiguator;
 
+use PHPUnit\Framework\TestCase;
+use Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule42;
+
 /**
  * Disambiguate Prefix Rule 42
  * Rule 42 : kauA -> kau-A
  */
 
-class DisambiguatorPrefixRule42Test extends \PHPUnit_Framework_TestCase
+final class DisambiguatorPrefixRule42Test extends TestCase
 {
-    public function setUp()
+    public DisambiguatorPrefixRule42 $subject;
+
+    protected function setUp(): void
     {
-        $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule42();
+        $this->subject = new DisambiguatorPrefixRule42();
     }
 
-    public function testDisambiguate()
+    public function testDisambiguate(): void
     {
-        $this->assertEquals('miliki', $this->subject->disambiguate('kaumiliki'));
+        self::assertSame('miliki', $this->subject->disambiguate('kaumiliki'));
     }
 }

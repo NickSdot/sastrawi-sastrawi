@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Sastrawi (https://github.com/sastrawi/sastrawi)
  *
@@ -8,22 +11,26 @@
 
 namespace Sastrawi\Morphology\Disambiguator;
 
+use function preg_match;
+
 /**
  * Disambiguate Prefix Rule 18b
  * Original Rule 18 : menyV -> meny-sV
  * Modified by CC (shifted into 18b, see also 18a)
  */
-class DisambiguatorPrefixRule18b implements DisambiguatorInterface
+final class DisambiguatorPrefixRule18b implements DisambiguatorInterface
 {
     /**
      * Disambiguate Prefix Rule 18b
      * Original Rule 18 : menyV -> meny-sV
      * Modified by CC (shifted into 18b, see also 18a)
      */
-    public function disambiguate($word)
+    public function disambiguate(string $word): ?string
     {
-        if (preg_match('/^meny([aiueo])(.*)$/', $word, $matches)) {
+        if (1 === preg_match('/^meny([aiueo])(.*)$/', $word, $matches)) {
             return 's' . $matches[1] . $matches[2];
         }
+
+        return null;
     }
 }

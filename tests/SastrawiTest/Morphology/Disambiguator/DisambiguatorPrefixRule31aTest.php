@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Sastrawi (https://github.com/sastrawi/sastrawi)
  *
@@ -8,20 +11,25 @@
 
 namespace SastrawiTest\Morphology\Disambiguator;
 
+use PHPUnit\Framework\TestCase;
+use Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule31a;
+
 /**
  * Disambiguate Prefix Rule 31a
  * CC Rule 31a : penyV -> pe-nyV
  */
 
-class DisambiguatorPrefixRule31aTest extends \PHPUnit_Framework_TestCase
+final class DisambiguatorPrefixRule31aTest extends TestCase
 {
-    public function setUp()
+    public DisambiguatorPrefixRule31a $subject;
+
+    protected function setUp(): void
     {
-        $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule31a();
+        $this->subject = new DisambiguatorPrefixRule31a();
     }
 
-    public function testDisambiguate()
+    public function testDisambiguate(): void
     {
-        $this->assertEquals('nyanyi', $this->subject->disambiguate('penyanyi'));
+        self::assertSame('nyanyi', $this->subject->disambiguate('penyanyi'));
     }
 }

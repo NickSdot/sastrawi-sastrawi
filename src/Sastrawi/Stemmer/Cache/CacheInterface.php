@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Sastrawi (https://github.com/sastrawi/sastrawi)
  *
@@ -10,9 +13,9 @@ namespace Sastrawi\Stemmer\Cache;
 
 interface CacheInterface
 {
-    public function has($key);
+    public function has(string $key): bool;
 
-    public function set($key, $value);
+    public function set(string $key, string $value): void;
 
-    public function get($key);
+    public function get(string $key): ?string;
 }

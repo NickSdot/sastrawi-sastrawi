@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Sastrawi (https://github.com/sastrawi/sastrawi)
  *
@@ -17,8 +20,5 @@ use Sastrawi\Stemmer\Context\ContextInterface;
  */
 interface VisitorInterface
 {
-    /**
-     * @return void
-     */
-    public function visit(ContextInterface $context);
+    public function visit(ContextInterface $context): void;
 }

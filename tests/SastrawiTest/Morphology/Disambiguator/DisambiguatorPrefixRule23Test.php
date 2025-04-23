@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Sastrawi (https://github.com/sastrawi/sastrawi)
  *
@@ -8,19 +11,24 @@
 
 namespace SastrawiTest\Morphology\Disambiguator;
 
+use PHPUnit\Framework\TestCase;
+use Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule23;
+
 /**
  * Disambiguate Prefix Rule 23
- * Rule 23 : perCAP -> per-CAP where C != 'r' AND P != 'er'
+ * Rule 23 : perCAP -> per-CAP where C  !==  'r' AND P  !==  'er'
  */
-class DisambiguatorPrefixRule23Test extends \PHPUnit_Framework_TestCase
+final class DisambiguatorPrefixRule23Test extends TestCase
 {
-    public function setUp()
+    public DisambiguatorPrefixRule23 $subject;
+
+    protected function setUp(): void
     {
-        $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule23();
+        $this->subject = new DisambiguatorPrefixRule23();
     }
 
-    public function testDisambiguate()
+    public function testDisambiguate(): void
     {
-        $this->assertEquals('tahan', $this->subject->disambiguate('pertahan'));
+        self::assertSame('tahan', $this->subject->disambiguate('pertahan'));
     }
 }

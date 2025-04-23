@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Sastrawi (https://github.com/sastrawi/sastrawi)
  *
@@ -7,6 +10,8 @@
  */
 
 namespace Sastrawi\Morphology\Disambiguator;
+
+use function preg_match;
 
 /**
  * Disambiguate Prefix Rule no 14
@@ -19,7 +24,7 @@ namespace Sastrawi\Morphology\Disambiguator;
  *
  * Original CS Rule no 14 was : men{c|d|j|z} -> men-{c|d|j|z}
  */
-class DisambiguatorPrefixRule14 implements DisambiguatorInterface
+final class DisambiguatorPrefixRule14 implements DisambiguatorInterface
 {
     /**
      * Disambiguate Prefix Rule no 14
@@ -32,13 +37,15 @@ class DisambiguatorPrefixRule14 implements DisambiguatorInterface
      *
      * Original CS Rule no 14 was : men{c|d|j|z} -> men-{c|d|j|z}
      */
-    public function disambiguate($word)
+    public function disambiguate(string $word): ?string
     {
         $matches  = null;
         $contains = preg_match('/^men([cdjstz])(.*)$/', $word, $matches);
 
-        if ($contains === 1) {
+        if (1 === $contains) {
             return $matches[1] . $matches[2];
         }
+
+        return null;
     }
 }

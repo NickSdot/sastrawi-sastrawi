@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Sastrawi (https://github.com/sastrawi/sastrawi)
  *
@@ -8,6 +11,9 @@
 
 namespace SastrawiTest\Morphology\Disambiguator;
 
+use PHPUnit\Framework\TestCase;
+use Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule30a;
+
 /**
  * Disambiguate Prefix Rule 30a
  * Rule 30a : pengV -> peng-V
@@ -15,19 +21,21 @@ namespace SastrawiTest\Morphology\Disambiguator;
  */
 
 //TODO: Maybe this rule can be combined with rule 29?
-class DisambiguatorPrefixRule30aTest extends \PHPUnit_Framework_TestCase
+final class DisambiguatorPrefixRule30aTest extends TestCase
 {
-    public function setUp()
+    public DisambiguatorPrefixRule30a $subject;
+
+    protected function setUp(): void
     {
-        $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule30a();
+        $this->subject = new DisambiguatorPrefixRule30a();
     }
 
-    public function testDisambiguate()
+    public function testDisambiguate(): void
     {
-        $this->assertEquals('alihan', $this->subject->disambiguate('pengalihan'));
-        $this->assertEquals('eram', $this->subject->disambiguate('pengeram'));
-        $this->assertEquals('ikat', $this->subject->disambiguate('pengikat'));
-        $this->assertEquals('obat', $this->subject->disambiguate('pengobat'));
-        $this->assertEquals('urusan', $this->subject->disambiguate('pengurusan'));
+        self::assertSame('alihan', $this->subject->disambiguate('pengalihan'));
+        self::assertSame('eram', $this->subject->disambiguate('pengeram'));
+        self::assertSame('ikat', $this->subject->disambiguate('pengikat'));
+        self::assertSame('obat', $this->subject->disambiguate('pengobat'));
+        self::assertSame('urusan', $this->subject->disambiguate('pengurusan'));
     }
 }

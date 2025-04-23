@@ -1,23 +1,24 @@
 <?php
 
+declare(strict_types=1);
+
 namespace SastrawiTest\Stemmer;
 
+use PHPUnit\Framework\TestCase;
 use Sastrawi\Stemmer\StemmerFactory;
+use Sastrawi\Stemmer\StemmerInterface;
 
-class StemmerFactoryTest extends \PHPUnit_Framework_TestCase
+final class StemmerFactoryTest extends TestCase
 {
-    protected $factory;
+    private StemmerFactory $factory;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->factory = new StemmerFactory();
     }
 
-    public function testCreateStemmerReturnStemmer()
+    public function testCreateStemmerReturnStemmer(): void
     {
-        $stemmer = $this->factory->createStemmer();
-
-        $this->assertNotNull($stemmer);
-        $this->assertInstanceOf('Sastrawi\Stemmer\StemmerInterface', $stemmer);
+        self::assertInstanceOf(StemmerInterface::class, $this->factory->createStemmer());
     }
 }

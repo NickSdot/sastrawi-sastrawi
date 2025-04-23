@@ -15,20 +15,34 @@
         {
             "name": "Andy Librian",
             "email": "andylibrian@gmail.com",
-            "homepage": "http://andylibrian.com",
+            "homepage": "https://andylibrian.com",
             "role": "Lead Developer"
         }
     ],
     "require": {
-        "php": ">=5.3"
+        "php": ">=8.4"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "~1.0",
-        "phpunit/phpunit": "4.8.7"
+        "phpunit/phpunit": "12.*",
+        "rector/rector": "^2.0",
+        "phpstan/phpstan": "^2.1",
+        "phpstan/extension-installer": "^1.4",
+        "phpstan/phpstan-strict-rules": "^2.0",
+        "phpstan/phpstan-deprecation-rules": "^2.0",
+        "tomasvotruba/type-coverage": "^2.0",
+        "friendsofphp/php-cs-fixer": "^3.75"
     },
     "autoload": {
-        "psr-0": {
-            "Sastrawi\\": "src"
+        "psr-4": {
+            "Sastrawi\\": "src/Sastrawi"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "SastrawiTest\\": "tests/SastrawiTest/",
+            "SastrawiFunctionalTest\\": "tests/SastrawiFunctionalTest/",
+            "SastrawiIntegrationTest\\": "tests/SastrawiIntegrationTest/"
         }
     },
     "license": "MIT",
@@ -41,6 +55,17 @@
     "extra": {
         "branch-alias": {
             "dev-master": "1.1.x-dev"
+        }
+    },
+    "scripts": {
+        "test": "./vendor/bin/phpunit tests",
+        "stan": "./vendor/bin/phpstan analyse",
+        "fixer": "export PHP_CS_FIXER_IGNORE_ENV=1; ./vendor/bin/php-cs-fixer",
+        "rector": "./vendor/bin/rector"
+    },
+    "config": {
+        "allow-plugins": {
+            "phpstan/extension-installer": true
         }
     }
 }

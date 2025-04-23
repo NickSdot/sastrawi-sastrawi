@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Sastrawi (https://github.com/sastrawi/sastrawi)
  *
@@ -8,20 +11,25 @@
 
 namespace SastrawiTest\Morphology\Disambiguator;
 
+use PHPUnit\Framework\TestCase;
+use Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule34;
+
 /**
  * Disambiguate Prefix Rule 34
- * Rule 34 : peCP -> pe-CP where C != {r|w|y|l|m|n} and P != 'er'
+ * Rule 34 : peCP -> pe-CP where C  !==  {r|w|y|l|m|n} and P  !==  'er'
  */
 
-class DisambiguatorPrefixRule34Test extends \PHPUnit_Framework_TestCase
+final class DisambiguatorPrefixRule34Test extends TestCase
 {
-    public function setUp()
+    public DisambiguatorPrefixRule34 $subject;
+
+    protected function setUp(): void
     {
-        $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule34();
+        $this->subject = new DisambiguatorPrefixRule34();
     }
 
-    public function testDisambiguate()
+    public function testDisambiguate(): void
     {
-        $this->assertEquals('tarung', $this->subject->disambiguate('petarung'));
+        self::assertSame('tarung', $this->subject->disambiguate('petarung'));
     }
 }

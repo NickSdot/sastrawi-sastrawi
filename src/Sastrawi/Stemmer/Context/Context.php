@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Sastrawi (https://github.com/sastrawi/sastrawi)
  *
@@ -9,162 +12,120 @@
 namespace Sastrawi\Stemmer\Context;
 
 use Sastrawi\Dictionary\DictionaryInterface;
-use Sastrawi\Stemmer\Context\Visitor\VisitorInterface;
-use Sastrawi\Stemmer\Context\Visitor\VisitableInterface;
 use Sastrawi\Stemmer\ConfixStripping;
+use Sastrawi\Stemmer\Context\Visitor\VisitableInterface;
+use Sastrawi\Stemmer\Context\Visitor\VisitorInterface;
+use Sastrawi\Stemmer\Context\Visitor\VisitorProvider;
+
+use function array_reverse;
+use function count;
 
 /**
  * Stemming Context using Nazief and Adriani, CS, ECS, Improved ECS
  */
-class Context implements ContextInterface, VisitableInterface
+final class Context implements ContextInterface, VisitableInterface
 {
-    /**
-     * @var string
-     */
-    protected $originalWord;
+    protected string $currentWord;
 
-    /**
-     * @var string
-     */
-    protected $currentWord;
+    protected bool $processIsStopped = false;
 
-    /**
-     * @var boolean
-     */
-    protected $processIsStopped = false;
+    /**  @var \Sastrawi\Stemmer\Context\RemovalInterface[]  */
+    protected array $removals = [];
 
-    /**
-     * @var \Sastrawi\Stemmer\Context\RemovalInterface[]
-     */
-    protected $removals = array();
+    /** @var \Sastrawi\Stemmer\Context\Visitor\VisitorInterface[]  */
+    protected array $visitors = [];
 
-    /**
-     * @var \Sastrawi\Dictionary\DictionaryInterface
-     */
-    protected $dictionary;
+    /**  @var \Sastrawi\Stemmer\Context\Visitor\VisitorInterface[]  */
+    protected array $suffixVisitors = [];
 
-    /**
-     * @var \Sastrawi\Stemmer\Context\Visitor\VisitorProvider
-     */
-    protected $visitorProvider;
+    /** @var \Sastrawi\Stemmer\Context\Visitor\VisitorInterface[]  */
+    protected array $prefixVisitors = [];
 
-    /**
-     * @var \Sastrawi\Stemmer\Context\Visitor\VisitorInterface[]
-     */
-    protected $visitors = array();
+    protected string $result;
 
-    /**
-     * @var \Sastrawi\Stemmer\Context\Visitor\VisitorInterface[]
-     */
-    protected $suffixVisitors = array();
-
-    /**
-     * @var \Sastrawi\Stemmer\Context\Visitor\VisitorInterface[]
-     */
-    protected $prefixVisitors = array();
-
-    /**
-     * @var string
-     */
-    protected $result;
-
-    /**
-     * @param string                                            $originalWord
-     * @param \Sastrawi\Dictionary\DictionaryInterface          $dictionary
-     * @param \Sastrawi\Stemmer\Context\Visitor\VisitorProvider $visitorProvider
-     */
     public function __construct(
-        $originalWord,
-        DictionaryInterface $dictionary,
-        Visitor\VisitorProvider $visitorProvider
+        protected string $originalWord,
+        protected DictionaryInterface $dictionary,
+        protected VisitorProvider $visitorProvider
     ) {
-        $this->originalWord = $originalWord;
         $this->currentWord  = $this->originalWord;
-        $this->dictionary   = $dictionary;
-        $this->visitorProvider = $visitorProvider;
 
         $this->initVisitors();
     }
 
-    protected function initVisitors()
+    protected function initVisitors(): void
     {
         $this->visitors       = $this->visitorProvider->getVisitors();
         $this->suffixVisitors = $this->visitorProvider->getSuffixVisitors();
         $this->prefixVisitors = $this->visitorProvider->getPrefixVisitors();
     }
 
-    public function setDictionary(DictionaryInterface $dictionary)
+    /**
+     * @api
+     */
+    public function setDictionary(DictionaryInterface $dictionary): void
     {
         $this->dictionary = $dictionary;
     }
 
-    public function getDictionary()
+    public function getDictionary(): DictionaryInterface
     {
         return $this->dictionary;
     }
 
-    public function getOriginalWord()
+    public function getOriginalWord(): string
     {
         return $this->originalWord;
     }
 
-    public function setCurrentWord($word)
+    public function setCurrentWord(string $word): void
     {
         $this->currentWord = $word;
     }
 
-    public function getCurrentWord()
+    public function getCurrentWord(): string
     {
         return $this->currentWord;
     }
 
-    public function stopProcess()
+    public function stopProcess(): void
     {
         $this->processIsStopped = true;
     }
 
-    public function processIsStopped()
+    public function processIsStopped(): bool
     {
         return $this->processIsStopped;
     }
 
-    public function addRemoval(RemovalInterface $removal)
+    public function addRemoval(RemovalInterface $removal): void
     {
         $this->removals[] = $removal;
     }
 
-    public function getRemovals()
+    public function getRemovals(): array
     {
         return $this->removals;
     }
 
-    public function getResult()
+    public function getResult(): string
     {
         return $this->result;
     }
 
     /**
      * Execute stemming process; the result can be retrieved with getResult()
-     *
-     * @return void
      */
-    public function execute()
+    public function execute(): void
     {
         // step 1 - 5
         $this->startStemmingProcess();
 
         // step 6
-        if ($this->dictionary->contains($this->getCurrentWord())) {
-            $this->result = $this->getCurrentWord();
-        } else {
-            $this->result = $this->originalWord;
-        }
+        $this->result = $this->dictionary->contains($this->getCurrentWord()) ? $this->getCurrentWord() : $this->originalWord;
     }
 
-    /**
-     * @return void
-     */
-    protected function startStemmingProcess()
+    protected function startStemmingProcess(): void
     {
         // step 1
         if ($this->dictionary->contains($this->getCurrentWord())) {
@@ -173,7 +134,8 @@ class Context implements ContextInterface, VisitableInterface
 
         $this->acceptVisitors($this->visitors);
 
-        if ($this->dictionary->contains($this->getCurrentWord())) {
+        // todo: PhpStan is of the opinion that this is always false; which is not correct
+        if (true === $this->dictionary->contains($this->getCurrentWord())) {
             return;
         }
 
@@ -194,12 +156,12 @@ class Context implements ContextInterface, VisitableInterface
             $this->removeSuffixes();
             if ($this->dictionary->contains($this->getCurrentWord())) {
                 return;
-            } else {
-                // if the trial is failed, restore the original word
-                // and continue to normal rule precedence (suffix first, prefix afterwards)
-                $this->setCurrentWord($this->originalWord);
-                $this->removals = array();
             }
+
+            // if the trial is failed, restore the original word
+            // and continue to normal rule precedence (suffix first, prefix afterward)
+            $this->setCurrentWord($this->originalWord);
+            $this->removals = [];
         }
 
         // step 2, 3
@@ -218,9 +180,9 @@ class Context implements ContextInterface, VisitableInterface
         $this->loopPengembalianAkhiran();
     }
 
-    protected function removePrefixes()
+    protected function removePrefixes(): void
     {
-        for ($i = 0; $i < 3; $i++) {
+        for ($i = 0; $i < 3; ++$i) {
             $this->acceptPrefixVisitors($this->prefixVisitors);
             if ($this->dictionary->contains($this->getCurrentWord())) {
                 return;
@@ -228,17 +190,20 @@ class Context implements ContextInterface, VisitableInterface
         }
     }
 
-    protected function removeSuffixes()
+    protected function removeSuffixes(): void
     {
         $this->acceptVisitors($this->suffixVisitors);
     }
 
-    public function accept(VisitorInterface $visitor)
+    public function accept(VisitorInterface $visitor): void
     {
         $visitor->visit($this);
     }
 
-    protected function acceptVisitors(array $visitors)
+    /**
+     * @param \Sastrawi\Stemmer\Context\Visitor\VisitorInterface[] $visitors
+     */
+    protected function acceptVisitors(array $visitors): ?string
     {
         foreach ($visitors as $visitor) {
             $this->accept($visitor);
@@ -251,9 +216,14 @@ class Context implements ContextInterface, VisitableInterface
                 return $this->getCurrentWord();
             }
         }
+
+        return null;
     }
 
-    protected function acceptPrefixVisitors(array $visitors)
+    /**
+     * @param \Sastrawi\Stemmer\Context\Visitor\VisitorInterface[] $visitors
+     */
+    protected function acceptPrefixVisitors(array $visitors): ?string
     {
         $removalCount = count($this->removals);
         foreach ($visitors as $visitor) {
@@ -268,15 +238,17 @@ class Context implements ContextInterface, VisitableInterface
             }
 
             if (count($this->removals) > $removalCount) {
-                return;
+                return null;
             }
         }
+
+        return null;
     }
 
     /**
      * ECS Loop Pengembalian Akhiran
      */
-    public function loopPengembalianAkhiran()
+    public function loopPengembalianAkhiran(): void
     {
         // restore prefix to form [DP+[DP+[DP]]] + Root word
         $this->restorePrefix();
@@ -290,7 +262,7 @@ class Context implements ContextInterface, VisitableInterface
                 continue;
             }
 
-            if ($removal->getRemovedPart() == 'kan') {
+            if ('kan' === $removal->getRemovedPart()) {
                 $this->setCurrentWord($removal->getResult() . 'k');
 
                 // step 4, 5
@@ -316,35 +288,36 @@ class Context implements ContextInterface, VisitableInterface
     }
 
     /**
-     * Check wether the removed part is a suffix
-     *
-     * @param  \Sastrawi\Stemmer\Context\RemovalInterface $removal
-     * @return boolean
+     * Check whether the removed part is a suffix
      */
-    protected function isSuffixRemoval(RemovalInterface $removal)
+    protected function isSuffixRemoval(RemovalInterface $removal): bool
     {
-        return $removal->getAffixType() == 'DS'
-            || $removal->getAffixType() == 'PP'
-            || $removal->getAffixType() == 'P';
+        if ('DS' === $removal->getAffixType()) {
+            return true;
+        }
+
+        if ('PP' === $removal->getAffixType()) {
+            return true;
+        }
+
+        return 'P' === $removal->getAffixType();
     }
 
     /**
      * Restore prefix to proceed with ECS loop pengembalian akhiran
-     *
-     * @return void
      */
-    public function restorePrefix()
+    public function restorePrefix(): void
     {
-        foreach ($this->removals as $i => $removal) {
-            if ($removal->getAffixType() == 'DP') {
-                // return the word before precoding (the subject of first prefix removal)
+        foreach ($this->removals as $removal) {
+            if ('DP' === $removal->getAffixType()) {
+                // return the word before pre-coding (the subject of first prefix removal)
                 $this->setCurrentWord($removal->getSubject());
                 break;
             }
         }
 
         foreach ($this->removals as $i => $removal) {
-            if ($removal->getAffixType() == 'DP') {
+            if ('DP' === $removal->getAffixType()) {
                 unset($this->removals[$i]);
             }
         }

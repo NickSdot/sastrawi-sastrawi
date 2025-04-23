@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Sastrawi (https://github.com/sastrawi/sastrawi)
  *
@@ -8,20 +11,24 @@
 
 namespace Sastrawi\Morphology\Disambiguator;
 
+use function preg_match;
+
 /**
  * Disambiguate Prefix Rule 30c
  * Rule 30c : pengV -> pengV- where V = 'e'
  */
-class DisambiguatorPrefixRule30c implements DisambiguatorInterface
+final class DisambiguatorPrefixRule30c implements DisambiguatorInterface
 {
     /**
      * Disambiguate Prefix Rule 30c
      * Rule 30a : peng-V -> pengV- where V = 'e'
      */
-    public function disambiguate($word)
+    public function disambiguate(string $word): ?string
     {
-        if (preg_match('/^penge(.*)$/', $word, $matches)) {
+        if (1 === preg_match('/^penge(.*)$/', $word, $matches)) {
             return $matches[1];
         }
+
+        return null;
     }
 }

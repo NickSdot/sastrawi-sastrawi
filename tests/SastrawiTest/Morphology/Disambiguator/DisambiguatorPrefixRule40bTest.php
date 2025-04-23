@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Sastrawi (https://github.com/sastrawi/sastrawi)
  *
@@ -8,22 +11,27 @@
 
 namespace SastrawiTest\Morphology\Disambiguator;
 
+use PHPUnit\Framework\TestCase;
+use Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule40b;
+
 /**
  * Disambiguate Prefix Rule 40b (CC infix rules)
  * Rule 40b : CinV -> CV
  */
 
-class DisambiguatorPrefixRule40bTest extends \PHPUnit_Framework_TestCase
+final class DisambiguatorPrefixRule40bTest extends TestCase
 {
-    public function setUp()
+    public DisambiguatorPrefixRule40b $subject;
+
+    protected function setUp(): void
     {
-        $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule40b();
+        $this->subject = new DisambiguatorPrefixRule40b();
     }
 
-    public function testDisambiguate()
+    public function testDisambiguate(): void
     {
-        $this->assertEquals('kerja', $this->subject->disambiguate('kinerja'));
-        $this->assertEquals('sambung', $this->subject->disambiguate('sinambung'));
-        $this->assertEquals('tambah', $this->subject->disambiguate('tinambah'));
+        self::assertSame('kerja', $this->subject->disambiguate('kinerja'));
+        self::assertSame('sambung', $this->subject->disambiguate('sinambung'));
+        self::assertSame('tambah', $this->subject->disambiguate('tinambah'));
     }
 }

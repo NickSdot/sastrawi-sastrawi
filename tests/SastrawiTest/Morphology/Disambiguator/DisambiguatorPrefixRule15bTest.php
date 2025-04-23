@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Sastrawi (https://github.com/sastrawi/sastrawi)
  *
@@ -8,22 +11,27 @@
 
 namespace SastrawiTest\Morphology\Disambiguator;
 
+use PHPUnit\Framework\TestCase;
+use Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule15b;
+
 /**
  * Disambiguate Prefix Rule 15b
  * Rule 15 : men{V} -> me-t{V}
  */
-class DisambiguatorPrefixRule15bTest extends \PHPUnit_Framework_TestCase
+final class DisambiguatorPrefixRule15bTest extends TestCase
 {
-    public function setUp()
+    public DisambiguatorPrefixRule15b $subject;
+
+    protected function setUp(): void
     {
-        $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule15b();
+        $this->subject = new DisambiguatorPrefixRule15b();
     }
 
-    public function testDisambiguate()
+    public function testDisambiguate(): void
     {
-        $this->assertEquals('tulis', $this->subject->disambiguate('menulis'));
-        $this->assertEquals('tari', $this->subject->disambiguate('menari'));
+        self::assertSame('tulis', $this->subject->disambiguate('menulis'));
+        self::assertSame('tari', $this->subject->disambiguate('menari'));
 
-        $this->assertNull($this->subject->disambiguate('menyayangi'));
+        self::assertNull($this->subject->disambiguate('menyayangi'));
     }
 }

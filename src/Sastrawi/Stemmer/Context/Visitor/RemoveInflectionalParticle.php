@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Sastrawi (https://github.com/sastrawi/sastrawi)
  *
@@ -11,40 +14,51 @@ namespace Sastrawi\Stemmer\Context\Visitor;
 use Sastrawi\Stemmer\Context\ContextInterface;
 use Sastrawi\Stemmer\Context\Removal;
 
+use function preg_replace;
+use function sprintf;
+
 /**
  * Remove Inflectional particle.
  *
  * Asian J. (2007) “Effective Techniques for Indonesian Text Retrieval”. page 60
  * @link http://researchbank.rmit.edu.au/eserv/rmit:6312/Asian.pdf
  */
-class RemoveInflectionalParticle implements VisitorInterface
+final class RemoveInflectionalParticle implements VisitorInterface
 {
-    public function visit(ContextInterface $context)
+    public function visit(ContextInterface $context): void
     {
-        $result = $this->remove($context->getCurrentWord());
-
-        if ($result != $context->getCurrentWord()) {
-            $removedPart = preg_replace("/$result/", '', $context->getCurrentWord(), 1);
-
-            $removal = new Removal(
-                $this,
-                $context->getCurrentWord(),
-                $result,
-                $removedPart,
-                'P'
-            );
-
-            $context->addRemoval($removal);
-            $context->setCurrentWord($result);
+        if ($context->getCurrentWord() === $result = $this->remove($context->getCurrentWord())) {
+            return;
         }
+
+        $removedPart = preg_replace(sprintf('/%s/', $result), '', $context->getCurrentWord(), 1);
+
+        if (null === $removedPart) {
+            throw new \RuntimeException('Could not get removed word part.');
+        }
+
+        $removal = new Removal(
+            $this,
+            $context->getCurrentWord(),
+            $result,
+            $removedPart,
+            'P'
+        );
+
+        $context->addRemoval($removal);
+        $context->setCurrentWord($result);
+
     }
 
     /**
      * Remove inflectional particle : lah|kah|tah|pun
-     * @param string $word
      */
-    public function remove($word)
+    public function remove(string $word): string
     {
-        return preg_replace('/-*(lah|kah|tah|pun)$/', '', $word, 1);
+        if (null === $result = preg_replace('/-*(lah|kah|tah|pun)$/', '', $word, 1)) {
+            throw new \RuntimeException(sprintf("The word '%s' does not exist", $word));
+        }
+
+        return $result;
     }
 }

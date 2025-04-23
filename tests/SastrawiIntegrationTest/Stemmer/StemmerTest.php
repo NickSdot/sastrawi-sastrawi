@@ -22,7 +22,7 @@ final class StemmerTest extends TestCase
     #[DataProvider('stemDataProvider')]
     public function testStem(string $word, string $stem): void
     {
-        self::assertEquals($stem, $this->stemmer->stem($word));
+        self::assertSame($stem, $this->stemmer->stem($word));
     }
 
 

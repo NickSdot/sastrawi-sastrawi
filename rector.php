@@ -1,6 +1,8 @@
 <?php
 
+use Rector\CodeQuality\Rector\Identical\SimplifyBoolIdenticalTrueRector;
 use Rector\Config\RectorConfig;
+use Rector\PHPUnit\CodeQuality\Rector\Class_\PreferPHPUnitThisCallRector;
 
 return RectorConfig::configure()
     ->withPaths([
@@ -20,4 +22,8 @@ return RectorConfig::configure()
         earlyReturn: true,
         strictBooleans: true,
         phpunitCodeQuality: true,
-    );
+    )
+    ->withSkip([
+        SimplifyBoolIdenticalTrueRector::class,
+        PreferPHPUnitThisCallRector::class,
+    ]);

@@ -28,8 +28,8 @@ final class DisambiguatorPrefixRule21aTest extends TestCase
 
     public function testDisambiguate(): void
     {
-        self::assertEquals('adilan', $this->subject->disambiguate('peradilan'));
-        self::assertEquals('undikan', $this->subject->disambiguate('perundikan'));
+        self::assertSame('adilan', $this->subject->disambiguate('peradilan'));
+        self::assertSame('undikan', $this->subject->disambiguate('perundikan'));
         self::assertNull($this->subject->disambiguate('perjudikan'));
     }
 }

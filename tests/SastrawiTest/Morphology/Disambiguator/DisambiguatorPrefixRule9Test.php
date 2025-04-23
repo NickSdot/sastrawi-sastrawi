@@ -29,7 +29,7 @@ final class DisambiguatorPrefixRule9Test extends TestCase
     public function testDisambiguate(): void
     {
         // todo: need a real world example
-        self::assertEquals('terbang', $this->subject->disambiguate('teterbang'));
+        self::assertSame('terbang', $this->subject->disambiguate('teterbang'));
         self::assertNull($this->subject->disambiguate('terperuk'));
     }
 }

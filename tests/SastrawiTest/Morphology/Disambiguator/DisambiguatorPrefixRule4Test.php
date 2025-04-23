@@ -28,7 +28,7 @@ final class DisambiguatorPrefixRule4Test extends TestCase
 
     public function testDisambiguate(): void
     {
-        self::assertEquals('ajar', $this->subject->disambiguate('belajar'));
+        self::assertSame('ajar', $this->subject->disambiguate('belajar'));
         self::assertNull($this->subject->disambiguate('bekerja'));
     }
 }

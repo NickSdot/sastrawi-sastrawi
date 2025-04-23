@@ -29,6 +29,6 @@ final class ArrayCacheTest extends TestCase
 
         $this->arrayCache->set('abc', 'foo');
         self::assertTrue($this->arrayCache->has('abc'));
-        self::assertEquals('foo', $this->arrayCache->get('abc'));
+        self::assertSame('foo', $this->arrayCache->get('abc'));
     }
 }

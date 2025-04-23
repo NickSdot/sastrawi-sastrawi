@@ -29,6 +29,6 @@ final class DisambiguatorPrefixRule35Test extends TestCase
 
     public function testDisambiguate(): void
     {
-        self::assertEquals('percaya', $this->subject->disambiguate('terpercaya'));
+        self::assertSame('percaya', $this->subject->disambiguate('terpercaya'));
     }
 }

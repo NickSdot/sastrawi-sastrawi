@@ -36,13 +36,13 @@ final class DisambiguatorPrefixRule14Test extends TestCase
 
     public function testDisambiguate(): void
     {
-        self::assertEquals('cantum', $this->subject->disambiguate('mencantum'));
-        self::assertEquals('duduki', $this->subject->disambiguate('menduduki'));
-        self::assertEquals('jemput', $this->subject->disambiguate('menjemput'));
-        self::assertEquals('syukuri', $this->subject->disambiguate('mensyukuri'));
-        self::assertEquals('syaratkan', $this->subject->disambiguate('mensyaratkan'));
-        self::assertEquals('taati', $this->subject->disambiguate('mentaati'));
-        self::assertEquals('ziarahi', $this->subject->disambiguate('menziarahi'));
+        self::assertSame('cantum', $this->subject->disambiguate('mencantum'));
+        self::assertSame('duduki', $this->subject->disambiguate('menduduki'));
+        self::assertSame('jemput', $this->subject->disambiguate('menjemput'));
+        self::assertSame('syukuri', $this->subject->disambiguate('mensyukuri'));
+        self::assertSame('syaratkan', $this->subject->disambiguate('mensyaratkan'));
+        self::assertSame('taati', $this->subject->disambiguate('mentaati'));
+        self::assertSame('ziarahi', $this->subject->disambiguate('menziarahi'));
 
         self::assertNull($this->subject->disambiguate('menyayangi'));
     }

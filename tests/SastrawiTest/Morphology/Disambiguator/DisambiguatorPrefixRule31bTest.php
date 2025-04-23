@@ -30,9 +30,9 @@ final class DisambiguatorPrefixRule31bTest extends TestCase
 
     public function testDisambiguate(): void
     {
-        self::assertEquals('salut', $this->subject->disambiguate('penyalut'));
-        self::assertEquals('sekat', $this->subject->disambiguate('penyekat'));
-        self::assertEquals('sikat', $this->subject->disambiguate('penyikat'));
-        self::assertEquals('sukat', $this->subject->disambiguate('penyukat'));
+        self::assertSame('salut', $this->subject->disambiguate('penyalut'));
+        self::assertSame('sekat', $this->subject->disambiguate('penyekat'));
+        self::assertSame('sikat', $this->subject->disambiguate('penyikat'));
+        self::assertSame('sukat', $this->subject->disambiguate('penyukat'));
     }
 }

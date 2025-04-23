@@ -29,6 +29,6 @@ final class DisambiguatorPrefixRule3Test extends TestCase
 
     public function testDisambiguate(): void
     {
-        self::assertEquals('hierarki', $this->subject->disambiguate('berhierarki'));
+        self::assertSame('hierarki', $this->subject->disambiguate('berhierarki'));
     }
 }

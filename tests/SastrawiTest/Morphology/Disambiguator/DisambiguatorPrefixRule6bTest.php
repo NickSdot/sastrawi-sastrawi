@@ -28,7 +28,7 @@ final class DisambiguatorPrefixRule6bTest extends TestCase
 
     public function testDisambiguate(): void
     {
-        self::assertEquals('racun', $this->subject->disambiguate('teracun'));
+        self::assertSame('racun', $this->subject->disambiguate('teracun'));
         self::assertNull($this->subject->disambiguate('terbalik'));
     }
 }

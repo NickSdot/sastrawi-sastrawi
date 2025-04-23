@@ -20,7 +20,6 @@ class DisambiguatorPrefixRule3 implements DisambiguatorInterface
     /**
      * Disambiguate Prefix Rule 3
      * Rule 3 : berCAerV -> ber-CAerV where C  !==  'r'
-     * return string|null
      */
     public function disambiguate(string $word): ?string
     {

@@ -25,7 +25,10 @@ abstract class AbstractDisambiguatePrefixRule implements VisitorInterface
         $result = null;
 
         foreach ($this->disambiguators as $disambiguator) {
-            $result = $disambiguator->disambiguate($context->getCurrentWord());
+
+            if (null === $result = $disambiguator->disambiguate($context->getCurrentWord())) {
+                continue;
+            }
 
             if ($context->getDictionary()->contains($result)) {
                 break;

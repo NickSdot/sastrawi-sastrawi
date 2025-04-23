@@ -22,12 +22,8 @@ interface DictionaryInterface extends Countable
 {
     /**
      * Checks whether a word is contained in the dictionary.
-     *
-     * @param string|null $word The word to search for.
-     *
-     * @return boolean TRUE if the dictionary contains the word, FALSE otherwise.
      */
-    public function contains(string|null $word): bool;
+    public function contains(string $word): bool;
 
     /**
      * Add a word to the dictionary

@@ -32,9 +32,8 @@ class ArrayDictionary implements DictionaryInterface
 
     /**
      * {@inheritdoc}
-     * @todo: must this accept null?
      */
-    public function contains(string|null $word): bool
+    public function contains(string $word): bool
     {
         return isset($this->words[$word]);
     }

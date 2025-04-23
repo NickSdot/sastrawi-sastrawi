@@ -26,7 +26,7 @@ final class DisambiguatorPrefixRule19Test extends \PHPUnit\Framework\TestCase
 
     public function testDisambiguate(): void
     {
-        $this->assertEquals('proteksi', $this->subject->disambiguate('memproteksi'));
-        $this->assertEquals('patroli', $this->subject->disambiguate('mempatroli'));
+        self::assertEquals('proteksi', $this->subject->disambiguate('memproteksi'));
+        self::assertEquals('patroli', $this->subject->disambiguate('mempatroli'));
     }
 }

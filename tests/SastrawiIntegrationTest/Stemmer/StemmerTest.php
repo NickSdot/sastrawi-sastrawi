@@ -19,7 +19,7 @@ final class StemmerTest extends \PHPUnit\Framework\TestCase
     #[\PHPUnit\Framework\Attributes\DataProvider('stemDataProvider')]
     public function testStem(string $word, string $stem): void
     {
-        $this->assertEquals($stem, $this->stemmer->stem($word));
+        self::assertEquals($stem, $this->stemmer->stem($word));
     }
 
     public static function stemDataProvider(): \Iterator

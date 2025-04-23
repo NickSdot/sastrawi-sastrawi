@@ -26,6 +26,6 @@ final class DisambiguatorPrefixRule13bTest extends \PHPUnit\Framework\TestCase
 
     public function testDisambiguate(): void
     {
-        $this->assertEquals('pakai', $this->subject->disambiguate('memakai'));
+        self::assertEquals('pakai', $this->subject->disambiguate('memakai'));
     }
 }

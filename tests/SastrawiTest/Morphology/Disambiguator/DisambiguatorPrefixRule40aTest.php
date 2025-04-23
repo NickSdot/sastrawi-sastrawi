@@ -26,6 +26,6 @@ final class DisambiguatorPrefixRule40aTest extends \PHPUnit\Framework\TestCase
 
     public function testDisambiguate(): void
     {
-        $this->assertEquals('pinang', $this->subject->disambiguate('pinang'));
+        self::assertEquals('pinang', $this->subject->disambiguate('pinang'));
     }
 }

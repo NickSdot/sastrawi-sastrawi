@@ -25,6 +25,6 @@ final class DisambiguatorPrefixRule23Test extends \PHPUnit\Framework\TestCase
 
     public function testDisambiguate(): void
     {
-        $this->assertEquals('tahan', $this->subject->disambiguate('pertahan'));
+        self::assertEquals('tahan', $this->subject->disambiguate('pertahan'));
     }
 }

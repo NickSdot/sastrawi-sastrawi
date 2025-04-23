@@ -17,21 +17,21 @@ final class ArrayDictionaryTest extends \PHPUnit\Framework\TestCase
 
     public function testDictionaryImplementsDictionaryInterface(): void
     {
-        $this->assertInstanceOf(\Sastrawi\Dictionary\DictionaryInterface::class, $this->dictionary);
+        self::assertInstanceOf(\Sastrawi\Dictionary\DictionaryInterface::class, $this->dictionary);
     }
 
     public function testAddAndContain(): void
     {
-        $this->assertFalse($this->dictionary->contains('word'));
+        self::assertFalse($this->dictionary->contains('word'));
         $this->dictionary->add('word');
-        $this->assertTrue($this->dictionary->contains('word'));
+        self::assertTrue($this->dictionary->contains('word'));
     }
 
     public function testAddCountWord(): void
     {
-        $this->assertCount(0, $this->dictionary);
+        self::assertCount(0, $this->dictionary);
         $this->dictionary->add('word');
-        $this->assertCount(1, $this->dictionary);
+        self::assertCount(1, $this->dictionary);
     }
 
     /**
@@ -40,9 +40,9 @@ final class ArrayDictionaryTest extends \PHPUnit\Framework\TestCase
      */
     public function testAddWordIgnoreEmptyString(): void
     {
-        $this->assertCount(0, $this->dictionary);
+        self::assertCount(0, $this->dictionary);
         $this->dictionary->add('');
-        $this->assertCount(0, $this->dictionary);
+        self::assertCount(0, $this->dictionary);
     }
 
     public function testAddWords(): void
@@ -53,9 +53,9 @@ final class ArrayDictionaryTest extends \PHPUnit\Framework\TestCase
         ];
 
         $this->dictionary->addWords($words);
-        $this->assertCount(2, $this->dictionary);
-        $this->assertTrue($this->dictionary->contains('word1'));
-        $this->assertTrue($this->dictionary->contains('word2'));
+        self::assertCount(2, $this->dictionary);
+        self::assertTrue($this->dictionary->contains('word1'));
+        self::assertTrue($this->dictionary->contains('word2'));
     }
 
     public function testConstructorPreserveWords(): void
@@ -66,8 +66,8 @@ final class ArrayDictionaryTest extends \PHPUnit\Framework\TestCase
         ];
 
         $dictionary = new ArrayDictionary($words);
-        $this->assertCount(2, $dictionary);
-        $this->assertTrue($dictionary->contains('word1'));
-        $this->assertTrue($dictionary->contains('word2'));
+        self::assertCount(2, $dictionary);
+        self::assertTrue($dictionary->contains('word1'));
+        self::assertTrue($dictionary->contains('word2'));
     }
 }

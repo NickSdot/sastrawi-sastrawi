@@ -15,16 +15,16 @@ final class ArrayCacheTest extends \PHPUnit\Framework\TestCase
 
     public function testInstanceOfCacheInterface(): void
     {
-        $this->assertInstanceOf(\Sastrawi\Stemmer\Cache\CacheInterface::class, $this->arrayCache);
+        self::assertInstanceOf(\Sastrawi\Stemmer\Cache\CacheInterface::class, $this->arrayCache);
     }
 
     public function testSetGetHas(): void
     {
-        $this->assertFalse($this->arrayCache->has('abc'));
-        $this->assertNull($this->arrayCache->get('abc'));
+        self::assertFalse($this->arrayCache->has('abc'));
+        self::assertNull($this->arrayCache->get('abc'));
 
         $this->arrayCache->set('abc', 123);
-        $this->assertTrue($this->arrayCache->has('abc'));
-        $this->assertEquals(123, $this->arrayCache->get('abc'));
+        self::assertTrue($this->arrayCache->has('abc'));
+        self::assertEquals(123, $this->arrayCache->get('abc'));
     }
 }

@@ -25,6 +25,6 @@ final class DisambiguatorPrefixRule17aTest extends \PHPUnit\Framework\TestCase
 
     public function testDisambiguate(): void
     {
-        $this->assertEquals('erat', $this->subject->disambiguate('mengerat'));
+        self::assertEquals('erat', $this->subject->disambiguate('mengerat'));
     }
 }

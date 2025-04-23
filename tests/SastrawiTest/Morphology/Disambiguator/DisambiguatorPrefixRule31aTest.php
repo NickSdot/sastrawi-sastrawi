@@ -26,6 +26,6 @@ final class DisambiguatorPrefixRule31aTest extends \PHPUnit\Framework\TestCase
 
     public function testDisambiguate(): void
     {
-        $this->assertEquals('nyanyi', $this->subject->disambiguate('penyanyi'));
+        self::assertEquals('nyanyi', $this->subject->disambiguate('penyanyi'));
     }
 }

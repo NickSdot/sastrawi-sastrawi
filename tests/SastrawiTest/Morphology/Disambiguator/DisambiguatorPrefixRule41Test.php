@@ -26,6 +26,6 @@ final class DisambiguatorPrefixRule41Test extends \PHPUnit\Framework\TestCase
 
     public function testDisambiguate(): void
     {
-        $this->assertEquals('miliki', $this->subject->disambiguate('kumiliki'));
+        self::assertEquals('miliki', $this->subject->disambiguate('kumiliki'));
     }
 }

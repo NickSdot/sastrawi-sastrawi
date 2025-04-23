@@ -10,6 +10,8 @@ declare(strict_types=1);
  */
 namespace SastrawiTest\Morphology\Disambiguator;
 
+use Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule12;
+
 /**
  * Disambiguate Prefix Rule 12
  * Nazief and Adriani Rule 12 : mempe{r|l} -> mem-pe{r|l}
@@ -17,18 +19,18 @@ namespace SastrawiTest\Morphology\Disambiguator;
  */
 final class DisambiguatorPrefixRule12Test extends \PHPUnit\Framework\TestCase
 {
-    public $subject;
+    public DisambiguatorPrefixRule12 $subject;
 
     protected function setUp(): void
     {
-        $this->subject = new \Sastrawi\Morphology\Disambiguator\DisambiguatorPrefixRule12();
+        $this->subject = new DisambiguatorPrefixRule12();
     }
 
     public function testDisambiguate(): void
     {
-        $this->assertEquals('pengaruhi', $this->subject->disambiguate('mempengaruhi'));
-        $this->assertEquals('perbaharui', $this->subject->disambiguate('memperbaharui'));
+        self::assertEquals('pengaruhi', $this->subject->disambiguate('mempengaruhi'));
+        self::assertEquals('perbaharui', $this->subject->disambiguate('memperbaharui'));
 
-        $this->assertNull($this->subject->disambiguate('mewarnai'));
+        self::assertNull($this->subject->disambiguate('mewarnai'));
     }
 }

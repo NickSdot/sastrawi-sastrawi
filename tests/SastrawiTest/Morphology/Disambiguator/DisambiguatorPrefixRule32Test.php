@@ -26,11 +26,11 @@ final class DisambiguatorPrefixRule32Test extends \PHPUnit\Framework\TestCase
 
     public function testDisambiguate(): void
     {
-        $this->assertEquals('ajar', $this->subject->disambiguate('pelajar'));
-        $this->assertEquals('layan', $this->subject->disambiguate('pelayan'));
-        $this->assertEquals('ledak', $this->subject->disambiguate('peledak'));
-        $this->assertEquals('lirik', $this->subject->disambiguate('pelirik'));
-        $this->assertEquals('lobi', $this->subject->disambiguate('pelobi'));
-        $this->assertEquals('lupa', $this->subject->disambiguate('pelupa'));
+        self::assertEquals('ajar', $this->subject->disambiguate('pelajar'));
+        self::assertEquals('layan', $this->subject->disambiguate('pelayan'));
+        self::assertEquals('ledak', $this->subject->disambiguate('peledak'));
+        self::assertEquals('lirik', $this->subject->disambiguate('pelirik'));
+        self::assertEquals('lobi', $this->subject->disambiguate('pelobi'));
+        self::assertEquals('lupa', $this->subject->disambiguate('pelupa'));
     }
 }

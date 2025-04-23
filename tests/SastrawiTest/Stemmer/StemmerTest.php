@@ -19,7 +19,7 @@ final class StemmerTest extends \PHPUnit\Framework\TestCase
 
     public function testStemmerImplementsStemmerInterface(): void
     {
-        $this->assertInstanceOf(\Sastrawi\Stemmer\StemmerInterface::class, $this->stemmer);
+        self::assertInstanceOf(\Sastrawi\Stemmer\StemmerInterface::class, $this->stemmer);
     }
 
     /**
@@ -27,8 +27,8 @@ final class StemmerTest extends \PHPUnit\Framework\TestCase
      */
     public function testStemReturnImmediatelyOnShortWord(): void
     {
-        $this->assertSame('mei', $this->stemmer->stem('mei'));
-        $this->assertSame('bui', $this->stemmer->stem('bui'));
+        self::assertSame('mei', $this->stemmer->stem('mei'));
+        self::assertSame('bui', $this->stemmer->stem('bui'));
     }
 
     /**
@@ -38,8 +38,8 @@ final class StemmerTest extends \PHPUnit\Framework\TestCase
     public function testStemReturnImmediatelyIfFoundOnDictionary(): void
     {
         $this->stemmer->getDictionary()->add('nila');
-        $this->assertSame('nila', $this->stemmer->stem('nilai'));
+        self::assertSame('nila', $this->stemmer->stem('nilai'));
         $this->stemmer->getDictionary()->add('nilai');
-        $this->assertSame('nilai', $this->stemmer->stem('nilai'));
+        self::assertSame('nilai', $this->stemmer->stem('nilai'));
     }
 }

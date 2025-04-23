@@ -26,7 +26,7 @@ final class DisambiguatorPrefixRule36Test extends \PHPUnit\Framework\TestCase
 
     public function testDisambiguate(): void
     {
-        $this->assertEquals('kerja', $this->subject->disambiguate('pekerja'));
-        $this->assertEquals('serta', $this->subject->disambiguate('peserta'));
+        self::assertEquals('kerja', $this->subject->disambiguate('pekerja'));
+        self::assertEquals('serta', $this->subject->disambiguate('peserta'));
     }
 }

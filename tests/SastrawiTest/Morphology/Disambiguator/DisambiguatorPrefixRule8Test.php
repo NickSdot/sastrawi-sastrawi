@@ -25,8 +25,8 @@ final class DisambiguatorPrefixRule8Test extends \PHPUnit\Framework\TestCase
 
     public function testDisambiguate(): void
     {
-        $this->assertEquals('tangkap', $this->subject->disambiguate('tertangkap'));
-        $this->assertNull($this->subject->disambiguate('teracun'));
-        $this->assertNull($this->subject->disambiguate('terperuk'));
+        self::assertEquals('tangkap', $this->subject->disambiguate('tertangkap'));
+        self::assertNull($this->subject->disambiguate('teracun'));
+        self::assertNull($this->subject->disambiguate('terperuk'));
     }
 }

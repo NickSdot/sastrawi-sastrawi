@@ -18,15 +18,15 @@ final class InvalidAffixPairSpecificationTest extends \PHPUnit\Framework\TestCas
      */
     public function testContainsInvalidAffixPair(): void
     {
-        $this->assertFalse($this->specification->isSatisfiedBy('memberikan'));
-        $this->assertFalse($this->specification->isSatisfiedBy('ketahui'));
+        self::assertFalse($this->specification->isSatisfiedBy('memberikan'));
+        self::assertFalse($this->specification->isSatisfiedBy('ketahui'));
 
-        $this->assertTrue($this->specification->isSatisfiedBy('berjatuhi'));
-        $this->assertTrue($this->specification->isSatisfiedBy('dipukulan'));
-        $this->assertTrue($this->specification->isSatisfiedBy('ketiduri'));
-        $this->assertTrue($this->specification->isSatisfiedBy('ketidurkan'));
-        $this->assertTrue($this->specification->isSatisfiedBy('menduaan'));
-        $this->assertTrue($this->specification->isSatisfiedBy('terduaan'));
-        $this->assertTrue($this->specification->isSatisfiedBy('perkataan')); // wtf?
+        self::assertTrue($this->specification->isSatisfiedBy('berjatuhi'));
+        self::assertTrue($this->specification->isSatisfiedBy('dipukulan'));
+        self::assertTrue($this->specification->isSatisfiedBy('ketiduri'));
+        self::assertTrue($this->specification->isSatisfiedBy('ketidurkan'));
+        self::assertTrue($this->specification->isSatisfiedBy('menduaan'));
+        self::assertTrue($this->specification->isSatisfiedBy('terduaan'));
+        self::assertTrue($this->specification->isSatisfiedBy('perkataan')); // wtf?
     }
 }

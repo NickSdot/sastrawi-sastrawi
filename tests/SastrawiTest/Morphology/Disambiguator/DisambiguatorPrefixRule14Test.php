@@ -33,14 +33,14 @@ final class DisambiguatorPrefixRule14Test extends \PHPUnit\Framework\TestCase
 
     public function testDisambiguate(): void
     {
-        $this->assertEquals('cantum', $this->subject->disambiguate('mencantum'));
-        $this->assertEquals('duduki', $this->subject->disambiguate('menduduki'));
-        $this->assertEquals('jemput', $this->subject->disambiguate('menjemput'));
-        $this->assertEquals('syukuri', $this->subject->disambiguate('mensyukuri'));
-        $this->assertEquals('syaratkan', $this->subject->disambiguate('mensyaratkan'));
-        $this->assertEquals('taati', $this->subject->disambiguate('mentaati'));
-        $this->assertEquals('ziarahi', $this->subject->disambiguate('menziarahi'));
+        self::assertEquals('cantum', $this->subject->disambiguate('mencantum'));
+        self::assertEquals('duduki', $this->subject->disambiguate('menduduki'));
+        self::assertEquals('jemput', $this->subject->disambiguate('menjemput'));
+        self::assertEquals('syukuri', $this->subject->disambiguate('mensyukuri'));
+        self::assertEquals('syaratkan', $this->subject->disambiguate('mensyaratkan'));
+        self::assertEquals('taati', $this->subject->disambiguate('mentaati'));
+        self::assertEquals('ziarahi', $this->subject->disambiguate('menziarahi'));
 
-        $this->assertNull($this->subject->disambiguate('menyayangi'));
+        self::assertNull($this->subject->disambiguate('menyayangi'));
     }
 }

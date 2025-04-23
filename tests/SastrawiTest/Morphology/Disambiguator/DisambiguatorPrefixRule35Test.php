@@ -26,6 +26,6 @@ final class DisambiguatorPrefixRule35Test extends \PHPUnit\Framework\TestCase
 
     public function testDisambiguate(): void
     {
-        $this->assertEquals('percaya', $this->subject->disambiguate('terpercaya'));
+        self::assertEquals('percaya', $this->subject->disambiguate('terpercaya'));
     }
 }

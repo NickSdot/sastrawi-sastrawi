@@ -26,6 +26,6 @@ final class DisambiguatorPrefixRule39aTest extends \PHPUnit\Framework\TestCase
 
     public function testDisambiguate(): void
     {
-        $this->assertEquals('pemain', $this->subject->disambiguate('pemain'));
+        self::assertEquals('pemain', $this->subject->disambiguate('pemain'));
     }
 }

@@ -26,6 +26,6 @@ final class DisambiguatorPrefixRule38aTest extends \PHPUnit\Framework\TestCase
 
     public function testDisambiguate(): void
     {
-        $this->assertEquals('pelawat', $this->subject->disambiguate('pelawat'));
+        self::assertEquals('pelawat', $this->subject->disambiguate('pelawat'));
     }
 }

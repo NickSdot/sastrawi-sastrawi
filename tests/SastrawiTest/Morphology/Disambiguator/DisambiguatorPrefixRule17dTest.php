@@ -25,6 +25,6 @@ final class DisambiguatorPrefixRule17dTest extends \PHPUnit\Framework\TestCase
 
     public function testDisambiguate(): void
     {
-        $this->assertEquals('ngerikan', $this->subject->disambiguate('mengerikan'));
+        self::assertEquals('ngerikan', $this->subject->disambiguate('mengerikan'));
     }
 }

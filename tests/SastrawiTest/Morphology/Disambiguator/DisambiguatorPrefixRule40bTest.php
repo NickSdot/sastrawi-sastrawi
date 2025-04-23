@@ -26,8 +26,8 @@ final class DisambiguatorPrefixRule40bTest extends \PHPUnit\Framework\TestCase
 
     public function testDisambiguate(): void
     {
-        $this->assertEquals('kerja', $this->subject->disambiguate('kinerja'));
-        $this->assertEquals('sambung', $this->subject->disambiguate('sinambung'));
-        $this->assertEquals('tambah', $this->subject->disambiguate('tinambah'));
+        self::assertEquals('kerja', $this->subject->disambiguate('kinerja'));
+        self::assertEquals('sambung', $this->subject->disambiguate('sinambung'));
+        self::assertEquals('tambah', $this->subject->disambiguate('tinambah'));
     }
 }

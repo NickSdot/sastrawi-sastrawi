@@ -26,11 +26,11 @@ final class DisambiguatorPrefixRule39bTest extends \PHPUnit\Framework\TestCase
 
     public function testDisambiguate(): void
     {
-        $this->assertEquals('tali', $this->subject->disambiguate('temali'));
-        $this->assertEquals('getar', $this->subject->disambiguate('gemetar'));
-        $this->assertEquals('guruh', $this->subject->disambiguate('gemuruh'));
-        $this->assertEquals('kerlip', $this->subject->disambiguate('kemerlip'));
-        $this->assertEquals('kerlap', $this->subject->disambiguate('kemerlap'));
-        $this->assertEquals('kelut', $this->subject->disambiguate('kemelut'));
+        self::assertEquals('tali', $this->subject->disambiguate('temali'));
+        self::assertEquals('getar', $this->subject->disambiguate('gemetar'));
+        self::assertEquals('guruh', $this->subject->disambiguate('gemuruh'));
+        self::assertEquals('kerlip', $this->subject->disambiguate('kemerlip'));
+        self::assertEquals('kerlap', $this->subject->disambiguate('kemerlap'));
+        self::assertEquals('kelut', $this->subject->disambiguate('kemelut'));
     }
 }

@@ -26,8 +26,8 @@ final class DisambiguatorPrefixRule30cTest extends \PHPUnit\Framework\TestCase
 
     public function testDisambiguate(): void
     {
-        $this->assertEquals('tahuan', $this->subject->disambiguate('pengetahuan'));
-        $this->assertEquals('blog', $this->subject->disambiguate('pengeblog'));
-        $this->assertEquals('test', $this->subject->disambiguate('pengetest'));
+        self::assertEquals('tahuan', $this->subject->disambiguate('pengetahuan'));
+        self::assertEquals('blog', $this->subject->disambiguate('pengeblog'));
+        self::assertEquals('test', $this->subject->disambiguate('pengetest'));
     }
 }

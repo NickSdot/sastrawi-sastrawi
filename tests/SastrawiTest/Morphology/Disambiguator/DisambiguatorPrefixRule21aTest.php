@@ -25,8 +25,8 @@ final class DisambiguatorPrefixRule21aTest extends \PHPUnit\Framework\TestCase
 
     public function testDisambiguate(): void
     {
-        $this->assertEquals('adilan', $this->subject->disambiguate('peradilan'));
-        $this->assertEquals('undikan', $this->subject->disambiguate('perundikan'));
-        $this->assertNull($this->subject->disambiguate('perjudikan'));
+        self::assertEquals('adilan', $this->subject->disambiguate('peradilan'));
+        self::assertEquals('undikan', $this->subject->disambiguate('perundikan'));
+        self::assertNull($this->subject->disambiguate('perjudikan'));
     }
 }

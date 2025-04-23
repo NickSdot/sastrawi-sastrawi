@@ -25,7 +25,7 @@ final class DisambiguatorPrefixRule1aTest extends \PHPUnit\Framework\TestCase
 
     public function testDisambiguate(): void
     {
-        $this->assertEquals('ia-ia', $this->subject->disambiguate('beria-ia'));
-        $this->assertNull($this->subject->disambiguate('berlari'));
+        self::assertEquals('ia-ia', $this->subject->disambiguate('beria-ia'));
+        self::assertNull($this->subject->disambiguate('berlari'));
     }
 }

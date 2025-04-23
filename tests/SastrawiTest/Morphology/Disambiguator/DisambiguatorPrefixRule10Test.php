@@ -25,11 +25,11 @@ final class DisambiguatorPrefixRule10Test extends \PHPUnit\Framework\TestCase
 
     public function testDisambiguate(): void
     {
-        $this->assertEquals('lalui', $this->subject->disambiguate('melalui'));
-        $this->assertEquals('racuni', $this->subject->disambiguate('meracuni'));
-        $this->assertEquals('warnai', $this->subject->disambiguate('mewarnai'));
-        $this->assertEquals('yakini', $this->subject->disambiguate('meyakini'));
+        self::assertEquals('lalui', $this->subject->disambiguate('melalui'));
+        self::assertEquals('racuni', $this->subject->disambiguate('meracuni'));
+        self::assertEquals('warnai', $this->subject->disambiguate('mewarnai'));
+        self::assertEquals('yakini', $this->subject->disambiguate('meyakini'));
 
-        $this->assertNull($this->subject->disambiguate('menyayangi'));
+        self::assertNull($this->subject->disambiguate('menyayangi'));
     }
 }

@@ -26,7 +26,7 @@ final class DisambiguatorPrefixRule9Test extends \PHPUnit\Framework\TestCase
     public function testDisambiguate(): void
     {
         //TODO - need a real world example
-        $this->assertEquals('terbang', $this->subject->disambiguate('teterbang'));
-        $this->assertNull($this->subject->disambiguate('terperuk'));
+        self::assertEquals('terbang', $this->subject->disambiguate('teterbang'));
+        self::assertNull($this->subject->disambiguate('terperuk'));
     }
 }

@@ -26,11 +26,11 @@ final class DisambiguatorPrefixRule16Test extends \PHPUnit\Framework\TestCase
 
     public function testDisambiguate(): void
     {
-        $this->assertEquals('gunakan', $this->subject->disambiguate('menggunakan'));
-        $this->assertEquals('hambat', $this->subject->disambiguate('menghambat'));
-        $this->assertEquals('qasar', $this->subject->disambiguate('mengqasar'));
-        $this->assertEquals('kritik', $this->subject->disambiguate('mengkritik'));
+        self::assertEquals('gunakan', $this->subject->disambiguate('menggunakan'));
+        self::assertEquals('hambat', $this->subject->disambiguate('menghambat'));
+        self::assertEquals('qasar', $this->subject->disambiguate('mengqasar'));
+        self::assertEquals('kritik', $this->subject->disambiguate('mengkritik'));
 
-        $this->assertNull($this->subject->disambiguate('mengira'));
+        self::assertNull($this->subject->disambiguate('mengira'));
     }
 }

@@ -26,10 +26,10 @@ final class DisambiguatorPrefixRule30bTest extends \PHPUnit\Framework\TestCase
 
     public function testDisambiguate(): void
     {
-        $this->assertEquals('kawal', $this->subject->disambiguate('pengawal'));
-        $this->assertEquals('ketat', $this->subject->disambiguate('pengetat'));
-        $this->assertEquals('kira', $this->subject->disambiguate('pengira'));
-        $this->assertEquals('korban', $this->subject->disambiguate('pengorban'));
-        $this->assertEquals('kuat', $this->subject->disambiguate('penguat'));
+        self::assertEquals('kawal', $this->subject->disambiguate('pengawal'));
+        self::assertEquals('ketat', $this->subject->disambiguate('pengetat'));
+        self::assertEquals('kira', $this->subject->disambiguate('pengira'));
+        self::assertEquals('korban', $this->subject->disambiguate('pengorban'));
+        self::assertEquals('kuat', $this->subject->disambiguate('penguat'));
     }
 }

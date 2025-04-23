@@ -12,7 +12,7 @@ namespace SastrawiTest\Morphology\Disambiguator;
 
 /**
  * Disambiguate Prefix Rule 36 (CS additional rules)
- * Rule 36 : peC1erC2 -> pe-C1erC2 where C1 != {r|w|y|l|m|n}
+ * Rule 36 : peC1erC2 -> pe-C1erC2 where C1  !==  {r|w|y|l|m|n}
  */
 
 final class DisambiguatorPrefixRule36Test extends \PHPUnit\Framework\TestCase

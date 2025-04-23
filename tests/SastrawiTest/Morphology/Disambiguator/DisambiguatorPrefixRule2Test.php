@@ -12,7 +12,7 @@ namespace SastrawiTest\Morphology\Disambiguator;
 
 /**
 * Disambiguate Prefix Rule 2
-* Rule 2 : berCAP -> ber-CAP where C != 'r' AND P != 'er'
+* Rule 2 : berCAP -> ber-CAP where C  !==  'r' AND P  !==  'er'
 */
 final class DisambiguatorPrefixRule2Test extends \PHPUnit\Framework\TestCase
 {

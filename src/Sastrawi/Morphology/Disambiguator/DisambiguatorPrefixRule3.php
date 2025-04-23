@@ -12,14 +12,14 @@ namespace Sastrawi\Morphology\Disambiguator;
 
 /**
 * Disambiguate Prefix Rule 3
-* Rule 3 : berCAerV -> ber-CAerV where C != 'r'
+* Rule 3 : berCAerV -> ber-CAerV where C  !==  'r'
 *
 */
 class DisambiguatorPrefixRule3 implements DisambiguatorInterface
 {
     /**
      * Disambiguate Prefix Rule 3
-     * Rule 3 : berCAerV -> ber-CAerV where C != 'r'
+     * Rule 3 : berCAerV -> ber-CAerV where C  !==  'r'
      * return string|null
      */
     public function disambiguate($word): ?string

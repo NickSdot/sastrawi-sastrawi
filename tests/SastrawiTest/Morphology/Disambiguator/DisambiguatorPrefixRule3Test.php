@@ -12,7 +12,7 @@ namespace SastrawiTest\Morphology\Disambiguator;
 
 /**
 * Disambiguate Prefix Rule 3
-* Rule 3 : berCAerV -> ber-CAerV where C != 'r'
+* Rule 3 : berCAerV -> ber-CAerV where C  !==  'r'
 *
 */
 final class DisambiguatorPrefixRule3Test extends \PHPUnit\Framework\TestCase

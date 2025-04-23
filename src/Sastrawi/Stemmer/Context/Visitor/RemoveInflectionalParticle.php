@@ -25,7 +25,7 @@ class RemoveInflectionalParticle implements VisitorInterface
     {
         $result = $this->remove($context->getCurrentWord());
 
-        if ($result != $context->getCurrentWord()) {
+        if ($result  !==  $context->getCurrentWord()) {
             $removedPart = preg_replace(sprintf('/%s/', $result), '', $context->getCurrentWord(), 1);
 
             $removal = new Removal(

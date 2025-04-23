@@ -12,7 +12,7 @@ namespace SastrawiTest\Morphology\Disambiguator;
 
 /**
  * Disambiguate Prefix Rule 35 (CS additional rules)
- * Rule 35 : terC1erC2 -> ter-C1erC2 where C1 != {r}
+ * Rule 35 : terC1erC2 -> ter-C1erC2 where C1  !==  {r}
  */
 
 final class DisambiguatorPrefixRule35Test extends \PHPUnit\Framework\TestCase

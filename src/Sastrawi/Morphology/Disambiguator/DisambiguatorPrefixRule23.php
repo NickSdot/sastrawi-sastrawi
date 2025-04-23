@@ -12,13 +12,13 @@ namespace Sastrawi\Morphology\Disambiguator;
 
 /**
  * Disambiguate Prefix Rule 23
- * Rule 23 : perCAP -> per-CAP where C != 'r' AND P != 'er'
+ * Rule 23 : perCAP -> per-CAP where C  !==  'r' AND P  !==  'er'
  */
 class DisambiguatorPrefixRule23 implements DisambiguatorInterface
 {
     /**
      * Disambiguate Prefix Rule 23
-     * Rule 23 : perCAP -> per-CAP where C != 'r' AND P != 'er'
+     * Rule 23 : perCAP -> per-CAP where C  !==  'r' AND P  !==  'er'
      */
     public function disambiguate($word): ?string
     {

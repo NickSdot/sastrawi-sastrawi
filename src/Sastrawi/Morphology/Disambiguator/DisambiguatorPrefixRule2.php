@@ -12,7 +12,7 @@ namespace Sastrawi\Morphology\Disambiguator;
 
 /**
 * Disambiguate Prefix Rule 2
-* Rule 2 : berCAP -> ber-CAP where C != 'r' AND P != 'er'
+* Rule 2 : berCAP -> ber-CAP where C  !==  'r' AND P  !==  'er'
 */
 class DisambiguatorPrefixRule2 implements DisambiguatorInterface
 {

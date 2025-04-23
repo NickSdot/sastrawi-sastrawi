@@ -22,7 +22,7 @@ class DisambiguatorPrefixRule32 implements DisambiguatorInterface
      */
     public function disambiguate($word): ?string
     {
-        if ($word == 'pelajar') {
+        if ($word === 'pelajar') {
             return 'ajar';
         }
 

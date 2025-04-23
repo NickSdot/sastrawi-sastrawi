@@ -12,7 +12,7 @@ namespace SastrawiTest\Morphology\Disambiguator;
 
 /**
  * Disambiguate Prefix Rule 9
- * Rule 9 : te-C1erC2 -> te-C1erC2 where C1 != 'r'
+ * Rule 9 : te-C1erC2 -> te-C1erC2 where C1  !==  'r'
  */
 final class DisambiguatorPrefixRule9Test extends \PHPUnit\Framework\TestCase
 {

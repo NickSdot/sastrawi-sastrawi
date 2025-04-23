@@ -22,7 +22,7 @@ class DisambiguatorPrefixRule4 implements DisambiguatorInterface
      */
     public function disambiguate($word): ?string
     {
-        if ($word == 'belajar') {
+        if ($word === 'belajar') {
             return 'ajar';
         }
 

@@ -12,7 +12,7 @@ namespace SastrawiTest\Morphology\Disambiguator;
 
 /**
  * Disambiguate Prefix Rule 34
- * Rule 34 : peCP -> pe-CP where C != {r|w|y|l|m|n} and P != 'er'
+ * Rule 34 : peCP -> pe-CP where C  !==  {r|w|y|l|m|n} and P  !==  'er'
  */
 
 final class DisambiguatorPrefixRule34Test extends \PHPUnit\Framework\TestCase

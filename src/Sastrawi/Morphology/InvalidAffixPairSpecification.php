@@ -24,7 +24,7 @@ class InvalidAffixPairSpecification implements SpecificationInterface
             return false;
         }
 
-        if ($word == 'ketahui') {
+        if ($word === 'ketahui') {
             return false;
         }
 

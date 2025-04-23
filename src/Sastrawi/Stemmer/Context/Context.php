@@ -270,7 +270,7 @@ class Context implements ContextInterface, VisitableInterface
                 continue;
             }
 
-            if ($removal->getRemovedPart() == 'kan') {
+            if ($removal->getRemovedPart() === 'kan') {
                 $this->setCurrentWord($removal->getResult() . 'k');
 
                 // step 4, 5
@@ -300,15 +300,15 @@ class Context implements ContextInterface, VisitableInterface
      */
     protected function isSuffixRemoval(RemovalInterface $removal): bool
     {
-        if ($removal->getAffixType() == 'DS') {
+        if ($removal->getAffixType() === 'DS') {
             return true;
         }
 
-        if ($removal->getAffixType() == 'PP') {
+        if ($removal->getAffixType() === 'PP') {
             return true;
         }
 
-        return $removal->getAffixType() == 'P';
+        return $removal->getAffixType() === 'P';
     }
 
     /**
@@ -317,7 +317,7 @@ class Context implements ContextInterface, VisitableInterface
     public function restorePrefix(): void
     {
         foreach ($this->removals as $i => $removal) {
-            if ($removal->getAffixType() == 'DP') {
+            if ($removal->getAffixType() === 'DP') {
                 // return the word before precoding (the subject of first prefix removal)
                 $this->setCurrentWord($removal->getSubject());
                 break;
@@ -325,7 +325,7 @@ class Context implements ContextInterface, VisitableInterface
         }
 
         foreach ($this->removals as $i => $removal) {
-            if ($removal->getAffixType() == 'DP') {
+            if ($removal->getAffixType() === 'DP') {
                 unset($this->removals[$i]);
             }
         }

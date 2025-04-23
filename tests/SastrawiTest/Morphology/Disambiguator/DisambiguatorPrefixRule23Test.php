@@ -12,7 +12,7 @@ namespace SastrawiTest\Morphology\Disambiguator;
 
 /**
  * Disambiguate Prefix Rule 23
- * Rule 23 : perCAP -> per-CAP where C != 'r' AND P != 'er'
+ * Rule 23 : perCAP -> per-CAP where C  !==  'r' AND P  !==  'er'
  */
 final class DisambiguatorPrefixRule23Test extends \PHPUnit\Framework\TestCase
 {

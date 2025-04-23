@@ -103,13 +103,13 @@ final class StemmerTest extends \PHPUnit\Framework\TestCase
         // rule 2 : berCAP -> ber-CAP
         $data[] = ['bersuara', 'suara'];
 
-        // rule 3 : berCAerV -> ber-CAerV where C != 'r'
+        // rule 3 : berCAerV -> ber-CAerV where C  !==  'r'
         $data[] = ['berdaerah', 'daerah'];
 
         // rule 4 : belajar -> bel-ajar
         $data[] = ['belajar', 'ajar'];
 
-        // rule 5 : beC1erC2 -> be-C1erC2 where C1 != {'r'|'l'}
+        // rule 5 : beC1erC2 -> be-C1erC2 where C1  !==  {'r'|'l'}
         $data[] = ['bekerja', 'kerja'];
         $data[] = ['beternak', 'ternak'];
 
@@ -119,13 +119,13 @@ final class StemmerTest extends \PHPUnit\Framework\TestCase
         // rule 6b : terV -> te-rV
         $data[] = ['teraup', 'raup'];
 
-        // rule 7 : terCerV -> ter-CerV where C != 'r'
+        // rule 7 : terCerV -> ter-CerV where C  !==  'r'
         $data[] = ['tergerak', 'gerak'];
 
-        // rule 8 : terCP -> ter-CP where C != 'r' and P != 'er'
+        // rule 8 : terCP -> ter-CP where C  !==  'r' and P  !==  'er'
         $data[] = ['terpuruk', 'puruk'];
 
-        // rule 9 : teC1erC2 -> te-C1erC2 where C1 != 'r'
+        // rule 9 : teC1erC2 -> te-C1erC2 where C1  !==  'r'
         $data[] = ['teterbang', 'terbang'];
 
         // rule 10 : me{l|r|w|y}V -> me-{l|r|w|y}V
@@ -175,7 +175,7 @@ final class StemmerTest extends \PHPUnit\Framework\TestCase
         // rule 18 : menyV -> meny-sV
         $data[] = ['menyuarakan', 'suara'];
 
-        // rule 19 : mempV -> mem-pV where V != 'e'
+        // rule 19 : mempV -> mem-pV where V  !==  'e'
         $data[] = ['mempopulerkan', 'populer'];
 
         // rule 20 : pe{w|y}V -> pe-{w|y}V
@@ -190,10 +190,10 @@ final class StemmerTest extends \PHPUnit\Framework\TestCase
 
         // rule 22 is missing in the document?
 
-        // rule 23 : perCAP -> per-CAP where C != 'r' and P != 'er'
+        // rule 23 : perCAP -> per-CAP where C  !==  'r' and P  !==  'er'
         $data[] = ['permuka', 'muka'];
 
-        // rule 24 : perCAerV -> per-CAerV where C != 'r'
+        // rule 24 : perCAerV -> per-CAerV where C  !==  'r'
         $data[] = ['perdaerah', 'daerah'];
 
         // rule 25 : pem{b|f|v} -> pem-{b|f|v}
@@ -237,18 +237,18 @@ final class StemmerTest extends \PHPUnit\Framework\TestCase
         $data[] = ['pelajar', 'ajar'];
         $data[] = ['pelabuhan', 'labuh'];
 
-        // rule 33 : peCerV -> per-erV where C != {r|w|y|l|m|n}
+        // rule 33 : peCerV -> per-erV where C  !==  {r|w|y|l|m|n}
         // TODO : find the examples
 
-        // rule 34 : peCP -> pe-CP where C != {r|w|y|l|m|n} and P != 'er'
+        // rule 34 : peCP -> pe-CP where C  !==  {r|w|y|l|m|n} and P  !==  'er'
         $data[] = ['petarung', 'tarung'];
 
         // CS additional rules
 
-        // rule 35 : terC1erC2 -> ter-C1erC2 where C1 != 'r'
+        // rule 35 : terC1erC2 -> ter-C1erC2 where C1  !==  'r'
         $data[] = ['terpercaya', 'percaya'];
 
-        // rule 36 : peC1erC2 -> pe-C1erC2 where C1 != {r|w|y|l|m|n}
+        // rule 36 : peC1erC2 -> pe-C1erC2 where C1  !==  {r|w|y|l|m|n}
         $data[] = ['pekerja', 'kerja'];
         $data[] = ['peserta', 'serta'];
 

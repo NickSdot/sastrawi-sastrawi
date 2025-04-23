@@ -30,7 +30,8 @@
         "phpstan/extension-installer": "^1.4",
         "phpstan/phpstan-strict-rules": "^2.0",
         "phpstan/phpstan-deprecation-rules": "^2.0",
-        "tomasvotruba/type-coverage": "^2.0"
+        "tomasvotruba/type-coverage": "^2.0",
+        "friendsofphp/php-cs-fixer": "^3.75"
     },
     "autoload": {
         "psr-4": {
@@ -59,6 +60,7 @@
     "scripts": {
         "test": "./vendor/bin/phpunit tests",
         "stan": "./vendor/bin/phpstan analyse",
+        "fixer": "export PHP_CS_FIXER_IGNORE_ENV=1; ./vendor/bin/php-cs-fixer",
         "rector": "./vendor/bin/rector"
     },
     "config": {

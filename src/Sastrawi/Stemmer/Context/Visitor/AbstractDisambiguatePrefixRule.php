@@ -37,6 +37,10 @@ abstract class AbstractDisambiguatePrefixRule implements VisitorInterface
 
         $removedPart = preg_replace(sprintf('/%s/', $result), '', $context->getCurrentWord(), 1);
 
+        if (null === $removedPart) {
+            throw new \RuntimeException('Could not get removed word part.');
+        }
+
         $removal = new Removal(
             $this,
             $context->getCurrentWord(),

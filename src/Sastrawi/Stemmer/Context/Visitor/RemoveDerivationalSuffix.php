@@ -23,22 +23,26 @@ class RemoveDerivationalSuffix implements VisitorInterface
 {
     public function visit(ContextInterface $context): void
     {
-        $result = $this->removeSuffix($context->getCurrentWord());
-
-        if ($result  !==  $context->getCurrentWord()) {
-            $removedPart = preg_replace(sprintf('/%s/', $result), '', $context->getCurrentWord(), 1);
-
-            $removal = new Removal(
-                $this,
-                $context->getCurrentWord(),
-                $result,
-                $removedPart,
-                'DS'
-            );
-
-            $context->addRemoval($removal);
-            $context->setCurrentWord($result);
+        if ($context->getCurrentWord() === $result = $this->removeSuffix($context->getCurrentWord())) {
+            return;
         }
+
+        $removedPart = preg_replace(sprintf('/%s/', $result), '', $context->getCurrentWord(), 1);
+
+        if (null === $removedPart) {
+            throw new \RuntimeException('Could not get removed word part.');
+        }
+
+        $removal = new Removal(
+            $this,
+            $context->getCurrentWord(),
+            $result,
+            $removedPart,
+            'DS'
+        );
+
+        $context->addRemoval($removal);
+        $context->setCurrentWord($result);
     }
 
     /**
@@ -49,8 +53,12 @@ class RemoveDerivationalSuffix implements VisitorInterface
      * @param  string $word
      * @return string word after its derivational suffix removed
      */
-    public function removeSuffix($word): ?string
+    public function removeSuffix(string $word): string
     {
-        return preg_replace('/(is|isme|isasi|i|kan|an)$/', '', $word, 1);
+        if (null === $result = preg_replace('/(is|isme|isasi|i|kan|an)$/', '', $word, 1)) {
+            throw new \RuntimeException("The word '{$word}' does not exist");
+        }
+
+        return $result;
     }
 }

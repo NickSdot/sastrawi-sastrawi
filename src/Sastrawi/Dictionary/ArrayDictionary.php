@@ -30,6 +30,7 @@ class ArrayDictionary implements DictionaryInterface
 
     /**
      * {@inheritdoc}
+     * @todo: must this accept null?
      */
     public function contains(string|null $word): bool
     {

@@ -17,37 +17,35 @@ use Sastrawi\Stemmer\Context\Visitor\VisitorInterface;
  */
 class Removal implements RemovalInterface
 {
-    /**
-     * @param string                                             $subject
-     * @param string                                             $result
-     * @param string                                             $removedPart
-     * @param string                                             $affixType
-     */
-    public function __construct(protected VisitorInterface $visitor, protected $subject, protected $result, protected $removedPart, protected $affixType)
-    {
-    }
+    public function __construct(
+        protected VisitorInterface $visitor,
+        protected string $subject,
+        protected string $result,
+        protected string $removedPart,
+        protected string $affixType
+    ) {}
 
     public function getVisitor(): VisitorInterface
     {
         return $this->visitor;
     }
 
-    public function getSubject()
+    public function getSubject(): string
     {
         return $this->subject;
     }
 
-    public function getResult()
+    public function getResult(): string
     {
         return $this->result;
     }
 
-    public function getRemovedPart()
+    public function getRemovedPart(): string
     {
         return $this->removedPart;
     }
 
-    public function getAffixType()
+    public function getAffixType(): string
     {
         return $this->affixType;
     }

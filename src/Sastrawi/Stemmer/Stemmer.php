@@ -81,7 +81,7 @@ class Stemmer implements StemmerInterface
     {
         // -ku|-mu|-nya
         // nikmat-Ku, etc
-        if (preg_match('/^(.*)-(ku|mu|nya|lah|kah|tah|pun)$/', $word, $words)) {
+        if (1 === preg_match('/^(.*)-(ku|mu|nya|lah|kah|tah|pun)$/', $word, $words)) {
             return str_contains($words[1], '-');
         }
 
@@ -108,8 +108,9 @@ class Stemmer implements StemmerInterface
         // malaikat-malaikat-nya -> malaikat malaikat-nya
         $suffix = $words[2];
 
-        if (in_array($suffix, [ 'ku', 'mu', 'nya', 'lah', 'kah', 'tah', 'pun' ], true) &&
-            preg_match('/^(.*)-(.*)$/', $words[1], $words)) {
+        if (
+            true === in_array($suffix, [ 'ku', 'mu', 'nya', 'lah', 'kah', 'tah', 'pun' ], true)
+            && 1 === preg_match('/^(.*)-(.*)$/', $words[1], $words)) {
             $words[2] .= '-' . $suffix;
         }
 

@@ -85,11 +85,17 @@ class ArrayDictionary implements DictionaryInterface
      *
      * @param string $filePath
      * @param string $delimiter
+     *
+     * @throws \Exception
      */
     public function addWordsFromTextFile(string $filePath, string $delimiter = "\n"): void
     {
-        $this->addWords(
-            explode($delimiter, file_get_contents($filePath))
-        );
+        $words = file($filePath , FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+
+        if([] === $words || false === $words) {
+            throw new \Exception('Dictionary file could not be read.');
+        }
+
+        $this->addWords($words);
     }
 }

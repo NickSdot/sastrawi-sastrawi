@@ -24,7 +24,7 @@ class DisambiguatorPrefixRule29 implements DisambiguatorInterface
      */
     public function disambiguate(string $word): ?string
     {
-        if (preg_match('/^peng([bcdfghjklmnpqrstvwxyz])(.*)$/', $word, $matches)) {
+        if (1 === preg_match('/^peng([bcdfghjklmnpqrstvwxyz])(.*)$/', $word, $matches)) {
             return $matches[1] . $matches[2];
         }
 

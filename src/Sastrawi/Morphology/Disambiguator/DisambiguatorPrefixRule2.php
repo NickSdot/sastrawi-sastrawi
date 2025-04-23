@@ -22,7 +22,7 @@ class DisambiguatorPrefixRule2 implements DisambiguatorInterface
         $contains = preg_match('/^ber([bcdfghjklmnpqrstvwxyz])([a-z])(.*)$/', $word, $matches);
 
         if ($contains === 1) {
-            if (preg_match('/^er(.*)$/', $matches[3]) === 1) {
+            if (1 === preg_match('/^er(.*)$/', $matches[3])) {
                 return null;
             }
 

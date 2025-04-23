@@ -37,7 +37,7 @@ class PrecedenceAdjustmentSpecification implements SpecificationInterface
         ];
 
         foreach ($regexRules as $rule) {
-            if (preg_match($rule, $word)) {
+            if (1 === preg_match($rule, $word)) {
                 return true;
             }
         }

@@ -22,7 +22,7 @@ class DisambiguatorPrefixRule30c implements DisambiguatorInterface
      */
     public function disambiguate(string $word): ?string
     {
-        if (preg_match('/^penge(.*)$/', $word, $matches)) {
+        if (1 === preg_match('/^penge(.*)$/', $word, $matches)) {
             return $matches[1];
         }
 

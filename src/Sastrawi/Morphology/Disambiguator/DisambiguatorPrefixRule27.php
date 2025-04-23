@@ -30,7 +30,7 @@ class DisambiguatorPrefixRule27 implements DisambiguatorInterface
      */
     public function disambiguate(string $word): ?string
     {
-        if (preg_match('/^pen([cdjstz])(.*)$/', $word, $matches)) {
+        if (1 === preg_match('/^pen([cdjstz])(.*)$/', $word, $matches)) {
             return $matches[1] . $matches[2];
         }
 

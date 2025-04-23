@@ -142,7 +142,7 @@ class Context implements ContextInterface, VisitableInterface
         $this->acceptVisitors($this->visitors);
 
         // todo: PhpStan is of the opinion that this is always false; which is not correct
-        if ($this->dictionary->contains($this->getCurrentWord())) {
+        if (true === $this->dictionary->contains($this->getCurrentWord())) {
             return;
         }
 

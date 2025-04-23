@@ -70,6 +70,10 @@ class StemmerFactory
             throw new \Exception('Dictionary file is missing. It seems that your installation is corrupted.');
         }
 
-        return file($dictionaryFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+        if (false === $data = file($dictionaryFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES)) {
+            throw new \Exception('Dictionary file could not be read.');
+        }
+
+        return $data;
     }
 }

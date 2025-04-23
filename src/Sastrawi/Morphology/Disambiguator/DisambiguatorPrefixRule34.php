@@ -22,8 +22,8 @@ class DisambiguatorPrefixRule34 implements DisambiguatorInterface
      */
     public function disambiguate(string $word): ?string
     {
-        if (preg_match('/^pe([bcdfghjklmnpqrstvwxyz])(.*)$/', $word, $matches)) {
-            if (preg_match('/^er(.*)$/', $matches[2]) === 1) {
+        if (1 === preg_match('/^pe([bcdfghjklmnpqrstvwxyz])(.*)$/', $word, $matches)) {
+            if (1 === preg_match('/^er(.*)$/', $matches[2])) {
                 return null;
             }
 

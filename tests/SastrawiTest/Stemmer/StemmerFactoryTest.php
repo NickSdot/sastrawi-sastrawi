@@ -19,9 +19,6 @@ final class StemmerFactoryTest extends TestCase
 
     public function testCreateStemmerReturnStemmer(): void
     {
-        $stemmer = $this->factory->createStemmer();
-
-        self::assertNotNull($stemmer); // todo: this is always true, why need it?
-        self::assertInstanceOf(StemmerInterface::class, $stemmer);
+        self::assertInstanceOf(StemmerInterface::class, $this->factory->createStemmer());
     }
 }

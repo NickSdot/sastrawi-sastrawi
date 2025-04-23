@@ -22,7 +22,7 @@ class DisambiguatorPrefixRule17c implements DisambiguatorInterface
      */
     public function disambiguate(string $word): ?string
     {
-        if (preg_match('/^menge(.*)$/', $word, $matches)) {
+        if (1 === preg_match('/^menge(.*)$/', $word, $matches)) {
             return $matches[1];
         }
 

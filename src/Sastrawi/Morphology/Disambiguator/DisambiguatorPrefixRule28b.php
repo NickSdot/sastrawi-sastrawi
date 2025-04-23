@@ -22,7 +22,7 @@ class DisambiguatorPrefixRule28b implements DisambiguatorInterface
      */
     public function disambiguate(string $word): ?string
     {
-        if (preg_match('/^pen([aiueo])(.*)$/', $word, $matches)) {
+        if (1 === preg_match('/^pen([aiueo])(.*)$/', $word, $matches)) {
             return 't' . $matches[1] . $matches[2];
         }
 

@@ -20,7 +20,7 @@ class InvalidAffixPairSpecification implements SpecificationInterface
 {
     public function isSatisfiedBy(string $word): bool
     {
-        if (preg_match('/^me(.*)kan$/', $word) === 1) {
+        if (1 === preg_match('/^me(.*)kan$/', $word)) {
             return false;
         }
 
